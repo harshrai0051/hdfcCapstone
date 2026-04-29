@@ -773,6 +773,148 @@ main div.form-wrapper {
     box-shadow: 0 4px 24px rgb(0 0 0 / 8%);
 }
 
+/* ===== EMI Panel Styles ===== */
+
+/* Main EMI panel container */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] {
+    background-color: #fdf6e3;
+    border-radius: 16px;
+    padding: 0;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Hide the legend (panel title "emi") */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] > legend {
+    display: none;
+}
+
+/* Top content area (all fields except disclaimer) */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] > .field-wrapper {
+    padding: 0;
+    margin: 0;
+    grid-column: unset;
+}
+
+/* "Avail XPRESS Personal Loan of" label + value block */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input1777439384155 {
+    padding: 20px 20px 0;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input1777439384155 label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #444;
+    display: block;
+    margin-bottom: 4px;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input1777439384155 input {
+    border: none;
+    background: transparent;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: 100%;
+    pointer-events: none;
+    box-shadow: none;
+}
+
+/* Dotted separator after the loan amount field */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input1777439384155::after {
+    content: "";
+    display: block;
+    border-top: 2px dashed #ccc;
+    margin: 16px 0 0;
+}
+
+/* Inner fields row: EMI Amount + Rate of Interest side by side */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-15963257921777439396426,
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-6493028611777439403108 {
+    display: inline-block;
+    width: 50%;
+    padding: 16px 20px 0;
+    vertical-align: top;
+    box-sizing: border-box;
+    border-left: 3px solid #f0a500;
+    margin-left: 20px;
+    width: calc(50% - 28px);
+    margin-bottom: 0;
+}
+
+/* Taxes field */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-6010830611777439410469 {
+    padding: 16px 20px 16px;
+    margin: 0 0 0 20px;
+    border-left: 3px solid #f0a500;
+    width: calc(50% - 28px);
+    box-sizing: border-box;
+}
+
+/* Labels for EMI Amount, Rate of Interest, Taxes */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-15963257921777439396426 label,
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-6493028611777439403108 label,
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-6010830611777439410469 label {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* Input values for EMI Amount, Rate of Interest, Taxes */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-15963257921777439396426 input,
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-6493028611777439403108 input,
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-6010830611777439410469 input {
+    border: none;
+    background: transparent;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    pointer-events: none;
+    box-shadow: none;
+}
+
+/* Disclaimer / plain text section at the bottom */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-plain-text1777439418996 {
+    background-color: #f0a500;
+    padding: 14px 20px 14px 50px;
+    margin-top: 8px;
+    position: relative;
+    border-radius: 0 0 16px 16px;
+    grid-column: unset;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-plain-text1777439418996::before {
+    content: "\24D8"; /* ⓘ circle-i character */
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    color: #fff;
+    font-style: normal;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-plain-text1777439418996 p {
+    color: #fff;
+    font-size: 0.82rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ===== END EMI Panel Styles ===== */
+
 /* Responsive adjustments for mobile */
 @media (width <= 599px) {
     :root {
