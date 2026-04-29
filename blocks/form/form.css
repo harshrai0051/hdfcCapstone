@@ -793,16 +793,28 @@ main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] > le
     display: none;
 }
 
-/* Top content area (all fields except disclaimer) */
+/* Override grid layout for this panel - use flex wrap */
+main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+}
+
+/* All direct field children reset */
 main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] > .field-wrapper {
     padding: 0;
     margin: 0;
     grid-column: unset;
 }
 
-/* "Avail XPRESS Personal Loan of" label + value block */
+/* "Avail XPRESS Personal Loan of" - full width */
 main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input1777439384155 {
+    flex: 0 0 100%;
+    width: 100%;
     padding: 20px 20px 0;
+    box-sizing: border-box;
 }
 
 main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input1777439384155 label {
@@ -835,26 +847,24 @@ main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .fie
     margin: 16px 0 0;
 }
 
-/* Inner fields row: EMI Amount + Rate of Interest side by side */
+/* EMI Amount + Rate of Interest - each takes ~50% side by side */
 main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-15963257921777439396426,
 main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-6493028611777439403108 {
-    display: inline-block;
-    width: 50%;
-    padding: 16px 20px 0;
-    vertical-align: top;
+    flex: 0 0 calc(50% - 28px);
+    width: calc(50% - 28px);
+    padding: 16px 12px 16px 12px;
     box-sizing: border-box;
     border-left: 3px solid #f0a500;
-    margin-left: 20px;
-    width: calc(50% - 28px);
-    margin-bottom: 0;
+    margin: 16px 0 0 20px;
 }
 
-/* Taxes field */
+/* Taxes field - same left-border, starts a new row */
 main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-text-input-6010830611777439410469 {
-    padding: 16px 20px 16px;
-    margin: 0 0 0 20px;
-    border-left: 3px solid #f0a500;
+    flex: 0 0 calc(50% - 28px);
     width: calc(50% - 28px);
+    padding: 16px 12px 16px 12px;
+    margin: 12px 0 16px 20px;
+    border-left: 3px solid #f0a500;
     box-sizing: border-box;
 }
 
@@ -866,7 +876,7 @@ main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .fie
     color: #666;
     font-weight: 400;
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 /* Input values for EMI Amount, Rate of Interest, Taxes */
@@ -885,7 +895,7 @@ main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .fie
     box-shadow: none;
 }
 
-/* Disclaimer / plain text section at the bottom */
+/* Disclaimer / plain text section at the bottom - full width */
 main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-plain-text1777439418996 {
     background-color: #f0a500;
     padding: 14px 20px 14px 50px;
@@ -893,6 +903,9 @@ main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .fie
     position: relative;
     border-radius: 0 0 16px 16px;
     grid-column: unset;
+    flex: 0 0 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 main .form form fieldset.panel-wrapper[name="panel_8663004081777438825805"] .field-plain-text1777439418996::before {
