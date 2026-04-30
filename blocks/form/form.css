@@ -1147,7 +1147,7 @@ main
     .field-income-source {
     flex: 0 0 calc(33.33% - 12px);
     width: calc(33.33% - 12px);
-    margin-left: 0;
+    margin-left: 15px;
     box-sizing: border-box;
     border: none;
     padding: 0;
