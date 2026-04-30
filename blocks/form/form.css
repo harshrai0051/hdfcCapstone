@@ -1072,7 +1072,7 @@ main
     padding: 0;
 }
 
-/* Mobile number field - col-4 ~33% with Indian flag */
+/* Mobile number field - col-4 ~33% */
 main
     .form
     form
@@ -1082,36 +1082,6 @@ main
     width: calc(33.33% - 16px);
     margin-right: 24px;
     box-sizing: border-box;
-    position: relative;
-}
-
-/* Indian flag + +91 prefix overlay */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="personal_loan_offer_panel"]
-    .field-aadhaar-linked-mobile-number::before {
-    content: "🇮🇳 +91";
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.9rem;
-    color: #333;
-    pointer-events: none;
-    z-index: 1;
-    line-height: 1;
-    white-space: nowrap;
-}
-
-/* Push input text right to not overlap the flag prefix */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="personal_loan_offer_panel"]
-    .field-aadhaar-linked-mobile-number
-    input[type="text"] {
-    padding-left: 78px;
 }
 
 /* Date of birth field - col-4 ~33% */
@@ -1177,7 +1147,7 @@ main
     .field-income-source {
     flex: 0 0 calc(33.33% - 12px);
     width: calc(33.33% - 12px);
-    margin-left: 24px;
+    margin-left: 0;
     box-sizing: border-box;
     border: none;
     padding: 0;
@@ -1303,6 +1273,27 @@ main
     gap: 10px;
 }
 
+/* Force checkbox wrapper inline within consent fields */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="personal_loan_offer_panel"]
+    .field-consent-loan-processing
+    .checkbox-wrapper,
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="personal_loan_offer_panel"]
+    .field-consent-marketing
+    .checkbox-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+}
+
 /* Checkbox styling */
 main
     .form
@@ -1328,6 +1319,7 @@ main
     font-weight: 400;
     line-height: 1.5;
     flex-basis: auto;
+    flex: 1;
 }
 
 /* Terms & privacy text */
