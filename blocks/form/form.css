@@ -1573,7 +1573,7 @@ main .form form fieldset.panel-wrapper[name="personal_details"] {
     align-items: flex-start;
     box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
     overflow: hidden;
-    margin-top: 24px;
+    margin-top: 23px !important;
 }
 
 /* Legend - accordion header bar */
