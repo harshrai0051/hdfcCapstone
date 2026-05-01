@@ -1397,6 +1397,188 @@ main
 
 /* ===== END Personal Loan Offer Panel Styles ===== */
 
+/* ===== Loan Details Panel Styles ===== */
+
+/* Main container - white card with rounded corners */
+main .form form fieldset.panel-wrapper[name="loan_details"] {
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+}
+
+/* Legend - accordion header bar */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    > legend.accordion-legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    float: none;
+}
+
+/* Bag/money icon before the legend text using emoji approximation */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    > legend.accordion-legend::before {
+    content: "💰";
+    font-size: 1.3rem;
+    margin-right: 14px;
+    line-height: 1;
+    filter: hue-rotate(180deg) saturate(0.6) brightness(1.2);
+}
+
+/* Chevron down after the legend text */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    > legend.accordion-legend::after {
+    content: "∨";
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #5f8dda;
+    font-weight: 400;
+    line-height: 1;
+}
+
+/* Content area wrapper - all field wrappers */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    > .field-wrapper {
+    grid-column: unset;
+    flex: 0 0 calc(25% - 1px);
+    width: calc(25% - 1px);
+    padding: 20px 20px 24px 20px;
+    margin: 0;
+    box-sizing: border-box;
+    border-left: 2px solid #7b9fd4;
+    margin-top: 20px;
+    margin-bottom: 4px;
+    margin-left: 24px;
+    background: transparent;
+}
+
+/* Remove left margin from every 1st field in each row (1st and 5th child among field-wrappers) */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    > .field-wrapper:nth-of-type(2) {
+    margin-left: 24px;
+}
+
+/* Labels */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    .field-label {
+    font-size: 0.82rem;
+    color: #8a96ab;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+/* Input values - read-only display style */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    input[type="text"] {
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a2340;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: 100%;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    input[type="text"]:hover,
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    input[type="text"]:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Bottom padding row after second row of fields */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="loan_details"]
+    > .field-wrapper:nth-last-of-type(-n + 4) {
+    margin-bottom: 20px;
+}
+
+/* Responsive: 2 per row on tablets */
+@media (width <= 900px) {
+    main
+        .form
+        form
+        fieldset.panel-wrapper[name="loan_details"]
+        > .field-wrapper {
+        flex: 0 0 calc(50% - 48px);
+        width: calc(50% - 48px);
+    }
+}
+
+/* Responsive: 1 per row on mobile */
+@media (width <= 599px) {
+    main
+        .form
+        form
+        fieldset.panel-wrapper[name="loan_details"]
+        > .field-wrapper {
+        flex: 0 0 calc(100% - 48px);
+        width: calc(100% - 48px);
+    }
+}
+
+/* ===== END Loan Details Panel Styles ===== */
+
 /* Responsive adjustments for mobile */
 @media (width <= 599px) {
     :root {
