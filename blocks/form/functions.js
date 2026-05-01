@@ -12,18 +12,18 @@ function submitFormArrayToString(globals) {
   const data = globals.functions.exportData();
   Object.keys(data).forEach((key) => {
     if (Array.isArray(data[key])) {
-      data[key] = data[key].join(",");
+      data[key] = data[key].join(',');
     }
   });
-  globals.functions.submitForm(data, true, "application/json");
+  globals.functions.submitForm(data, true, 'application/json');
 }
 
 /**
  * Days diff
  */
 function days(endDate, startDate) {
-  const start = typeof startDate === "string" ? new Date(startDate) : startDate;
-  const end = typeof endDate === "string" ? new Date(endDate) : endDate;
+  const start = typeof startDate === 'string' ? new Date(startDate) : startDate;
+  const end = typeof endDate === 'string' ? new Date(endDate) : endDate;
 
   if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
     return 0;
@@ -37,13 +37,13 @@ function days(endDate, startDate) {
  * Mask mobile
  */
 function maskMobileNumber(mobileNumber) {
-  if (!mobileNumber) return "";
+  if (!mobileNumber) return '';
   const value = mobileNumber.toString();
-  return `${"*".repeat(5)}${value.substring(5)}`;
+  return `${'*'.repeat(5)}${value.substring(5)}`;
 }
 
 /**
- * Update range bubble UI
+ * Update range bubble UI (DO NOT FORMAT ₹ HERE)
  */
 function updateBubble(input, element) {
   const step = input.step || 1;
@@ -54,12 +54,12 @@ function updateBubble(input, element) {
   const current = Math.ceil((value - min) / step);
   const total = Math.ceil((max - min) / step);
 
-  const bubble = element.querySelector(".range-bubble");
+  const bubble = element.querySelector('.range-bubble');
   const bubbleWidth = bubble.getBoundingClientRect().width || 31;
 
   const left = `${(current / total) * 100}% - ${(current / total) * bubbleWidth}px`;
 
-  // IMPORTANT: keep raw value (no ₹ here)
+  // IMPORTANT: raw value only
   bubble.innerText = `${value}`;
 
   const style = `
@@ -68,33 +68,33 @@ function updateBubble(input, element) {
   `;
 
   bubble.style.left = `calc(${left})`;
-  element.setAttribute("style", style);
+  element.setAttribute('style', style);
 }
 
 /**
  * Decorate range slider
  */
 async function decorate(fieldDiv, fieldJson) {
-  const input = fieldDiv.querySelector("input");
+  const input = fieldDiv.querySelector('input');
 
-  input.type = "range";
+  input.type = 'range';
   input.min = input.min || 1;
   input.max = input.max || 100;
   input.step = fieldJson?.properties?.stepValue || 1;
 
-  const div = document.createElement("div");
-  div.className = "range-widget-wrapper decorated";
+  const div = document.createElement('div');
+  div.className = 'range-widget-wrapper decorated';
 
   input.after(div);
 
-  const hover = document.createElement("span");
-  hover.className = "range-bubble";
+  const hover = document.createElement('span');
+  hover.className = 'range-bubble';
 
-  const rangeMinEl = document.createElement("span");
-  rangeMinEl.className = "range-min";
+  const rangeMinEl = document.createElement('span');
+  rangeMinEl.className = 'range-min';
 
-  const rangeMaxEl = document.createElement("span");
-  rangeMaxEl.className = "range-max";
+  const rangeMaxEl = document.createElement('span');
+  rangeMaxEl.className = 'range-max';
 
   rangeMinEl.innerText = `${input.min}`;
   rangeMaxEl.innerText = `${input.max}`;
@@ -104,7 +104,7 @@ async function decorate(fieldDiv, fieldJson) {
   div.appendChild(rangeMinEl);
   div.appendChild(rangeMaxEl);
 
-  input.addEventListener("input", (e) => {
+  input.addEventListener('input', (e) => {
     updateBubble(e.target, div);
   });
 
@@ -117,11 +117,11 @@ async function decorate(fieldDiv, fieldJson) {
  * Format INR
  */
 function formatIndianCurrency(amount) {
-  return `₹${amount.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
+  return `₹${amount.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
 }
 
 /**
- * EMI formula
+ * EMI calculation
  */
 function calculateEMI(principal, annualRate, tenureMonths) {
   const monthlyRate = annualRate / (12 * 100);
@@ -133,74 +133,79 @@ function calculateEMI(principal, annualRate, tenureMonths) {
   const onePlusR = 1 + monthlyRate;
   const onePlusRPowerN = onePlusR ** tenureMonths;
 
-  const emi = (principal * monthlyRate * onePlusRPowerN) / (onePlusRPowerN - 1);
+  const emi =
+    (principal * monthlyRate * onePlusRPowerN) /
+    (onePlusRPowerN - 1);
 
   return Math.round(emi);
 }
 
 /**
- * EMI Calculator INIT (FIXED)
+ * EMI Calculator INIT (FINAL)
  */
 function initEMICalculator() {
-  const loanAmountInput = document.querySelector("#numberinput-573a41b8b9");
-  const loanTenureInput = document.querySelector("#numberinput-9a0e8002ff");
+  const loanAmountInput = document.querySelector('#numberinput-573a41b8b9');
+  const tenureInput = document.querySelector('#numberinput-9a0e8002ff');
 
-  const xpressField = document.querySelector("#textinput-3f693161b5");
-  const emiAmountField = document.querySelector("#textinput-b0f0fe33c2");
-  const roiField = document.querySelector("#textinput-705f91a759");
-  const taxField = document.querySelector("#textinput-8adf25be5f");
+  const loanDisplay = document.querySelector('#textinput-3f693161b5');
+  const emiDisplay = document.querySelector('#textinput-b0f0fe33c2');
+  const roiDisplay = document.querySelector('#textinput-705f91a759');
+  const taxDisplay = document.querySelector('#textinput-8adf25be5f');
 
-  if (!loanAmountInput || !loanTenureInput) {
-    console.log("❌ EMI elements not found");
+  if (!loanAmountInput || !tenureInput) {
+    console.log('❌ EMI elements not found');
     return;
   }
 
-  const annualRate = 10.97;
-  const taxPercent = 18;
+  const RATE = 10.97;
+  const TAX = 18;
 
-  function updateEMI() {
-    const loanAmount = parseFloat(loanAmountInput.value) || 50000;
-    const tenure = parseFloat(loanTenureInput.value) || 12;
+  function setFieldValue(field, value) {
+    if (!field) return;
 
-    // Loan display
-    if (xpressField) {
-      xpressField.value = formatIndianCurrency(loanAmount);
-    }
+    field.value = value;
+    field.setAttribute('value', value);
 
-    // EMI
-    const emi = calculateEMI(loanAmount, annualRate, tenure);
-    if (emiAmountField) {
-      emiAmountField.value = formatIndianCurrency(emi);
-    }
-
-    // ROI
-    if (roiField) {
-      roiField.value = `${annualRate}% p.a.`;
-    }
-
-    // TAX
-    if (taxField) {
-      const tax = Math.round((emi * taxPercent) / 100);
-      taxField.value = formatIndianCurrency(tax);
-    }
+    // trigger UI refresh (IMPORTANT)
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    field.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
-  // Events
-  loanAmountInput.addEventListener("input", updateEMI);
-  loanTenureInput.addEventListener("input", updateEMI);
+  function updateEMI() {
+    const loan = parseFloat(loanAmountInput.value) || 50000;
+    const months = parseFloat(tenureInput.value) || 12;
 
-  // Initial run
+    const emi = calculateEMI(loan, RATE, months);
+    const tax = Math.round((emi * TAX) / 100);
+
+    setFieldValue(loanDisplay, formatIndianCurrency(loan));
+    setFieldValue(emiDisplay, formatIndianCurrency(emi));
+    setFieldValue(roiDisplay, `${RATE}%`);
+    setFieldValue(taxDisplay, formatIndianCurrency(tax));
+  }
+
+  // 🔥 REAL-TIME SYNC
+  loanAmountInput.addEventListener('input', updateEMI);
+  tenureInput.addEventListener('input', updateEMI);
+
   updateEMI();
 }
 
 /**
- * IMPORTANT: Ensure init runs AFTER DOM + sliders ready
+ * Wait for DOM (dynamic forms safe)
  */
-window.addEventListener("load", () => {
-  setTimeout(() => {
+function waitAndInit() {
+  const loan = document.querySelector('#numberinput-573a41b8b9');
+  const tenure = document.querySelector('#numberinput-9a0e8002ff');
+
+  if (loan && tenure) {
     initEMICalculator();
-  }, 300);
-});
+  } else {
+    setTimeout(waitAndInit, 300);
+  }
+}
+
+waitAndInit();
 
 /**
  * EXPORTS
