@@ -1402,7 +1402,7 @@ main
 /* Main container - white card with rounded corners */
 main .form form fieldset.panel-wrapper[name="loan_details"] {
     background-color: #fff;
-    border-radius: 12px;
+    border-radius: 16px;
     border: 1px solid #e4e9f2;
     padding: 0;
     box-sizing: border-box;
@@ -1451,49 +1451,21 @@ main
     filter: hue-rotate(180deg) saturate(0.6) brightness(1.2);
 }
 
-/* Chevron down after the legend text */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="loan_details"]
-    > legend.accordion-legend::after {
-    content: "∨";
-    position: absolute;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    color: #5f8dda;
-    font-weight: 400;
-    line-height: 1;
-}
-
-/* Content area wrapper - all field wrappers */
+/* Content area wrapper - all field wrappers: 4 per row */
 main
     .form
     form
     fieldset.panel-wrapper[name="loan_details"]
     > .field-wrapper {
     grid-column: unset;
-    flex: 0 0 calc(25% - 1px);
-    width: calc(25% - 1px);
-    padding: 20px 20px 24px 20px;
-    margin: 0;
+    flex: 1 1 calc(25% - 32px);
+    min-width: 0;
+    max-width: calc(25% - 32px);
+    padding: 20px 16px 24px 16px;
+    margin: 20px 0 4px 24px;
     box-sizing: border-box;
-    border-left: 2px solid #7b9fd4;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    margin-left: 24px;
+    border-left: 3px solid #7b9fd4;
     background: transparent;
-}
-
-/* Remove left margin from every 1st field in each row (1st and 5th child among field-wrappers) */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="loan_details"]
-    > .field-wrapper:nth-of-type(2) {
-    margin-left: 24px;
 }
 
 /* Labels */
@@ -1544,7 +1516,7 @@ main
     box-shadow: none;
 }
 
-/* Bottom padding row after second row of fields */
+/* Bottom margin for last row of fields */
 main
     .form
     form
@@ -1560,8 +1532,8 @@ main
         form
         fieldset.panel-wrapper[name="loan_details"]
         > .field-wrapper {
-        flex: 0 0 calc(50% - 48px);
-        width: calc(50% - 48px);
+        flex: 1 1 calc(50% - 48px);
+        max-width: calc(50% - 48px);
     }
 }
 
@@ -1572,8 +1544,8 @@ main
         form
         fieldset.panel-wrapper[name="loan_details"]
         > .field-wrapper {
-        flex: 0 0 calc(100% - 48px);
-        width: calc(100% - 48px);
+        flex: 1 1 calc(100% - 48px);
+        max-width: calc(100% - 48px);
     }
 }
 
