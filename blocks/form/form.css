@@ -1851,55 +1851,128 @@ main .form form select[multiple] {
     height: calc(42px + 50px);
 }
 
-/* ===== OTP Input Field Styles ===== */
+/* ===== Enter OTP Panel ===== */
 
-main .form form input#textinput-8c697feb65 {
-    width: 100%;
-    height: 52px;
-    border: 1.5px solid #d0d5dd;
-    border-radius: 10px;
-    background-color: #fff;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #1a2340;
-    letter-spacing: 1.8rem;
-    padding: 0 48px 0 20px;
-    margin: 8px 0 4px;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 4%);
-    outline: none;
-    caret-color: #5f8dda;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    font-family: monospace;
+main .form form .field-otp-verification-panel {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    row-gap: 12px;
+    column-gap: 16px;
 }
 
-main .form form input#textinput-8c697feb65:focus {
-    border-color: #5f8dda;
-    box-shadow: 0 0 0 3px rgb(95 141 218 / 12%);
+/* Heading */
+main .form form .field-otp-verification-panel > legend {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111;
+    padding-bottom: 2px;
+    margin-bottom: 0;
+    border: none;
 }
 
-main .form form input#textinput-8c697feb65:hover {
-    border-color: #aab4c4;
+/* OTP instruction */
+main .form form .field-otp-instructions-richtext p {
+    font-size: 0.88rem;
+    color: #333;
+    margin: 0;
+    line-height: 1.5;
 }
 
-/* Wrapper to allow eye icon overlay */
-main .form form .field-otp-code {
+main .form form .field-otp-instructions-richtext u {
+    color: #4a62b6;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* OTP input wrapper (your password field) */
+main .form form .field-password1777648986377 {
     position: relative;
+    margin: 4px 0;
 }
 
-main .form form .field-otp-code::after {
-    content: "";
-    display: block;
+/* Hide label */
+main .form form .field-password1777648986377 > label {
+    display: none;
+}
+
+/* OTP input style */
+main .form form .field-password1777648986377 input {
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #d0d5dd;
+    font-size: 1.1rem;
+    letter-spacing: 1.8em;
+    text-indent: 0.9em;
+    padding: 0 44px 0 0;
+    width: 100%;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Focus */
+main .form form .field-password1777648986377 input:focus {
+    border-color: #4a62b6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(74 98 182 / 10%);
+}
+
+/* Eye icon */
+#togglePassword {
     position: absolute;
-    right: 14px;
+    right: 10px;
     top: 50%;
-    transform: translateY(-30%);
-    width: 22px;
-    height: 22px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23aab4c4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94'/%3E%3Cpath d='M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: contain;
-    pointer-events: none;
-    opacity: 0.7;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
-/* ===== END OTP Input Field Styles ===== */
+/* Resend timer */
+main .form form #textinput-447ef8b5b0 {
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+/* Attempts */
+main .form form #textinput-b825c7d30f {
+    font-size: 0.82rem;
+    text-align: right;
+    color: #888;
+}
+
+/* Submit button */
+main .form form .field-submit-otp button {
+    background-color: rgb(165 180 252 / 30%);
+    color: #3730a3;
+    border: 1.5px solid #a5b4fc;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+main .form form .field-submit-otp button::after {
+    content: "›";
+}
+
+main .form form .field-submit-otp button:hover {
+    background-color: rgb(165 180 252 / 50%);
+}
+main .form form #button-c578b87368 {
+    background: transparent;
+    border: none;
+    color: #4a62b6;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-align: right;
+}
+
+main .form form #button-c578b87368:hover {
+    text-decoration: underline;
+}
