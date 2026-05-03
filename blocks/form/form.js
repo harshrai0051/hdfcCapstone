@@ -1,4 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { initFormFieldMapping } from './functions.js';
 import transferRepeatableDOM, { insertAddButton, insertRemoveButton, createButton as createRepeatButton } from './components/repeat/repeat.js';
 import { emailPattern, getSubmitBaseUrl, SUBMISSION_SERVICE } from './constant.js';
 import GoogleReCaptcha from './integrations/recaptcha.js';
@@ -579,5 +580,8 @@ export default async function decorate(block) {
       form.dataset.formpath = formDef.properties['fd:path'];
     }
     container.replaceWith(form);
+    setTimeout(() => {
+      initFormFieldMapping();
+    }, 500);
   }
 }
