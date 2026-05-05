@@ -2598,21 +2598,6 @@ main .form form fieldset.field-personal-details-pre-gender-panel .drop-down-wrap
     z-index: 2;
 }
 
-/* Email field — "Verify" text */
-main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-email-id::after {
-    content: "Verify";
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #4a62b6;
-    pointer-events: none;
-    z-index: 2;
-    letter-spacing: 0.01em;
-}
-
 /* Email suggestions — pill/chip style, full width */
 main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions {
     border: none;
