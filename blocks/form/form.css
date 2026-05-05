@@ -1983,6 +1983,166 @@ main
 
 /* ===== END Salary Account Details Panel Styles ===== */
 
+/* ===== Full Name (As per PAN) Panel Styles ===== */
+
+/* Main container */
+main .form form fieldset.panel-wrapper[name="full_name_as_per_pan_panel"] {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+    margin-top: 23px !important;
+}
+
+/* Legend - header bar */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+    > legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: default;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Person/ID card icon */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+    > legend::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='6' y='14' width='52' height='36' rx='6' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3'/%3E%3Ccircle cx='22' cy='30' r='7' fill='%235b8dee' opacity='0.3' stroke='%235b8dee' stroke-width='2'/%3E%3Cpath d='M10 46 Q14 36 22 36 Q30 36 34 46' stroke='%235b8dee' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Cline x1='38' y1='24' x2='56' y2='24' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='38' y1='32' x2='56' y2='32' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='38' y1='40' x2='50' y2='40' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+/* Field wrappers inside the panel */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+    > .field-wrapper {
+    grid-column: unset;
+    flex: 1 1 calc(50% - 48px);
+    min-width: 0;
+    max-width: calc(50% - 48px);
+    padding: 0;
+    margin: 20px 0 20px 24px;
+    box-sizing: border-box;
+    background: transparent;
+    position: relative;
+}
+
+/* Floating label */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+    .field-wrapper
+    > label.field-label {
+    font-size: 0.75rem;
+    color: #8a96ab;
+    font-weight: 400;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+    line-height: 1;
+}
+
+/* Editable input - bordered rounded */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+    input[type="text"] {
+    border: 1.5px solid #d0d9ea;
+    border-radius: 10px;
+    height: 52px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a2340;
+    background: #fff;
+    padding: 20px 14px 6px;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    box-sizing: border-box;
+    pointer-events: auto;
+}
+
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+    input[type="text"]:hover,
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+    input[type="text"]:focus {
+    border-color: #7b9fd4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
+}
+
+/* Field description (e.g. "Leave blank if not available on PAN") */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+    .field-description {
+    font-size: 0.78rem;
+    color: #8a96ab;
+    margin-top: 8px;
+    line-height: 1.4;
+    grid-column: unset;
+}
+
+/* Responsive: 1 per row on mobile */
+@media (width <= 599px) {
+    main
+        .form
+        form
+        fieldset.panel-wrapper[name="full_name_as_per_pan_panel"]
+        > .field-wrapper {
+        flex: 1 1 calc(100% - 48px);
+        max-width: calc(100% - 48px);
+    }
+}
+
+/* ===== END Full Name (As per PAN) Panel Styles ===== */
+
 /* ===== Verify Email ID Panel Styles ===== */
 
 /* Main outer container */
