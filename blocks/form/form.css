@@ -2464,96 +2464,103 @@ main .form form #button-c578b87368:hover {
 
 /* ===== Personal Details Pre-Gender Panel ===== */
 
-/* Panel container */
+/* Main container — same approach as full_name_as_per_pan_panel */
 main .form form fieldset.field-personal-details-pre-gender-panel {
-    background: #fff;
-    border: 1px solid #e8edf5;
-    border-radius: 12px;
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
     padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
     overflow: hidden;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 20px 24px;
-    align-items: start;
+    margin-top: 23px !important;
 }
 
-/* Panel legend — blue header bar */
+/* Legend — header bar */
 main .form form fieldset.field-personal-details-pre-gender-panel > legend {
-    grid-column: 1 / -1;
-    width: 100%;
-    background: linear-gradient(90deg, #dce6f7 0%, #e8eef9 100%);
-    color: #1a2340;
-    font-size: 1.05rem;
-    font-weight: 700;
-    padding: 14px 20px;
-    margin-bottom: 0 !important;
-    border: none;
     display: flex;
     align-items: center;
-    gap: 10px;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
     box-sizing: border-box;
+    cursor: default;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
 }
 
+/* Briefcase/ID icon before legend text */
 main .form form fieldset.field-personal-details-pre-gender-panel > legend::before {
     content: "";
     display: inline-block;
-    width: 22px;
-    height: 22px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a62b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2' ry='2'/%3E%3Cpath d='M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2'/%3E%3C/svg%3E");
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='6' y='14' width='52' height='36' rx='6' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3'/%3E%3Ccircle cx='22' cy='30' r='7' fill='%235b8dee' opacity='0.3' stroke='%235b8dee' stroke-width='2'/%3E%3Cpath d='M10 46 Q14 36 22 36 Q30 36 34 46' stroke='%235b8dee' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Cline x1='38' y1='24' x2='56' y2='24' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='38' y1='32' x2='56' y2='32' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='38' y1='40' x2='50' y2='40' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-size: contain;
-    flex-shrink: 0;
+    vertical-align: middle;
 }
 
-/* Fields inside panel — remove default margin/padding oddities */
+/* All direct field wrappers — reset grid column, use flex */
 main .form form fieldset.field-personal-details-pre-gender-panel > .field-wrapper {
+    grid-column: unset;
     margin: 0;
-    padding: 0 20px;
+    padding: 0;
+}
+
+/* col-6 fields (Gender, PAN) — each ~50% */
+main .form form fieldset.field-personal-details-pre-gender-panel > .col-6 {
+    flex: 1 1 calc(50% - 48px);
+    min-width: 0;
+    max-width: calc(50% - 48px);
+    margin: 20px 0 20px 24px;
+    box-sizing: border-box;
     position: relative;
 }
 
-/* col-6 fields */
-main .form form fieldset.field-personal-details-pre-gender-panel > .col-6 {
-    grid-column: span 6;
-}
-
-/* col-12 fields */
+/* col-12 fields (Email) — full width */
 main .form form fieldset.field-personal-details-pre-gender-panel > .col-12 {
-    grid-column: 1 / -1;
-}
-
-/* Last child gets bottom padding */
-main .form form fieldset.field-personal-details-pre-gender-panel > .field-wrapper:last-of-type {
-    padding-bottom: 20px;
-}
-
-/* Floating label wrapper base */
-main .form form fieldset.field-personal-details-pre-gender-panel .field-wrapper {
+    flex: 0 0 calc(100% - 48px);
+    width: calc(100% - 48px);
+    margin: 0 0 0 24px;
+    box-sizing: border-box;
     position: relative;
 }
 
 /* Floating label */
-main .form form fieldset.field-personal-details-pre-gender-panel .field-wrapper > label {
+main .form form fieldset.field-personal-details-pre-gender-panel .field-wrapper > label.field-label {
+    font-size: 0.75rem;
+    color: #8a96ab;
+    font-weight: 400;
     position: absolute;
     top: 10px;
-    left: 34px;
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: #8a96ab;
+    left: 14px;
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
+    display: block;
     line-height: 1;
-    transition: all 0.15s ease;
-    background: transparent;
 }
 
-/* Input / select base — floating label style */
+/* Input / select — bordered rounded, floating label style */
 main .form form fieldset.field-personal-details-pre-gender-panel input,
 main .form form fieldset.field-personal-details-pre-gender-panel select {
-    height: 52px;
     border: 1.5px solid #d0d9ea;
     border-radius: 10px;
+    height: 52px;
     font-size: 0.95rem;
     font-weight: 600;
     color: #1a2340;
@@ -2579,7 +2586,7 @@ main .form form fieldset.field-personal-details-pre-gender-panel select:focus {
 main .form form fieldset.field-personal-details-pre-gender-panel .drop-down-wrapper::after {
     content: "";
     position: absolute;
-    right: 34px;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
     width: 16px;
@@ -2595,7 +2602,7 @@ main .form form fieldset.field-personal-details-pre-gender-panel .drop-down-wrap
 main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-pan-id1::after {
     content: "";
     position: absolute;
-    right: 34px;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
     width: 20px;
@@ -2607,15 +2614,11 @@ main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-pa
     z-index: 2;
 }
 
-/* Email field — "Verify" button */
-main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-email-id {
-    position: relative;
-}
-
+/* Email field — "Verify" text */
 main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-email-id::after {
     content: "Verify";
     position: absolute;
-    right: 34px;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 0.9rem;
@@ -2626,17 +2629,20 @@ main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-em
     letter-spacing: 0.01em;
 }
 
-/* Email suggestions — pill/chip style */
+/* Email suggestions — pill/chip style, full width */
 main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions {
     border: none;
-    padding: 0 20px 20px;
-    margin: -12px 0 0;
+    padding: 0 0 20px 24px;
+    margin: 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 8px;
     background: transparent;
-    grid-column: 1 / -1;
+    flex: 0 0 calc(100% - 24px);
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+    grid-column: unset;
 }
 
 main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions > legend {
@@ -2653,6 +2659,7 @@ main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-
     cursor: pointer;
     transition: border-color 0.15s, background 0.15s;
     gap: 0;
+    margin: 0;
 }
 
 main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper:hover {
@@ -2685,28 +2692,16 @@ main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-
     background: #e8eeff;
 }
 
-/* Responsive: stack col-6 to full width on mobile */
-@media (width <= 600px) {
+/* Responsive: stack to full width on mobile */
+@media (width <= 599px) {
     main .form form fieldset.field-personal-details-pre-gender-panel > .col-6 {
-        grid-column: 1 / -1;
+        flex: 0 0 calc(100% - 48px);
+        max-width: calc(100% - 48px);
     }
 
-    main .form form fieldset.field-personal-details-pre-gender-panel > .field-wrapper {
-        padding: 0 14px;
-    }
-
-    main .form form fieldset.field-personal-details-pre-gender-panel .field-wrapper > label {
-        left: 28px;
-    }
-
-    main .form form fieldset.field-personal-details-pre-gender-panel .drop-down-wrapper::after,
-    main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-pan-id1::after,
-    main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-email-id::after {
-        right: 28px;
-    }
-
-    main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions {
-        padding: 0 14px 14px;
+    main .form form fieldset.field-personal-details-pre-gender-panel > .col-12 {
+        flex: 0 0 calc(100% - 48px);
+        width: calc(100% - 48px);
     }
 }
 
