@@ -1831,6 +1831,344 @@ main
 
 /* ===== END Personal Details Panel Styles ===== */
 
+/* ===== Salary Account Details Panel Styles ===== */
+
+/* Main container */
+main .form form fieldset.panel-wrapper[name="salary_account_details"] {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+    margin-top: 23px !important;
+}
+
+/* Legend - accordion header bar */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="salary_account_details"]
+    > legend.accordion-legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Bank/salary icon before legend text */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="salary_account_details"]
+    > legend.accordion-legend::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='8' y='28' width='48' height='24' rx='4' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3'/%3E%3Cpolygon points='32,8 8,28 56,28' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3' stroke-linejoin='round'/%3E%3Crect x='14' y='36' width='8' height='12' rx='2' fill='%235b8dee' opacity='0.5'/%3E%3Crect x='28' y='36' width='8' height='12' rx='2' fill='%235b8dee' opacity='0.5'/%3E%3Crect x='42' y='36' width='8' height='12' rx='2' fill='%235b8dee' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+/* All direct field-wrappers */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="salary_account_details"]
+    > .field-wrapper {
+    grid-column: unset;
+    flex: 1 1 calc(33.33% - 32px);
+    min-width: 0;
+    max-width: calc(33.33% - 32px);
+    padding: 8px 16px 10px 14px;
+    margin: 10px 0 10px 24px;
+    box-sizing: border-box;
+    border-left: 3px solid #7b9fd4;
+    background: transparent;
+}
+
+/* Labels */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="salary_account_details"]
+    .field-label {
+    font-size: 0.82rem;
+    color: #8a96ab;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+/* Input values - read-only display style */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="salary_account_details"]
+    input[type="text"] {
+    border: none;
+    background: transparent;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a2340;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: 100%;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="salary_account_details"]
+    input[type="text"]:hover,
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="salary_account_details"]
+    input[type="text"]:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Responsive: 2 per row on tablets */
+@media (width <= 900px) {
+    main
+        .form
+        form
+        fieldset.panel-wrapper[name="salary_account_details"]
+        > .field-wrapper {
+        flex: 1 1 calc(50% - 48px);
+        max-width: calc(50% - 48px);
+    }
+}
+
+/* Responsive: 1 per row on mobile */
+@media (width <= 599px) {
+    main
+        .form
+        form
+        fieldset.panel-wrapper[name="salary_account_details"]
+        > .field-wrapper {
+        flex: 1 1 calc(100% - 48px);
+        max-width: calc(100% - 48px);
+    }
+}
+
+/* ===== END Salary Account Details Panel Styles ===== */
+
+/* ===== Verify Email ID Panel Styles ===== */
+
+/* Main outer container */
+main .form form fieldset.panel-wrapper[name="verify_email_id"] {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+    margin-top: 23px !important;
+}
+
+/* Legend - accordion header bar */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    > legend.accordion-legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Email/shield icon before legend text */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    > legend.accordion-legend::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Cpath d='M32 8 L54 20 L54 36 Q54 52 32 58 Q10 52 10 36 L10 20 Z' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M22 32 L28 38 L42 26' stroke='%235b8dee' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+/* Chevron indicator on right */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    > legend.accordion-legend::after {
+    content: "∧";
+    position: absolute;
+    right: 24px;
+    font-size: 1rem;
+    color: #5b8dee;
+}
+
+/* Inner sub-panels (personal + work email) - each 50% */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    > fieldset.panel-wrapper {
+    flex: 1 1 calc(50% - 48px);
+    min-width: 0;
+    max-width: calc(50% - 48px);
+    margin: 20px 0 20px 24px;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    background: transparent;
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Hide inner sub-panel legends (Personal Email ID / Work Email ID) - shown as label */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    > fieldset.panel-wrapper
+    > legend {
+    display: none;
+}
+
+/* Email input wrapper inside sub-panels */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    .email-wrapper {
+    grid-column: unset;
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Sub-panel label (Personal Email ID / Work Email ID) shown as floating label */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    .email-wrapper
+    > label {
+    font-size: 0.78rem;
+    color: #8a96ab;
+    font-weight: 400;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    pointer-events: none;
+    z-index: 1;
+    transition: all 0.15s ease;
+    display: block !important;
+}
+
+/* Email input - editable, bordered pill */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    input[type="email"] {
+    border: 1.5px solid #d0d9ea;
+    border-radius: 10px;
+    height: 52px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a2340;
+    background: #fff;
+    padding: 18px 14px 6px;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    input[type="email"]:hover,
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="verify_email_id"]
+    input[type="email"]:focus {
+    border-color: #7b9fd4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
+}
+
+/* Responsive: stack sub-panels on mobile */
+@media (width <= 768px) {
+    main
+        .form
+        form
+        fieldset.panel-wrapper[name="verify_email_id"]
+        > fieldset.panel-wrapper {
+        flex: 1 1 calc(100% - 48px);
+        max-width: calc(100% - 48px);
+    }
+}
+
+/* ===== END Verify Email ID Panel Styles ===== */
+
 /* Responsive adjustments for mobile */
 @media (width <= 599px) {
     :root {
