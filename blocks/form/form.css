@@ -2675,3 +2675,215 @@ main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-
 }
 
 /* ===== END Personal Details Pre-Gender Panel Styles ===== */
+
+/* ===== Address Details Panel Styles ===== */
+
+/* Main container */
+main .form form fieldset.field-address-details {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+    margin-top: 23px !important;
+}
+
+/* Legend — gradient header bar */
+main .form form fieldset.field-address-details > legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: default;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Location/address pin icon before legend text */
+main .form form fieldset.field-address-details > legend::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Ccircle cx='32' cy='26' r='10' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3'/%3E%3Cpath d='M32 14 C20 14 14 22 14 28 C14 42 32 58 32 58 C32 58 50 42 50 28 C50 22 44 14 32 14 Z' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='28' r='5' fill='%235b8dee' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+/* Direct field-wrappers — reset grid column */
+main .form form fieldset.field-address-details > .field-wrapper {
+    grid-column: unset;
+    margin: 0;
+    padding: 0;
+}
+
+/* Address text input — full width with left border accent */
+main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records {
+    flex: 0 0 calc(100% - 48px);
+    width: calc(100% - 48px);
+    margin: 20px 24px 0;
+    box-sizing: border-box;
+    position: relative;
+    border-left: 3px solid #7b9fd4;
+    padding: 4px 12px 4px 14px;
+}
+
+/* Floating label for address field */
+main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records > label.field-label {
+    font-size: 0.75rem;
+    color: #8a96ab;
+    font-weight: 400;
+    position: absolute;
+    top: 10px;
+    left: 28px;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+    line-height: 1;
+}
+
+/* Address text input */
+main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records input[type="text"] {
+    border: 1.5px solid #d0d9ea;
+    border-radius: 10px;
+    height: 52px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a2340;
+    background: #fff;
+    padding: 20px 14px 6px;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records input[type="text"]:hover,
+main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records input[type="text"]:focus {
+    border-color: #7b9fd4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
+}
+
+/* Radio group — full width, horizontal layout */
+main .form form fieldset.field-address-details .field-is-customer-aadhaar-address {
+    flex: 0 0 calc(100% - 48px);
+    width: calc(100% - 48px);
+    margin: 20px 24px 24px;
+    box-sizing: border-box;
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Radio group legend — question label */
+main .form form fieldset.field-address-details .field-is-customer-aadhaar-address > legend {
+    width: 100%;
+    flex: 0 0 100%;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #444;
+    padding: 0 0 8px;
+    border: none;
+    margin: 0;
+    display: block;
+    float: none;
+}
+
+/* Radio wrapper — inline flex */
+main .form form fieldset.field-address-details .field-is-customer-aadhaar-address .radio-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+/* Custom radio button — hide native, replace with styled circle */
+main .form form fieldset.field-address-details .field-is-customer-aadhaar-address input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #7b9fd4;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+    background: #fff;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+/* Inner filled dot on checked */
+main .form form fieldset.field-address-details .field-is-customer-aadhaar-address input[type="radio"]::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #5f8dda;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.15s ease;
+}
+
+main .form form fieldset.field-address-details .field-is-customer-aadhaar-address input[type="radio"]:checked {
+    border-color: #5f8dda;
+    background: #fff;
+}
+
+main .form form fieldset.field-address-details .field-is-customer-aadhaar-address input[type="radio"]:checked::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Radio labels */
+main .form form fieldset.field-address-details .field-is-customer-aadhaar-address .radio-wrapper label {
+    font-size: 0.88rem;
+    color: #333;
+    font-weight: 400;
+    cursor: pointer;
+    flex-basis: auto;
+    white-space: nowrap;
+}
+
+/* Responsive: stack radio buttons on mobile */
+@media (width <= 599px) {
+    main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records,
+    main .form form fieldset.field-address-details .field-is-customer-aadhaar-address {
+        flex: 0 0 calc(100% - 48px);
+        width: calc(100% - 48px);
+    }
+
+    main .form form fieldset.field-address-details .field-is-customer-aadhaar-address {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ===== END Address Details Panel Styles ===== */
