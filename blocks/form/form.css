@@ -1992,7 +1992,7 @@ main .form form fieldset.panel-wrapper[name="verify_email_id"] {
     border: 1px solid #e4e9f2;
     padding: 0;
     box-sizing: border-box;
-    display: flex !important;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0;
@@ -2058,7 +2058,7 @@ main
     box-sizing: border-box;
     border: none;
     background: transparent;
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     gap: 0;
 }
