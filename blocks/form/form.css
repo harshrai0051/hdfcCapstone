@@ -2887,3 +2887,552 @@ main .form form fieldset.field-address-details .field-is-customer-aadhaar-addres
 }
 
 /* ===== END Address Details Panel Styles ===== */
+
+/* ===== Employer Details Panel Styles ===== */
+
+/* Main container */
+main .form form fieldset.field-employer-details {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+    margin-top: 23px !important;
+}
+
+/* Legend — gradient header bar */
+main .form form fieldset.field-employer-details > legend.accordion-legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: default;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Briefcase/document icon */
+main .form form fieldset.field-employer-details > legend.accordion-legend::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='8' y='20' width='48' height='36' rx='5' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3'/%3E%3Crect x='22' y='12' width='20' height='12' rx='4' fill='%23dbeafe' stroke='%235b8dee' stroke-width='2.5'/%3E%3Cline x1='16' y1='38' x2='48' y2='38' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round'/%3E%3Cline x1='16' y1='46' x2='36' y2='46' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+/* All direct field-wrappers — reset grid column */
+main .form form fieldset.field-employer-details > .field-wrapper {
+    grid-column: unset;
+    margin: 0;
+    padding: 0;
+}
+
+/* col-6 fields (Employer Company Name dropdown, Enter Company Name input, Industry Type) */
+main .form form fieldset.field-employer-details > .col-6 {
+    flex: 1 1 calc(50% - 48px);
+    min-width: 0;
+    max-width: calc(50% - 48px);
+    margin: 16px 0 0 24px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* col-12 fields (help text paragraphs) */
+main .form form fieldset.field-employer-details > .col-12 {
+    flex: 0 0 calc(100% - 48px);
+    width: calc(100% - 48px);
+    margin: 4px 0 0 24px;
+    box-sizing: border-box;
+}
+
+/* Help text paragraphs */
+main .form form fieldset.field-employer-details > .col-12 p {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Floating label */
+main .form form fieldset.field-employer-details .field-wrapper > label.field-label {
+    font-size: 0.75rem;
+    color: #8a96ab;
+    font-weight: 400;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+    line-height: 1;
+}
+
+/* Input / Select — bordered rounded, floating label style */
+main .form form fieldset.field-employer-details input[type="text"],
+main .form form fieldset.field-employer-details select {
+    border: 1.5px solid #d0d9ea;
+    border-radius: 10px;
+    height: 52px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1a2340;
+    background: #fff;
+    padding: 20px 14px 6px;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    box-sizing: border-box;
+    appearance: none;
+}
+
+main .form form fieldset.field-employer-details input[type="text"]:hover,
+main .form form fieldset.field-employer-details select:hover,
+main .form form fieldset.field-employer-details input[type="text"]:focus,
+main .form form fieldset.field-employer-details select:focus {
+    border-color: #7b9fd4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
+}
+
+/* Custom dropdown chevron */
+main .form form fieldset.field-employer-details .drop-down-wrapper::after {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a96ab' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Bottom padding for last row */
+main .form form fieldset.field-employer-details > .col-6:last-of-type,
+main .form form fieldset.field-employer-details > .col-12:last-child {
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (width <= 599px) {
+    main .form form fieldset.field-employer-details > .col-6 {
+        flex: 0 0 calc(100% - 48px);
+        max-width: calc(100% - 48px);
+    }
+}
+
+/* ===== END Employer Details Panel Styles ===== */
+
+/* ===== Income Details Panel Styles ===== */
+
+/* Main container */
+main .form form fieldset.field-income-details {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+    margin-top: 23px !important;
+}
+
+/* Legend — gradient header bar */
+main .form form fieldset.field-income-details > legend.accordion-legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: default;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Coin/income icon */
+main .form form fieldset.field-income-details > legend.accordion-legend::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Ccircle cx='32' cy='32' r='22' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-size='22' font-family='Arial' font-weight='bold' fill='%235b8dee'%3E%E2%82%B9%3C/text%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+/* All direct field-wrappers */
+main .form form fieldset.field-income-details > .field-wrapper {
+    grid-column: unset;
+    margin: 0;
+    padding: 0;
+}
+
+/* col-6 fields (Monthly Income, Ongoing EMIs) */
+main .form form fieldset.field-income-details > .col-6 {
+    flex: 1 1 calc(50% - 48px);
+    min-width: 0;
+    max-width: calc(50% - 48px);
+    margin: 16px 0 20px 24px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Floating label */
+main .form form fieldset.field-income-details .field-wrapper > label.field-label {
+    font-size: 0.75rem;
+    color: #8a96ab;
+    font-weight: 400;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+    line-height: 1;
+}
+
+/* Number inputs */
+main .form form fieldset.field-income-details input[type="number"] {
+    border: 1.5px solid #d0d9ea;
+    border-radius: 10px;
+    height: 52px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1a2340;
+    background: #fff;
+    padding: 20px 14px 6px;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    box-sizing: border-box;
+    -moz-appearance: textfield;
+}
+
+main .form form fieldset.field-income-details input[type="number"]::-webkit-inner-spin-button,
+main .form form fieldset.field-income-details input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+main .form form fieldset.field-income-details input[type="number"]:hover,
+main .form form fieldset.field-income-details input[type="number"]:focus {
+    border-color: #7b9fd4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
+}
+
+/* Responsive */
+@media (width <= 599px) {
+    main .form form fieldset.field-income-details > .col-6 {
+        flex: 0 0 calc(100% - 48px);
+        max-width: calc(100% - 48px);
+    }
+}
+
+/* ===== END Income Details Panel Styles ===== */
+
+/* ===== Work Email ID Panel Styles ===== */
+
+/* Main container */
+main .form form fieldset.field-work-email-id-panel {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+    margin-top: 23px !important;
+}
+
+/* Legend — gradient header bar */
+main .form form fieldset.field-work-email-id-panel > legend.accordion-legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: default;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Email/envelope icon */
+main .form form fieldset.field-work-email-id-panel > legend.accordion-legend::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='6' y='16' width='52' height='36' rx='6' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3'/%3E%3Cpath d='M6 22 L32 38 L58 22' stroke='%235b8dee' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+/* All direct field-wrappers */
+main .form form fieldset.field-work-email-id-panel > .field-wrapper {
+    grid-column: unset;
+    margin: 0;
+    padding: 0;
+}
+
+/* col-6 email field */
+main .form form fieldset.field-work-email-id-panel > .col-6 {
+    flex: 1 1 calc(50% - 48px);
+    min-width: 0;
+    max-width: calc(50% - 48px);
+    margin: 16px 0 0 24px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* col-12 help text */
+main .form form fieldset.field-work-email-id-panel > .col-12 {
+    flex: 0 0 calc(100% - 48px);
+    width: calc(100% - 48px);
+    margin: 4px 0 20px 24px;
+    box-sizing: border-box;
+}
+
+main .form form fieldset.field-work-email-id-panel > .col-12 p {
+    font-size: 0.82rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Floating label */
+main .form form fieldset.field-work-email-id-panel .field-wrapper > label.field-label {
+    font-size: 0.75rem;
+    color: #8a96ab;
+    font-weight: 400;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+    line-height: 1;
+}
+
+/* Email input */
+main .form form fieldset.field-work-email-id-panel input[type="email"] {
+    border: 1.5px solid #d0d9ea;
+    border-radius: 10px;
+    height: 52px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1a2340;
+    background: #fff;
+    padding: 20px 14px 6px;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+main .form form fieldset.field-work-email-id-panel input[type="email"]:hover,
+main .form form fieldset.field-work-email-id-panel input[type="email"]:focus {
+    border-color: #7b9fd4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
+}
+
+/* Responsive */
+@media (width <= 599px) {
+    main .form form fieldset.field-work-email-id-panel > .col-6 {
+        flex: 0 0 calc(100% - 48px);
+        max-width: calc(100% - 48px);
+    }
+}
+
+/* ===== END Work Email ID Panel Styles ===== */
+
+/* ===== Type of Loan Panel Styles ===== */
+
+/* Main container */
+main .form form fieldset.field-type-of-loan-panel {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #e4e9f2;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+    align-items: flex-start;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 4%);
+    overflow: hidden;
+    margin-top: 23px !important;
+}
+
+/* Legend — gradient header bar */
+main .form form fieldset.field-type-of-loan-panel > legend.accordion-legend {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 0 0 100%;
+    background: linear-gradient(135deg, #eaf0fb 0%, #dde7f5 100%);
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2340;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+    cursor: default;
+    position: relative;
+    float: none;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Bank/building icon */
+main .form form fieldset.field-type-of-loan-panel > legend.accordion-legend::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='8' y='28' width='48' height='24' rx='4' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3'/%3E%3Cpolygon points='32,8 8,28 56,28' fill='%23dbeafe' stroke='%235b8dee' stroke-width='3' stroke-linejoin='round'/%3E%3Crect x='14' y='36' width='8' height='12' rx='2' fill='%235b8dee' opacity='0.5'/%3E%3Crect x='28' y='36' width='8' height='12' rx='2' fill='%235b8dee' opacity='0.5'/%3E%3Crect x='42' y='36' width='8' height='12' rx='2' fill='%235b8dee' opacity='0.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+/* All direct field-wrappers */
+main .form form fieldset.field-type-of-loan-panel > .field-wrapper {
+    grid-column: unset;
+    margin: 0;
+    padding: 0;
+}
+
+/* col-6 loan type dropdown */
+main .form form fieldset.field-type-of-loan-panel > .col-6 {
+    flex: 1 1 calc(50% - 48px);
+    min-width: 0;
+    max-width: calc(50% - 48px);
+    margin: 16px 0 20px 24px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Floating label */
+main .form form fieldset.field-type-of-loan-panel .field-wrapper > label.field-label {
+    font-size: 0.75rem;
+    color: #8a96ab;
+    font-weight: 400;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    pointer-events: none;
+    z-index: 1;
+    display: block;
+    line-height: 1;
+}
+
+/* Select dropdown */
+main .form form fieldset.field-type-of-loan-panel select {
+    border: 1.5px solid #d0d9ea;
+    border-radius: 10px;
+    height: 52px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1a2340;
+    background: #fff;
+    padding: 20px 14px 6px;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    box-sizing: border-box;
+    appearance: none;
+}
+
+main .form form fieldset.field-type-of-loan-panel select:hover,
+main .form form fieldset.field-type-of-loan-panel select:focus {
+    border-color: #7b9fd4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
+}
+
+/* Custom dropdown chevron */
+main .form form fieldset.field-type-of-loan-panel .drop-down-wrapper::after {
+    content: "";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a96ab' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Responsive */
+@media (width <= 599px) {
+    main .form form fieldset.field-type-of-loan-panel > .col-6 {
+        flex: 0 0 calc(100% - 48px);
+        max-width: calc(100% - 48px);
+    }
+}
+
+/* ===== END Type of Loan Panel Styles ===== */
