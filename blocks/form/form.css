@@ -2633,7 +2633,7 @@ main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-em
 main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions {
     border: none;
     padding: 0 0 20px 24px;
-    margin: 0;
+    margin: 5px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
