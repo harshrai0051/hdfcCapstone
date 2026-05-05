@@ -2044,19 +2044,6 @@ main
     vertical-align: middle;
 }
 
-/* Chevron indicator on right */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="verify_email_id"]
-    > legend.accordion-legend::after {
-    content: "∧";
-    position: absolute;
-    right: 24px;
-    font-size: 1rem;
-    color: #5b8dee;
-}
-
 /* Inner sub-panels (personal + work email) - each 50% */
 main
     .form
