@@ -464,6 +464,59 @@ function waitAndInitMapping() {
 }
 
 /**
+ * Fix "Pan Card" label → "PAN Number" and
+ * make email-suggestion checkboxes behave like radio buttons (single-select).
+ */
+function initPersonalDetailsPreGenderPanel() {
+  function applyFixes() {
+    // 1. Rename "Pan Card" label to "PAN Number"
+    const panLabel = document.querySelector(
+      'label[for="emailinput-f5348740aa"].field-label',
+    );
+    if (panLabel && panLabel.textContent.trim() === 'Pan Card') {
+      panLabel.textContent = 'PAN Number';
+    }
+
+    // 2. Radio-like behaviour for email-suggestion checkboxes
+    const emailSuggestionsFieldset = document.querySelector(
+      'fieldset[name="email_suggestions"]',
+    );
+    if (emailSuggestionsFieldset && !emailSuggestionsFieldset.dataset.radioInit) {
+      emailSuggestionsFieldset.dataset.radioInit = 'true';
+      emailSuggestionsFieldset.addEventListener('change', (e) => {
+        const clicked = e.target;
+        if (clicked.type !== 'checkbox' || clicked.name !== 'email_suggestions') return;
+
+        // Uncheck every sibling checkbox except the one just clicked
+        emailSuggestionsFieldset
+          .querySelectorAll('input[type="checkbox"][name="email_suggestions"]')
+          .forEach((cb) => {
+            if (cb !== clicked) {
+              cb.checked = false;
+            }
+          });
+      });
+    }
+  }
+
+  // Poll until the panel is in the DOM
+  function waitForPanel() {
+    const panel = document.querySelector(
+      'fieldset.field-personal-details-pre-gender-panel',
+    );
+    if (panel) {
+      applyFixes();
+    } else {
+      setTimeout(waitForPanel, 300);
+    }
+  }
+
+  waitForPanel();
+}
+
+initPersonalDetailsPreGenderPanel();
+
+/**
  * EXPORTS
  */
 export {
