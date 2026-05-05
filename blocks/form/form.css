@@ -213,7 +213,7 @@ main .form fieldset:not(.checkbox-group-wrapper, .radio-group-wrapper) legend {
     border-bottom: var(--form-fieldset-legend-border);
     width: 100%;
     padding: var(--form-fieldset-legend-padding);
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
 }
 
 main .form label,
