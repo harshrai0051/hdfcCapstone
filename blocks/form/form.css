@@ -2461,3 +2461,253 @@ main .form form #button-c578b87368 {
 main .form form #button-c578b87368:hover {
     text-decoration: underline;
 }
+
+/* ===== Personal Details Pre-Gender Panel ===== */
+
+/* Panel container */
+main .form form fieldset.field-personal-details-pre-gender-panel {
+    background: #fff;
+    border: 1px solid #e8edf5;
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 20px 24px;
+    align-items: start;
+}
+
+/* Panel legend — blue header bar */
+main .form form fieldset.field-personal-details-pre-gender-panel > legend {
+    grid-column: 1 / -1;
+    width: 100%;
+    background: linear-gradient(90deg, #dce6f7 0%, #e8eef9 100%);
+    color: #1a2340;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 14px 20px;
+    margin-bottom: 0 !important;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel > legend::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a62b6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='7' width='20' height='14' rx='2' ry='2'/%3E%3Cpath d='M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    flex-shrink: 0;
+}
+
+/* Fields inside panel — remove default margin/padding oddities */
+main .form form fieldset.field-personal-details-pre-gender-panel > .field-wrapper {
+    margin: 0;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* col-6 fields */
+main .form form fieldset.field-personal-details-pre-gender-panel > .col-6 {
+    grid-column: span 6;
+}
+
+/* col-12 fields */
+main .form form fieldset.field-personal-details-pre-gender-panel > .col-12 {
+    grid-column: 1 / -1;
+}
+
+/* Last child gets bottom padding */
+main .form form fieldset.field-personal-details-pre-gender-panel > .field-wrapper:last-of-type {
+    padding-bottom: 20px;
+}
+
+/* Floating label wrapper base */
+main .form form fieldset.field-personal-details-pre-gender-panel .field-wrapper {
+    position: relative;
+}
+
+/* Floating label */
+main .form form fieldset.field-personal-details-pre-gender-panel .field-wrapper > label {
+    position: absolute;
+    top: 10px;
+    left: 34px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #8a96ab;
+    pointer-events: none;
+    z-index: 2;
+    line-height: 1;
+    transition: all 0.15s ease;
+    background: transparent;
+}
+
+/* Input / select base — floating label style */
+main .form form fieldset.field-personal-details-pre-gender-panel input,
+main .form form fieldset.field-personal-details-pre-gender-panel select {
+    height: 52px;
+    border: 1.5px solid #d0d9ea;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a2340;
+    background: #fff;
+    padding: 20px 14px 6px;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    box-sizing: border-box;
+    appearance: none;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel input:hover,
+main .form form fieldset.field-personal-details-pre-gender-panel select:hover,
+main .form form fieldset.field-personal-details-pre-gender-panel input:focus,
+main .form form fieldset.field-personal-details-pre-gender-panel select:focus {
+    border-color: #7b9fd4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
+}
+
+/* Custom dropdown chevron */
+main .form form fieldset.field-personal-details-pre-gender-panel .drop-down-wrapper::after {
+    content: "";
+    position: absolute;
+    right: 34px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a96ab' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* PAN field — green checkmark icon */
+main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-pan-id1::after {
+    content: "";
+    position: absolute;
+    right: 34px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322c55e' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='9 12 11 14 15 10'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Email field — "Verify" button */
+main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-email-id {
+    position: relative;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-email-id::after {
+    content: "Verify";
+    position: absolute;
+    right: 34px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #4a62b6;
+    pointer-events: none;
+    z-index: 2;
+    letter-spacing: 0.01em;
+}
+
+/* Email suggestions — pill/chip style */
+main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions {
+    border: none;
+    padding: 0 20px 20px;
+    margin: -12px 0 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: transparent;
+    grid-column: 1 / -1;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions > legend {
+    display: none;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1.5px solid #c5d0e6;
+    border-radius: 20px;
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    gap: 0;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper:hover {
+    border-color: #4a62b6;
+    background: #f0f4ff;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #4a62b6;
+    cursor: pointer;
+    position: static;
+    padding: 0;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Checked pill */
+main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper input[type="checkbox"]:checked + label {
+    font-weight: 700;
+}
+
+main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper:has(input[type="checkbox"]:checked) {
+    border-color: #4a62b6;
+    background: #e8eeff;
+}
+
+/* Responsive: stack col-6 to full width on mobile */
+@media (width <= 600px) {
+    main .form form fieldset.field-personal-details-pre-gender-panel > .col-6 {
+        grid-column: 1 / -1;
+    }
+
+    main .form form fieldset.field-personal-details-pre-gender-panel > .field-wrapper {
+        padding: 0 14px;
+    }
+
+    main .form form fieldset.field-personal-details-pre-gender-panel .field-wrapper > label {
+        left: 28px;
+    }
+
+    main .form form fieldset.field-personal-details-pre-gender-panel .drop-down-wrapper::after,
+    main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-pan-id1::after,
+    main .form form fieldset.field-personal-details-pre-gender-panel .field-enter-email-id::after {
+        right: 28px;
+    }
+
+    main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions {
+        padding: 0 14px 14px;
+    }
+}
+
+/* ===== END Personal Details Pre-Gender Panel Styles ===== */
