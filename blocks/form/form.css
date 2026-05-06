@@ -3566,7 +3566,7 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     grid-row: 1;
 }
 
-/* Input (number value) — column 2, row 2 */
+/* Input (number value) — inside .number-input-row flex container */
 main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number input[type="text"] {
     position: static;
     border: none;
@@ -3582,8 +3582,6 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     pointer-events: auto;
     letter-spacing: 0.02em;
     display: inline-block;
-    grid-column: 2;
-    grid-row: 2;
 }
 
 /* Description text — spans both columns, row 3 (below icon and number) */
@@ -3700,11 +3698,13 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     background: #f0fdf4;
 }
 
-/* Inline row: input value + copy button side by side */
+/* Inline row: input value + copy button side by side — column 2, row 2 in the grid */
 main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .number-input-row {
     display: flex;
     align-items: center;
     gap: 0;
+    grid-column: 2;
+    grid-row: 2;
 }
 
 /* ===== END Thank You Panel Styles ===== */
