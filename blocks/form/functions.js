@@ -607,12 +607,28 @@ function removePanelPlaceholders() {
     'emailinput-38bfd754e8',  // Work Email ID
   ];
 
-  const allFound = fieldIds.every((id) => document.getElementById(id));
+  const dropdownIds = [
+    'dropdown-8e87f43526', // Employer/Company Name dropdown
+    'dropdown-d634820a49', // Select Loan Type dropdown
+  ];
 
-  if (allFound) {
+  const allInputsFound = fieldIds.every((id) => document.getElementById(id));
+  const allDropdownsFound = dropdownIds.every((id) => document.getElementById(id));
+
+  if (allInputsFound && allDropdownsFound) {
+    // Remove placeholder attribute from text/number/email inputs
     fieldIds.forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.removeAttribute('placeholder');
+    });
+
+    // Remove the first disabled placeholder option from each dropdown
+    dropdownIds.forEach((id) => {
+      const select = document.getElementById(id);
+      if (select) {
+        const firstOption = select.querySelector('option[disabled]');
+        if (firstOption) firstOption.remove();
+      }
     });
   } else {
     setTimeout(removePanelPlaceholders, 300);
