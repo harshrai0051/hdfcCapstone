@@ -517,6 +517,60 @@ function initPersonalDetailsPreGenderPanel() {
 initPersonalDetailsPreGenderPanel();
 
 /**
+ * Thank You Panel - Add copy button to Loan Application Number
+ */
+function initThankYouPanel() {
+  function applyThankYouEnhancements() {
+    const panel = document.getElementById('panelcontainer-66df6ce6e9');
+    if (!panel) return;
+
+    // Add copy button next to loan application number input
+    const loanAppInput = document.getElementById('textinput-baf76d084a');
+    if (loanAppInput && !loanAppInput.parentElement.querySelector('.copy-btn')) {
+      const copyBtn = document.createElement('button');
+      copyBtn.type = 'button';
+      copyBtn.className = 'copy-btn';
+      copyBtn.setAttribute('aria-label', 'Copy loan application number');
+      copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+      loanAppInput.insertAdjacentElement('afterend', copyBtn);
+
+      copyBtn.addEventListener('click', () => {
+        const value = loanAppInput.value;
+        if (value) {
+          navigator.clipboard.writeText(value).then(() => {
+            copyBtn.classList.add('copied');
+            setTimeout(() => copyBtn.classList.remove('copied'), 1500);
+          }).catch(() => {
+            // Fallback
+            const ta = document.createElement('textarea');
+            ta.value = value;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            copyBtn.classList.add('copied');
+            setTimeout(() => copyBtn.classList.remove('copied'), 1500);
+          });
+        }
+      });
+    }
+  }
+
+  function waitForThankYouPanel() {
+    const panel = document.getElementById('panelcontainer-66df6ce6e9');
+    if (panel) {
+      applyThankYouEnhancements();
+    } else {
+      setTimeout(waitForThankYouPanel, 300);
+    }
+  }
+
+  waitForThankYouPanel();
+}
+
+initThankYouPanel();
+
+/**
  * EXPORTS
  */
 export {

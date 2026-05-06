@@ -3436,3 +3436,339 @@ main .form form fieldset.field-type-of-loan-panel .drop-down-wrapper::after {
 }
 
 /* ===== END Type of Loan Panel Styles ===== */
+
+/* ===== Thank You Panel Styles ===== */
+
+/* Main container — no background, no border, just flex column */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+}
+
+/* Hide the panel legend ("Thank You") */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] > legend {
+    display: none;
+}
+
+/* Reset field wrappers */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] > .field-wrapper {
+    grid-column: unset;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- Top notification bar: "Your uploaded KYC documents..." ---- */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-plain-text1777440386480 {
+    background-color: #fef9ec;
+    border: 1.5px solid #f5dfa0;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-plain-text1777440386480 p {
+    font-size: 0.95rem;
+    color: #5a4200;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+/* ---- Main white card container ---- */
+/* Wrap the loan-application-number, xpress-summary, loan-amount into a card.
+   We achieve this by making the panel inner container a white card for the
+   middle three elements, using a common sibling trick via adjacent styling */
+
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number,
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-xpress-personal-loan-summary,
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount {
+    background: #fff;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* White card top (loan application number section) */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number {
+    border: 1px solid #e8eaf0;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    padding: 24px 24px 20px;
+    position: relative;
+}
+
+/* White card middle (xpress summary heading) */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-xpress-personal-loan-summary {
+    border: 1px solid #e8eaf0;
+    border-top: none;
+    border-bottom: none;
+    padding: 0 24px;
+}
+
+/* White card bottom (loan amount) */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount {
+    border: 1px solid #e8eaf0;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 0 24px 24px;
+    margin-bottom: 20px;
+}
+
+/* ---- Loan Application Number field ---- */
+
+/* Hide the input field visually, show it as a display value */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number label.field-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    font-weight: 400;
+    margin-bottom: 6px;
+    padding-left: 56px;
+}
+
+/* The application number value display */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number input[type="text"] {
+    border: none;
+    background: transparent;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: auto;
+    display: inline-block;
+    pointer-events: none;
+    box-shadow: none;
+    letter-spacing: 0.02em;
+    flex: none;
+}
+
+/* Wrapper for icon + content layout */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+}
+
+/* Purple icon circle before the content */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number::before {
+    content: "";
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    background-color: #f0eeff;
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='none'%3E%3Crect x='12' y='10' width='30' height='38' rx='4' fill='%23ddd6fe' stroke='%237c3aed' stroke-width='2.5'/%3E%3Crect x='20' y='18' width='30' height='38' rx='4' fill='%23ede9fe' stroke='%237c3aed' stroke-width='2.5'/%3E%3Cline x1='27' y1='30' x2='43' y2='30' stroke='%237c3aed' stroke-width='2' stroke-linecap='round'/%3E%3Cline x1='27' y1='37' x2='43' y2='37' stroke='%237c3aed' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='44' cy='48' r='10' fill='%237c3aed'/%3E%3Ctext x='44' y='52.5' text-anchor='middle' font-size='12' font-family='Arial' font-weight='bold' fill='white'%3EK%3C/text%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
+    margin-right: 14px;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+/* Column layout for label + input row */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number > label.field-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    font-weight: 400;
+    margin-bottom: 4px;
+    padding-left: 0;
+    flex: none;
+    width: 100%;
+}
+
+/* Inner content column */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number > .text-input-wrapper,
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number > input,
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number > label {
+    /* reset */
+}
+
+/* Override: make label + input stack in a column inside the flex row */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Content wrapper (label + input + description) */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number > label.field-label ~ input,
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number > label.field-label {
+    margin-left: 0;
+}
+
+/* Force the label to go on top by using a pseudo-wrapper approach */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number label.field-label {
+    position: absolute;
+    top: 24px;
+    left: 90px;
+    font-size: 0.85rem;
+    color: #888;
+    font-weight: 400;
+    display: block;
+    line-height: 1;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number input[type="text"] {
+    position: absolute;
+    top: 44px;
+    left: 90px;
+    border: none;
+    background: transparent;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: auto;
+    box-shadow: none;
+    pointer-events: auto;
+}
+
+/* Copy icon after the application number */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number input[type="text"]::after {
+    content: "⧉";
+}
+
+/* Description text "We may call or email you, if needed." */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .field-description {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    right: 24px;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 400;
+    padding-top: 60px;
+}
+
+/* Ensure the card has enough height for absolute positioning */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number {
+    min-height: 130px;
+}
+
+/* Dashed separator between loan number section and summary */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-xpress-personal-loan-summary {
+    padding-top: 0;
+    border-top: 1.5px dashed #d5d8e0 !important;
+    margin-top: 0;
+}
+
+/* Wait — let's restructure this more cleanly using a description-section approach */
+
+/* ---- Xpress Personal Loan Summary heading ---- */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-xpress-personal-loan-summary p {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    padding: 20px 0 0;
+}
+
+/* ---- Loan Amount field ---- */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount label.field-label {
+    display: block;
+    font-size: 0.78rem;
+    color: #888;
+    font-weight: 400;
+    margin-bottom: 4px;
+    margin-top: 16px;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount input[type="text"] {
+    border: none;
+    border-left: 3px solid #b0bde0;
+    background: transparent;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    padding: 4px 0 4px 12px;
+    margin: 0;
+    height: auto;
+    width: auto;
+    box-shadow: none;
+    border-radius: 0;
+    pointer-events: none;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount input[type="text"]:hover,
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount input[type="text"]:focus {
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    border-left: 3px solid #b0bde0;
+    outline: none;
+    box-shadow: none;
+}
+
+/* ---- Bottom blue info bar ---- */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-plain-text-21046908741777441839426 {
+    background-color: #eef2ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-plain-text-21046908741777441839426 p {
+    font-size: 0.9rem;
+    color: #3730a3;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ---- Copy button for Loan Application Number ---- */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 4px 6px;
+    margin: 0 0 0 10px;
+    cursor: pointer;
+    color: #5f8dda;
+    border-radius: 6px;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    transition: color 0.15s ease, background 0.15s ease;
+    flex-shrink: 0;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .copy-btn:hover {
+    background: #eef2ff;
+    color: #3730a3;
+}
+
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .copy-btn.copied {
+    color: #16a34a;
+    background: #f0fdf4;
+}
+
+/* Inline row: input value + copy button side by side */
+main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .number-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+/* ===== END Thank You Panel Styles ===== */
