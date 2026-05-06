@@ -208,6 +208,25 @@ function waitAndInit() {
 waitAndInit();
 
 /**
+ * Fix tenure slider to snap only to multiples of 12 (12, 24, 36, 48, 60, 72, 84)
+ */
+function fixTenureSliderStep() {
+  const tenureInput = document.getElementById('numberinput-9a0e8002ff');
+  if (tenureInput) {
+    tenureInput.step = 12;
+    // Snap current value to nearest valid multiple of 12
+    const snapped = Math.round(parseFloat(tenureInput.value) / 12) * 12;
+    tenureInput.value = Math.min(84, Math.max(12, snapped));
+    // Trigger UI update so bubble and EMI recalculate
+    tenureInput.dispatchEvent(new Event('input', { bubbles: true }));
+  } else {
+    setTimeout(fixTenureSliderStep, 300);
+  }
+}
+
+fixTenureSliderStep();
+
+/**
  * Map all source form fields into the Review Details accordion.
  *
  * Source panels:
