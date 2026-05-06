@@ -3707,4 +3707,86 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     grid-row: 2;
 }
 
+/* ===== Message Panel Styles (panel1777437956773) ===== */
+
+/* Panel container — transparent, no border */
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+}
+
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] > legend {
+    display: none;
+}
+
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] > .field-wrapper {
+    grid-column: unset;
+    margin: 0;
+    padding: 0;
+}
+
+/* "Loan offer based on customer's declared income" — bold heading with party emoji */
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text1777438016234 {
+    background: transparent;
+    border: none;
+    padding: 0 0 4px;
+}
+
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text1777438016234 p {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text1777438016234 p::before {
+    content: "🎉";
+    font-style: normal;
+    flex-shrink: 0;
+}
+
+/* "You can get a loan up to ₹15,00,000!" — light blue card with money bag icon */
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text-14231599091777438024640 {
+    background-color: #e8f4fd;
+    border: none;
+    border-radius: 14px;
+    padding: 18px 24px 18px 80px;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text-14231599091777438024640::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='48' rx='20' ry='13' fill='%23ffd700' opacity='0.3'/%3E%3Cpath d='M14 36 Q14 20 32 20 Q50 20 50 36 Q50 52 32 52 Q14 52 14 36Z' fill='%234a90e2' stroke='%232c5fa8' stroke-width='2'/%3E%3Cpath d='M24 20 Q28 12 32 14 Q36 12 40 20' fill='%234a90e2' stroke='%232c5fa8' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='38' cy='10' r='4' fill='%23ffd700' stroke='%23e6b800' stroke-width='1.5'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-size='16' font-family='Arial' font-weight='bold' fill='%23fff'%3E%E2%82%B9%3C/text%3E%3Cline x1='16' y1='52' x2='10' y2='58' stroke='%23c8a800' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='8' cy='59' r='3' fill='%23ffd700'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text-14231599091777438024640 p {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ===== END Message Panel Styles ===== */
+
 /* ===== END Thank You Panel Styles ===== */
