@@ -3529,6 +3529,7 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number {
     display: flex !important;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: flex-start;
     gap: 0;
     position: static;
@@ -3588,18 +3589,19 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     order: 1;
 }
 
-/* Description text "We may call or email you, if needed." - normal flow below input */
+/* Description text "We may call or email you, if needed." - on its own line below icon+content */
 main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .field-description {
     position: static;
     font-size: 0.9rem;
     color: #555;
     font-weight: 400;
     padding-top: 0;
-    margin-top: 2px;
+    margin-top: 12px;
     bottom: unset;
     left: unset;
     right: unset;
     display: block;
+    flex: 0 0 100%;
     width: 100%;
     order: 2;
 }
