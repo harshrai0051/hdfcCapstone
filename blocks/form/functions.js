@@ -622,12 +622,12 @@ function removePanelPlaceholders() {
       if (el) el.removeAttribute('placeholder');
     });
 
-    // Remove the first disabled placeholder option from each dropdown
+    // Clear the text of the first disabled placeholder option so it shows blank
     dropdownIds.forEach((id) => {
       const select = document.getElementById(id);
       if (select) {
         const firstOption = select.querySelector('option[disabled]');
-        if (firstOption) firstOption.remove();
+        if (firstOption) firstOption.textContent = '';
       }
     });
   } else {
