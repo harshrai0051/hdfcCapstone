@@ -596,6 +596,32 @@ function initThankYouPanel() {
 initThankYouPanel();
 
 /**
+ * Remove placeholders from specific panel fields
+ */
+function removePanelPlaceholders() {
+  const fieldIds = [
+    'textinput-5fd2ae7fc3',   // Enter Employer/Company Name
+    'textinput-72cdaa5e64',   // Industry Type
+    'numberinput-4f93a1127c', // Monthly Net Income (Salary)
+    'numberinput-fa64c35931', // Ongoing EMIs (If any)
+    'emailinput-38bfd754e8',  // Work Email ID
+  ];
+
+  const allFound = fieldIds.every((id) => document.getElementById(id));
+
+  if (allFound) {
+    fieldIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.removeAttribute('placeholder');
+    });
+  } else {
+    setTimeout(removePanelPlaceholders, 300);
+  }
+}
+
+removePanelPlaceholders();
+
+/**
  * EXPORTS
  */
 export {
