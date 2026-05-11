@@ -920,6 +920,84 @@ function initOtpPanel() {
 initOtpPanel();
 
 // ─────────────────────────────────────────────────────────────────────────────
+// PAN VALIDATION
+// ─────────────────────────────────────────────────────────────────────────────
+
+// PAN: 3 alpha + 'P' (4th) + 1 alpha + 4 digits + 1 alpha, total 10 chars
+const PAN_REGEX = /^[A-Z]{3}P[A-Z][0-9]{4}[A-Z]$/;
+
+/**
+ * Validate a PAN string. Returns null if valid, or an error message string.
+ */
+function validatePan(raw) {
+  const v = (raw || '').trim().toUpperCase();
+  if (v.length === 0) return null; // empty — no error while user hasn't typed yet
+  if (v.length !== 10) return 'PAN must be exactly 10 characters.';
+  if (PAN_REGEX.test(v)) return null;
+  if (!/^[A-Z]{5}/.test(v)) return 'First 5 characters of PAN must be alphabets.';
+  if (v[3] !== 'P') return 'Fourth character of PAN must be "P".';
+  if (!/^[0-9]{4}$/.test(v.slice(5, 9))) return 'Characters 6–9 of PAN must be numeric.';
+  return 'PAN could not be verified. Please enter a valid PAN.';
+}
+
+/**
+ * Show/clear the PAN error message below the PAN field.
+ */
+function updatePanError() {
+  const panInput = document.getElementById('emailinput-f5348740aa');
+  if (!panInput) return;
+
+  const fieldWrapper = panInput.closest('.field-wrapper');
+  if (!fieldWrapper) return;
+
+  let errorEl = fieldWrapper.querySelector('.pan-error');
+  const errorMsg = validatePan(panInput.value);
+
+  if (errorMsg) {
+    if (!errorEl) {
+      errorEl = document.createElement('span');
+      errorEl.className = 'pan-error';
+      fieldWrapper.append(errorEl);
+    }
+    errorEl.textContent = errorMsg;
+    fieldWrapper.classList.add('has-error');
+    panInput.setAttribute('aria-invalid', 'true');
+  } else {
+    if (errorEl) errorEl.remove();
+    fieldWrapper.classList.remove('has-error');
+    panInput.removeAttribute('aria-invalid');
+  }
+}
+
+/**
+ * Attach PAN validation listeners to the PAN input field.
+ */
+function initPanValidation() {
+  function attachPanListeners() {
+    const panInput = document.getElementById('emailinput-f5348740aa');
+    if (!panInput) {
+      setTimeout(attachPanListeners, 300);
+      return;
+    }
+
+    // Convert to uppercase as user types
+    panInput.addEventListener('input', () => {
+      const pos = panInput.selectionStart;
+      panInput.value = panInput.value.toUpperCase();
+      panInput.setSelectionRange(pos, pos);
+      updatePanError();
+    });
+
+    panInput.addEventListener('blur', updatePanError);
+    panInput.addEventListener('change', updatePanError);
+  }
+
+  attachPanListeners();
+}
+
+initPanValidation();
+
+// ─────────────────────────────────────────────────────────────────────────────
 // DOB VALIDATION
 // ─────────────────────────────────────────────────────────────────────────────
 

@@ -1395,6 +1395,21 @@ main
     background-color: #4a78c8;
 }
 
+/* PAN validation error */
+main .form form .pan-error {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--form-error-color);
+    font-weight: 600;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+main .form form .field-wrapper.has-error input[type="email"] {
+    border-color: var(--form-error-color) !important;
+    box-shadow: 0 0 0 2px rgb(255 95 63 / 15%) !important;
+}
+
 /* DOB age validation error */
 main
     .form
