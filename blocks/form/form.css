@@ -1395,6 +1395,31 @@ main
     background-color: #4a78c8;
 }
 
+/* DOB age validation error */
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="personal_loan_offer_panel"]
+    .field-date-of-birth
+    .dob-age-error {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--form-error-color);
+    font-weight: 600;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="personal_loan_offer_panel"]
+    .field-date-of-birth.has-error
+    input[type="text"] {
+    border-color: var(--form-error-color) !important;
+    box-shadow: 0 0 0 2px rgb(255 95 63 / 15%) !important;
+}
+
 /* ===== END Personal Loan Offer Panel Styles ===== */
 
 /* ===== Loan Details Panel Styles ===== */

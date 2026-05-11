@@ -919,6 +919,130 @@ function initOtpPanel() {
 
 initOtpPanel();
 
+// ─────────────────────────────────────────────────────────────────────────────
+// DOB VALIDATION
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Calculate age in years from a date string (YYYY-MM-DD or similar).
+ */
+function getAge(dobRaw) {
+  const dob = new Date(dobRaw);
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+  const monthDiff = today.getMonth() - dob.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+    age -= 1;
+  }
+  return age;
+}
+
+/**
+ * Check whether all required fields on the Personal Loan Offer panel are valid.
+ */
+function isValid() {
+  const form = document.querySelector('form');
+  if (!form) return false;
+
+  const phone = form.querySelector('.field-mobile-number input');
+  const dob = form.querySelector('.field-date-of-birth input');
+  const checkboxes = [
+    ...form.querySelectorAll('.field-consent-communication input[type="checkbox"]'),
+    ...form.querySelectorAll('.field-consent-marketing input[type="checkbox"]'),
+  ];
+
+  const phoneOk = (phone?.value || '').replace(/\D/g, '').length >= 10;
+
+  const dobRaw = (dob?.getAttribute('edit-value') || dob?.value || '').trim();
+  const dobDate = new Date(dobRaw);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const age = getAge(dobRaw);
+  const dobOk = dobRaw.length > 0
+    && !Number.isNaN(dobDate.getTime())
+    && dobDate < today
+    && age >= 21 && age <= 60;
+
+  const checkboxesOk = checkboxes.length > 0 && checkboxes.every((cb) => cb.checked);
+
+  return phoneOk && dobOk && checkboxesOk;
+}
+
+/**
+ * Show/clear the age-range error message below the DOB field.
+ */
+function updateDobError() {
+  const form = document.querySelector('form');
+  if (!form) return;
+
+  const dob = form.querySelector('.field-date-of-birth input');
+  const dobField = form.querySelector('.field-date-of-birth');
+  if (!dobField || !dob) return;
+
+  let errorEl = dobField.querySelector('.dob-age-error');
+  const dobRaw = (dob.getAttribute('edit-value') || dob.value || '').trim();
+
+  let errorMsg = '';
+  if (dobRaw.length > 0) {
+    const dobDate = new Date(dobRaw);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (Number.isNaN(dobDate.getTime())) {
+      errorMsg = 'Please enter a valid date of birth.';
+    } else if (dobDate >= today) {
+      errorMsg = 'Date of birth cannot be today or a future date.';
+    } else {
+      const age = getAge(dobRaw);
+      if (age < 21) errorMsg = 'Age must be 21 or above to apply for a loan.';
+      else if (age > 60) errorMsg = 'Age must be 60 or below to apply for a loan.';
+    }
+  }
+
+  if (errorMsg) {
+    if (!errorEl) {
+      errorEl = document.createElement('span');
+      errorEl.className = 'dob-age-error';
+      dobField.append(errorEl);
+    }
+    errorEl.textContent = errorMsg;
+    dobField.classList.add('has-error');
+  } else {
+    if (errorEl) errorEl.remove();
+    dobField.classList.remove('has-error');
+  }
+}
+
+/**
+ * Attach DOB validation listeners to the date-of-birth field.
+ */
+function initDobValidation() {
+  function attachListeners() {
+    const dobInput = document.getElementById('datepicker-11fedea8ba');
+    if (!dobInput) {
+      setTimeout(attachListeners, 300);
+      return;
+    }
+
+    // Run on every change/input event
+    ['change', 'input', 'blur'].forEach((evt) => {
+      dobInput.addEventListener(evt, () => {
+        // Short delay allows the datepicker to write edit-value before we read it
+        setTimeout(updateDobError, 50);
+      });
+    });
+
+    // Also watch for attribute mutations (datepicker writes edit-value via JS)
+    const observer = new MutationObserver(() => {
+      setTimeout(updateDobError, 50);
+    });
+    observer.observe(dobInput, { attributes: true, attributeFilter: ['edit-value', 'value'] });
+  }
+
+  attachListeners();
+}
+
+initDobValidation();
+
 /**
  * EXPORTS
  */
@@ -934,4 +1058,7 @@ export {
   initEMICalculator,
   mapFormFieldsToReview,
   initFormFieldMapping,
+  getAge,
+  isValid,
+  updateDobError,
 };
