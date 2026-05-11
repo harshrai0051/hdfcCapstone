@@ -637,6 +637,261 @@ function removePanelPlaceholders() {
 
 removePanelPlaceholders();
 
+// ─────────────────────────────────────────────────────────────────────────────
+// OTP FUNCTIONALITY
+// ─────────────────────────────────────────────────────────────────────────────
+
+const OTP_API_BASE = 'https://dimmer-headroom-feed.ngrok-free.dev';
+
+let otpTimerInterval = null;
+let attemptsLeft = 3;
+
+/**
+ * Start OTP timer - counts down from 30 seconds.
+ * Disables the Resend OTP button during the countdown.
+ */
+function startOtpTimer() {
+  const timerInput = document.getElementById('textinput-447ef8b5b0');
+  const resendBtn = document.getElementById('button-c578b87368');
+
+  let timeLeft = 30;
+
+  if (otpTimerInterval) {
+    clearInterval(otpTimerInterval);
+  }
+
+  if (resendBtn) {
+    resendBtn.disabled = true;
+  }
+
+  if (timerInput) {
+    timerInput.value = `${timeLeft}s`;
+  }
+
+  otpTimerInterval = setInterval(() => {
+    timeLeft -= 1;
+
+    if (timerInput) {
+      timerInput.value = `${timeLeft}s`;
+    }
+
+    if (timeLeft <= 0) {
+      clearInterval(otpTimerInterval);
+      otpTimerInterval = null;
+
+      if (resendBtn) {
+        resendBtn.disabled = false;
+      }
+
+      if (timerInput) {
+        timerInput.value = '0s';
+      }
+    }
+  }, 1000);
+}
+
+/**
+ * Stop OTP timer.
+ */
+function stopOtpTimer() {
+  if (otpTimerInterval) {
+    clearInterval(otpTimerInterval);
+    otpTimerInterval = null;
+  }
+}
+
+/**
+ * Generate OTP — called when "View Loan Eligibility" button is clicked.
+ */
+async function generateOtp(e) {
+  if (e) e.preventDefault();
+
+  try {
+    // Mobile number (Aadhaar linked mobile)
+    const mobile = document.getElementById('textinput-b07476d9e3')?.value;
+
+    // Date of birth
+    const dobEl = document.getElementById('datepicker-11fedea8ba');
+    const dob = dobEl?.getAttribute('edit-value') || dobEl?.value;
+
+    // OTP input (password field)
+    const otpInput = document.getElementById('textinput-8c697feb65');
+
+    // Attempts Left display
+    const attemptsField = document.getElementById('textinput-b825c7d30f');
+
+    // Submit OTP button
+    const submitBtn = document.getElementById('submit-1a393311e1');
+
+    // Reset attempts counter
+    attemptsLeft = 3;
+
+    const res = await fetch(`${OTP_API_BASE}/api/generate-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mobile, dob }),
+    });
+
+    const data = await res.json();
+    console.log('Generate OTP response:', data);
+
+    if (res.ok) {
+      // Keep submit disabled until OTP is verified
+      if (submitBtn) {
+        submitBtn.disabled = true;
+      }
+
+      // Show initial attempts count
+      if (attemptsField) {
+        attemptsField.style.color = '#000';
+        attemptsField.value = `Attempts Left: ${attemptsLeft}/3`;
+      }
+
+      // Auto-fill OTP for testing
+      if (otpInput && data.otp) {
+        otpInput.value = data.otp;
+      }
+
+      // Start the 30-second resend timer
+      startOtpTimer();
+    } else {
+      console.error('Generate OTP failed:', data);
+    }
+  } catch (err) {
+    console.error('Generate OTP Error:', err);
+  }
+}
+
+/**
+ * Validate OTP — called when "Verify OTP" button is clicked.
+ */
+async function validateOtp(e) {
+  if (e) e.preventDefault();
+
+  try {
+    // Mobile number
+    const mobile = document.getElementById('textinput-b07476d9e3')?.value;
+
+    // OTP entered by user (password field)
+    const otp = document.getElementById('textinput-8c697feb65')?.value;
+
+    // Attempts Left display
+    const attemptsField = document.getElementById('textinput-b825c7d30f');
+
+    // Submit OTP button
+    const submitBtn = document.getElementById('submit-1a393311e1');
+
+    // Resend OTP button
+    const resendBtn = document.getElementById('button-c578b87368');
+
+    // Timer input
+    const timerInput = document.getElementById('textinput-447ef8b5b0');
+
+    const res = await fetch(`${OTP_API_BASE}/api/validate-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mobile, otp }),
+    });
+
+    const data = await res.json();
+    console.log('Validate OTP response:', data);
+
+    // ── SUCCESS ──────────────────────────────────────────────────────────────
+    if (res.ok) {
+      if (attemptsField) {
+        attemptsField.value = '✔ OTP Verified Successfully';
+        attemptsField.style.color = 'green';
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+      }
+
+      stopOtpTimer();
+
+      if (timerInput) {
+        timerInput.value = '';
+      }
+
+    // ── FAILURE ──────────────────────────────────────────────────────────────
+    } else {
+      attemptsLeft -= 1;
+      if (attemptsLeft < 0) attemptsLeft = 0;
+
+      stopOtpTimer();
+
+      if (timerInput) {
+        timerInput.value = '';
+      }
+
+      if (attemptsLeft > 0) {
+        // Allow retry: enable resend
+        if (resendBtn) {
+          resendBtn.disabled = false;
+        }
+
+        if (attemptsField) {
+          attemptsField.value = `❌ Incorrect OTP. Attempts Left: ${attemptsLeft}/3`;
+          attemptsField.style.color = 'red';
+        }
+      } else {
+        // All attempts exhausted
+        if (attemptsField) {
+          attemptsField.value = '❌ Too many failed attempts. Try again after 24 hours';
+          attemptsField.style.color = 'red';
+        }
+
+        if (resendBtn) {
+          resendBtn.disabled = true;
+        }
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+      }
+
+      if (data.message) {
+        console.log(data.message);
+      }
+    }
+  } catch (err) {
+    console.error('Validate OTP Error:', err);
+  }
+}
+
+/**
+ * Wire up OTP buttons once the OTP panel is in the DOM.
+ */
+function initOtpPanel() {
+  const viewLoanBtn = document.getElementById('submit-3b37973aeb');
+  const verifyOtpBtn = document.getElementById('button-71c0d88d0d');
+  const resendOtpBtn = document.getElementById('button-c578b87368');
+
+  if (!viewLoanBtn || !verifyOtpBtn) {
+    setTimeout(initOtpPanel, 300);
+    return;
+  }
+
+  // "View Loan Eligibility" triggers OTP generation
+  viewLoanBtn.addEventListener('click', (e) => {
+    generateOtp(e);
+  });
+
+  // "Verify OTP" triggers OTP validation
+  verifyOtpBtn.addEventListener('click', (e) => {
+    validateOtp(e);
+  });
+
+  // "Resend OTP" re-triggers OTP generation
+  if (resendOtpBtn) {
+    resendOtpBtn.addEventListener('click', (e) => {
+      generateOtp(e);
+    });
+  }
+}
+
+initOtpPanel();
+
 /**
  * EXPORTS
  */
