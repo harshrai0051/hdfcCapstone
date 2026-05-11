@@ -2494,17 +2494,18 @@ main
     pointer-events: none;
 }
 
-/* Attempts field — same row as timer, right-aligned */
+/* Attempts / error field — full width row below timer */
 main
     .form
     form
     fieldset[name="otp_meta_panel"]
     .field-text-input-16306142951777442376265 {
-    flex: 1 1 auto;
+    flex: 0 0 100%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    margin-top: 0;
+    justify-content: flex-start;
+    margin-top: 2px;
     overflow: visible;
 }
 
@@ -2514,7 +2515,7 @@ main
     fieldset[name="otp_meta_panel"]
     .field-text-input-16306142951777442376265
     label {
-    display: none; /* label hidden; value shows "X/3 attempt(s) left" */
+    display: none; /* label hidden; value shows error message */
 }
 
 main
@@ -2531,14 +2532,14 @@ main
     padding: 0;
     margin: 0;
     height: auto;
-    width: max-content;
-    min-width: max-content;
-    max-width: none;
-    text-align: right;
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
     box-shadow: none;
     pointer-events: none;
-    white-space: nowrap;
+    white-space: normal;
     overflow: visible;
+    word-break: break-word;
 }
 
 /* Resend OTP button — new line, aligned under the timer (left side) */
