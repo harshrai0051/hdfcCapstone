@@ -1458,11 +1458,7 @@ main
 }
 
 /* Content area wrapper - all field wrappers: 4 per row */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="loan_details"]
-    > .field-wrapper {
+main .form form fieldset.panel-wrapper[name="loan_details"] > .field-wrapper {
     grid-column: unset;
     flex: 1 1 calc(25% - 32px);
     min-width: 0;
@@ -1475,11 +1471,7 @@ main
 }
 
 /* Labels */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="loan_details"]
-    .field-label {
+main .form form fieldset.panel-wrapper[name="loan_details"] .field-label {
     font-size: 0.82rem;
     color: #8a96ab;
     font-weight: 400;
@@ -1489,11 +1481,7 @@ main
 }
 
 /* Input values - read-only display style */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="loan_details"]
-    input[type="text"] {
+main .form form fieldset.panel-wrapper[name="loan_details"] input[type="text"] {
     border: none;
     background: transparent;
     font-size: 0.95rem;
@@ -1645,11 +1633,7 @@ main
     form
     fieldset.panel-wrapper[name="personal_details"]
     .field-date-of-birth,
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="personal_details"]
-    .field-pan {
+main .form form fieldset.panel-wrapper[name="personal_details"] .field-pan {
     flex: 1 1 calc(25% - 32px);
     min-width: 0;
     max-width: calc(25% - 32px);
@@ -1661,11 +1645,7 @@ main
 }
 
 /* Dashed separator after the first row of 4 fields */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="personal_details"]
-    .field-pan {
+main .form form fieldset.panel-wrapper[name="personal_details"] .field-pan {
     position: relative;
 }
 
@@ -1714,11 +1694,7 @@ main
 }
 
 /* Labels */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="personal_details"]
-    .field-label {
+main .form form fieldset.panel-wrapper[name="personal_details"] .field-label {
     font-size: 0.82rem;
     color: #8a96ab;
     font-weight: 400;
@@ -1778,11 +1754,7 @@ main
         form
         fieldset.panel-wrapper[name="personal_details"]
         .field-date-of-birth,
-    main
-        .form
-        form
-        fieldset.panel-wrapper[name="personal_details"]
-        .field-pan {
+    main .form form fieldset.panel-wrapper[name="personal_details"] .field-pan {
         flex: 1 1 calc(50% - 48px);
         max-width: calc(50% - 48px);
     }
@@ -1819,11 +1791,7 @@ main
         form
         fieldset.panel-wrapper[name="personal_details"]
         .field-date-of-birth,
-    main
-        .form
-        form
-        fieldset.panel-wrapper[name="personal_details"]
-        .field-pan {
+    main .form form fieldset.panel-wrapper[name="personal_details"] .field-pan {
         flex: 1 1 calc(100% - 48px);
         max-width: calc(100% - 48px);
     }
@@ -2234,11 +2202,7 @@ main
 }
 
 /* Email input wrapper inside sub-panels */
-main
-    .form
-    form
-    fieldset.panel-wrapper[name="verify_email_id"]
-    .email-wrapper {
+main .form form fieldset.panel-wrapper[name="verify_email_id"] .email-wrapper {
     grid-column: unset;
     flex: 0 0 auto;
     width: 100%;
@@ -2443,7 +2407,6 @@ main .form form .field-password1777648986377 input:focus {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    z-index: 2;
 }
 
 /* Verify OTP button — outlined blue */
@@ -2458,7 +2421,9 @@ main .form form .field-verify-otp-btn button {
     cursor: pointer;
     width: auto;
     white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
+    transition:
+        background 0.15s,
+        color 0.15s;
 }
 
 main .form form .field-verify-otp-btn button:hover {
@@ -2478,7 +2443,7 @@ main .form form fieldset[name="otp_meta_panel"] {
     padding: 0;
     margin: 0;
     width: 100%;
-    grid-column: span 12;
+    grid-column: span 9;
 }
 
 /* Override inner col-4 grid spans — use flex children instead */
@@ -2496,7 +2461,12 @@ main .form form fieldset[name="otp_meta_panel"] .field-text-input1777442313108 {
     gap: 4px;
 }
 
-main .form form fieldset[name="otp_meta_panel"] .field-text-input1777442313108 label {
+main
+    .form
+    form
+    fieldset[name="otp_meta_panel"]
+    .field-text-input1777442313108
+    label {
     font-size: 0.82rem;
     color: #555;
     font-weight: 400;
@@ -2504,7 +2474,12 @@ main .form form fieldset[name="otp_meta_panel"] .field-text-input1777442313108 l
     margin: 0;
 }
 
-main .form form fieldset[name="otp_meta_panel"] .field-text-input1777442313108 input {
+main
+    .form
+    form
+    fieldset[name="otp_meta_panel"]
+    .field-text-input1777442313108
+    input {
     border: none;
     background: transparent;
     font-size: 0.82rem;
@@ -2519,18 +2494,32 @@ main .form form fieldset[name="otp_meta_panel"] .field-text-input1777442313108 i
 }
 
 /* Attempts field — push to the right */
-main .form form fieldset[name="otp_meta_panel"] .field-text-input-16306142951777442376265 {
+main
+    .form
+    form
+    fieldset[name="otp_meta_panel"]
+    .field-text-input-16306142951777442376265 {
     flex: 1 1 auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-main .form form fieldset[name="otp_meta_panel"] .field-text-input-16306142951777442376265 label {
+main
+    .form
+    form
+    fieldset[name="otp_meta_panel"]
+    .field-text-input-16306142951777442376265
+    label {
     display: none; /* label hidden; value shows "X/3 attempt(s) left" */
 }
 
-main .form form fieldset[name="otp_meta_panel"] .field-text-input-16306142951777442376265 input {
+main
+    .form
+    form
+    fieldset[name="otp_meta_panel"]
+    .field-text-input-16306142951777442376265
+    input {
     border: none;
     background: transparent;
     font-size: 0.82rem;
@@ -2547,7 +2536,11 @@ main .form form fieldset[name="otp_meta_panel"] .field-text-input-16306142951777
 }
 
 /* Resend OTP button — right-aligned link style (hidden by default via JS) */
-main .form form fieldset[name="otp_meta_panel"] .field-form-button1777442532723 {
+main
+    .form
+    form
+    fieldset[name="otp_meta_panel"]
+    .field-form-button1777442532723 {
     flex: 0 0 auto;
     margin-left: 16px;
 }
@@ -2643,7 +2636,11 @@ main .form form fieldset.field-personal-details-pre-gender-panel > legend {
 }
 
 /* Briefcase/ID icon before legend text */
-main .form form fieldset.field-personal-details-pre-gender-panel > legend::before {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    > legend::before {
     content: "";
     display: inline-block;
     width: 32px;
@@ -2657,7 +2654,11 @@ main .form form fieldset.field-personal-details-pre-gender-panel > legend::befor
 }
 
 /* All direct field wrappers — reset grid column, use flex */
-main .form form fieldset.field-personal-details-pre-gender-panel > .field-wrapper {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    > .field-wrapper {
     grid-column: unset;
     margin: 0;
     padding: 0;
@@ -2683,7 +2684,12 @@ main .form form fieldset.field-personal-details-pre-gender-panel > .col-12 {
 }
 
 /* Floating label */
-main .form form fieldset.field-personal-details-pre-gender-panel .field-wrapper > label.field-label {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    .field-wrapper
+    > label.field-label {
     font-size: 0.75rem;
     color: #8a96ab;
     font-weight: 400;
@@ -2724,7 +2730,11 @@ main .form form fieldset.field-personal-details-pre-gender-panel select:focus {
 }
 
 /* Custom dropdown chevron */
-main .form form fieldset.field-personal-details-pre-gender-panel .drop-down-wrapper::after {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    .drop-down-wrapper::after {
     content: "";
     position: absolute;
     right: 14px;
@@ -2740,7 +2750,11 @@ main .form form fieldset.field-personal-details-pre-gender-panel .drop-down-wrap
 }
 
 /* Email suggestions — pill/chip style, full width */
-main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    fieldset.field-email-suggestions {
     border: none;
     padding: 0 0 20px 24px;
     margin: 5px;
@@ -2755,11 +2769,21 @@ main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-
     grid-column: unset;
 }
 
-main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions > legend {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    fieldset.field-email-suggestions
+    > legend {
     display: none;
 }
 
-main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    fieldset.field-email-suggestions
+    .checkbox-wrapper {
     display: flex;
     align-items: center;
     background: #fff;
@@ -2767,21 +2791,40 @@ main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-
     border-radius: 20px;
     padding: 4px 12px;
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
+    transition:
+        border-color 0.15s,
+        background 0.15s;
     gap: 0;
     margin: 0;
 }
 
-main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper:hover {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    fieldset.field-email-suggestions
+    .checkbox-wrapper:hover {
     border-color: #4a62b6;
     background: #f0f4ff;
 }
 
-main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper input[type="checkbox"] {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    fieldset.field-email-suggestions
+    .checkbox-wrapper
+    input[type="checkbox"] {
     display: none;
 }
 
-main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper label {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    fieldset.field-email-suggestions
+    .checkbox-wrapper
+    label {
     font-size: 0.82rem;
     font-weight: 500;
     color: #4a62b6;
@@ -2793,11 +2836,23 @@ main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-
 }
 
 /* Checked pill */
-main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper input[type="checkbox"]:checked + label {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    fieldset.field-email-suggestions
+    .checkbox-wrapper
+    input[type="checkbox"]:checked
+    + label {
     font-weight: 700;
 }
 
-main .form form fieldset.field-personal-details-pre-gender-panel fieldset.field-email-suggestions .checkbox-wrapper:has(input[type="checkbox"]:checked) {
+main
+    .form
+    form
+    fieldset.field-personal-details-pre-gender-panel
+    fieldset.field-email-suggestions
+    .checkbox-wrapper:has(input[type="checkbox"]:checked) {
     border-color: #4a62b6;
     background: #e8eeff;
 }
@@ -2878,7 +2933,11 @@ main .form form fieldset.field-address-details > .field-wrapper {
 }
 
 /* Address text input — full width with left border accent */
-main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-address-as-per-aadhaar-records {
     flex: 0 0 calc(100% - 48px);
     width: calc(100% - 48px);
     margin: 20px 24px 0;
@@ -2889,7 +2948,12 @@ main .form form fieldset.field-address-details .field-address-as-per-aadhaar-rec
 }
 
 /* Floating label for address field */
-main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records > label.field-label {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-address-as-per-aadhaar-records
+    > label.field-label {
     font-size: 0.75rem;
     color: #8a96ab;
     font-weight: 400;
@@ -2903,7 +2967,12 @@ main .form form fieldset.field-address-details .field-address-as-per-aadhaar-rec
 }
 
 /* Address text input */
-main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records input[type="text"] {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-address-as-per-aadhaar-records
+    input[type="text"] {
     border: 1.5px solid #d0d9ea;
     border-radius: 10px;
     height: 52px;
@@ -2918,15 +2987,29 @@ main .form form fieldset.field-address-details .field-address-as-per-aadhaar-rec
     box-sizing: border-box;
 }
 
-main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records input[type="text"]:hover,
-main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records input[type="text"]:focus {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-address-as-per-aadhaar-records
+    input[type="text"]:hover,
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-address-as-per-aadhaar-records
+    input[type="text"]:focus {
     border-color: #7b9fd4;
     outline: none;
     box-shadow: 0 0 0 3px rgb(91 141 238 / 10%);
 }
 
 /* Radio group — full width, horizontal layout */
-main .form form fieldset.field-address-details .field-is-customer-aadhaar-address {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-is-customer-aadhaar-address {
     flex: 0 0 calc(100% - 48px);
     width: calc(100% - 48px);
     margin: 20px 24px 24px;
@@ -2941,7 +3024,12 @@ main .form form fieldset.field-address-details .field-is-customer-aadhaar-addres
 }
 
 /* Radio group legend — question label */
-main .form form fieldset.field-address-details .field-is-customer-aadhaar-address > legend {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-is-customer-aadhaar-address
+    > legend {
     width: 100%;
     flex: 0 0 100%;
     font-size: 0.88rem;
@@ -2955,7 +3043,12 @@ main .form form fieldset.field-address-details .field-is-customer-aadhaar-addres
 }
 
 /* Radio wrapper — inline flex */
-main .form form fieldset.field-address-details .field-is-customer-aadhaar-address .radio-wrapper {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-is-customer-aadhaar-address
+    .radio-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -2964,7 +3057,12 @@ main .form form fieldset.field-address-details .field-is-customer-aadhaar-addres
 }
 
 /* Custom radio button — hide native, replace with styled circle */
-main .form form fieldset.field-address-details .field-is-customer-aadhaar-address input[type="radio"] {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-is-customer-aadhaar-address
+    input[type="radio"] {
     appearance: none;
     -webkit-appearance: none;
     width: 20px;
@@ -2976,11 +3074,18 @@ main .form form fieldset.field-address-details .field-is-customer-aadhaar-addres
     position: relative;
     cursor: pointer;
     background: #fff;
-    transition: border-color 0.15s, background 0.15s;
+    transition:
+        border-color 0.15s,
+        background 0.15s;
 }
 
 /* Inner filled dot on checked */
-main .form form fieldset.field-address-details .field-is-customer-aadhaar-address input[type="radio"]::before {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-is-customer-aadhaar-address
+    input[type="radio"]::before {
     content: "";
     display: block;
     width: 10px;
@@ -2994,17 +3099,33 @@ main .form form fieldset.field-address-details .field-is-customer-aadhaar-addres
     transition: transform 0.15s ease;
 }
 
-main .form form fieldset.field-address-details .field-is-customer-aadhaar-address input[type="radio"]:checked {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-is-customer-aadhaar-address
+    input[type="radio"]:checked {
     border-color: #5f8dda;
     background: #fff;
 }
 
-main .form form fieldset.field-address-details .field-is-customer-aadhaar-address input[type="radio"]:checked::before {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-is-customer-aadhaar-address
+    input[type="radio"]:checked::before {
     transform: translate(-50%, -50%) scale(1);
 }
 
 /* Radio labels */
-main .form form fieldset.field-address-details .field-is-customer-aadhaar-address .radio-wrapper label {
+main
+    .form
+    form
+    fieldset.field-address-details
+    .field-is-customer-aadhaar-address
+    .radio-wrapper
+    label {
     font-size: 0.88rem;
     color: #333;
     font-weight: 400;
@@ -3015,13 +3136,25 @@ main .form form fieldset.field-address-details .field-is-customer-aadhaar-addres
 
 /* Responsive: stack radio buttons on mobile */
 @media (width <= 599px) {
-    main .form form fieldset.field-address-details .field-address-as-per-aadhaar-records,
-    main .form form fieldset.field-address-details .field-is-customer-aadhaar-address {
+    main
+        .form
+        form
+        fieldset.field-address-details
+        .field-address-as-per-aadhaar-records,
+    main
+        .form
+        form
+        fieldset.field-address-details
+        .field-is-customer-aadhaar-address {
         flex: 0 0 calc(100% - 48px);
         width: calc(100% - 48px);
     }
 
-    main .form form fieldset.field-address-details .field-is-customer-aadhaar-address {
+    main
+        .form
+        form
+        fieldset.field-address-details
+        .field-is-customer-aadhaar-address {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -3069,7 +3202,11 @@ main .form form fieldset.field-employer-details > legend.accordion-legend {
 }
 
 /* Briefcase/document icon */
-main .form form fieldset.field-employer-details > legend.accordion-legend::before {
+main
+    .form
+    form
+    fieldset.field-employer-details
+    > legend.accordion-legend::before {
     content: "";
     display: inline-block;
     width: 32px;
@@ -3116,7 +3253,12 @@ main .form form fieldset.field-employer-details > .col-12 p {
 }
 
 /* Floating label */
-main .form form fieldset.field-employer-details .field-wrapper > label.field-label {
+main
+    .form
+    form
+    fieldset.field-employer-details
+    .field-wrapper
+    > label.field-label {
     font-size: 0.75rem;
     color: #8a96ab;
     font-weight: 400;
@@ -3228,7 +3370,11 @@ main .form form fieldset.field-income-details > legend.accordion-legend {
 }
 
 /* Coin/income icon */
-main .form form fieldset.field-income-details > legend.accordion-legend::before {
+main
+    .form
+    form
+    fieldset.field-income-details
+    > legend.accordion-legend::before {
     content: "";
     display: inline-block;
     width: 32px;
@@ -3259,7 +3405,12 @@ main .form form fieldset.field-income-details > .col-6 {
 }
 
 /* Floating label */
-main .form form fieldset.field-income-details .field-wrapper > label.field-label {
+main
+    .form
+    form
+    fieldset.field-income-details
+    .field-wrapper
+    > label.field-label {
     font-size: 0.75rem;
     color: #8a96ab;
     font-weight: 400;
@@ -3289,8 +3440,16 @@ main .form form fieldset.field-income-details input[type="number"] {
     -moz-appearance: textfield;
 }
 
-main .form form fieldset.field-income-details input[type="number"]::-webkit-inner-spin-button,
-main .form form fieldset.field-income-details input[type="number"]::-webkit-outer-spin-button {
+main
+    .form
+    form
+    fieldset.field-income-details
+    input[type="number"]::-webkit-inner-spin-button,
+main
+    .form
+    form
+    fieldset.field-income-details
+    input[type="number"]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0;
 }
@@ -3352,7 +3511,11 @@ main .form form fieldset.field-work-email-id-panel > legend.accordion-legend {
 }
 
 /* Email/envelope icon */
-main .form form fieldset.field-work-email-id-panel > legend.accordion-legend::before {
+main
+    .form
+    form
+    fieldset.field-work-email-id-panel
+    > legend.accordion-legend::before {
     content: "";
     display: inline-block;
     width: 32px;
@@ -3398,7 +3561,12 @@ main .form form fieldset.field-work-email-id-panel > .col-12 p {
 }
 
 /* Floating label */
-main .form form fieldset.field-work-email-id-panel .field-wrapper > label.field-label {
+main
+    .form
+    form
+    fieldset.field-work-email-id-panel
+    .field-wrapper
+    > label.field-label {
     font-size: 0.75rem;
     color: #8a96ab;
     font-weight: 400;
@@ -3484,7 +3652,11 @@ main .form form fieldset.field-type-of-loan-panel > legend.accordion-legend {
 }
 
 /* Bank/building icon */
-main .form form fieldset.field-type-of-loan-panel > legend.accordion-legend::before {
+main
+    .form
+    form
+    fieldset.field-type-of-loan-panel
+    > legend.accordion-legend::before {
     content: "";
     display: inline-block;
     width: 32px;
@@ -3515,7 +3687,12 @@ main .form form fieldset.field-type-of-loan-panel > .col-6 {
 }
 
 /* Floating label */
-main .form form fieldset.field-type-of-loan-panel .field-wrapper > label.field-label {
+main
+    .form
+    form
+    fieldset.field-type-of-loan-panel
+    .field-wrapper
+    > label.field-label {
     font-size: 0.75rem;
     color: #8a96ab;
     font-weight: 400;
@@ -3593,19 +3770,31 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] {
 }
 
 /* Hide the panel legend ("Thank You") */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] > legend {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    > legend {
     display: none;
 }
 
 /* Reset field wrappers */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] > .field-wrapper {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    > .field-wrapper {
     grid-column: unset;
     margin: 0;
     padding: 0;
 }
 
 /* ---- Top notification bar: "Your uploaded KYC documents..." ---- */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-plain-text1777440386480 {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-plain-text1777440386480 {
     background-color: #fef9ec;
     border: 1.5px solid #f5dfa0;
     border-radius: 10px;
@@ -3615,7 +3804,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     width: 100%;
 }
 
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-plain-text1777440386480 p {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-plain-text1777440386480
+    p {
     font-size: 0.95rem;
     color: #5a4200;
     margin: 0;
@@ -3628,9 +3822,21 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
    We achieve this by making the panel inner container a white card for the
    middle three elements, using a common sibling trick via adjacent styling */
 
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number,
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-xpress-personal-loan-summary,
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number,
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-xpress-personal-loan-summary,
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-amount {
     background: #fff;
     border-left: none;
     border-right: none;
@@ -3639,7 +3845,11 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* White card top (loan application number section) */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number {
     border: 1px solid #e8eaf0;
     border-bottom: none;
     border-radius: 12px 12px 0 0;
@@ -3648,7 +3858,11 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* White card middle (xpress summary heading) */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-xpress-personal-loan-summary {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-xpress-personal-loan-summary {
     border: 1px solid #e8eaf0;
     border-top: none;
     border-bottom: none;
@@ -3656,7 +3870,11 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* White card bottom (loan amount) */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-amount {
     border: 1px solid #e8eaf0;
     border-top: none;
     border-radius: 0 0 12px 12px;
@@ -3667,7 +3885,11 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 /* ---- Loan Application Number field ---- */
 
 /* Container: CSS grid — icon on left (spans 2 rows), label+number on right, description full-width below */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number {
     display: grid !important;
     grid-template-columns: 66px 1fr;
     grid-template-rows: auto auto auto;
@@ -3677,7 +3899,11 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* Purple icon circle — occupies column 1, spans rows 1 and 2 */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number::before {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number::before {
     content: "";
     display: block;
     width: 52px;
@@ -3694,7 +3920,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* Label — column 2, row 1 */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number label.field-label {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number
+    label.field-label {
     position: static;
     display: block;
     font-size: 0.85rem;
@@ -3708,7 +3939,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* Input (number value) — inside .number-input-row flex container */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number input[type="text"] {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number
+    input[type="text"] {
     position: static;
     border: none;
     background: transparent;
@@ -3726,7 +3962,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* Description text — spans both columns, row 3 (below icon and number) */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .field-description {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number
+    .field-description {
     position: static;
     font-size: 0.9rem;
     color: #555;
@@ -3739,7 +3980,11 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* Dashed separator between loan number section and summary */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-xpress-personal-loan-summary {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-xpress-personal-loan-summary {
     padding-top: 0;
     border-top: 1.5px dashed #d5d8e0 !important;
     margin-top: 0;
@@ -3748,7 +3993,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 /* Wait — let's restructure this more cleanly using a description-section approach */
 
 /* ---- Xpress Personal Loan Summary heading ---- */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-xpress-personal-loan-summary p {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-xpress-personal-loan-summary
+    p {
     font-size: 1.1rem;
     font-weight: 700;
     color: #1a1a2e;
@@ -3757,7 +4007,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* ---- Loan Amount field ---- */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount label.field-label {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-amount
+    label.field-label {
     display: block;
     font-size: 0.78rem;
     color: #888;
@@ -3766,7 +4021,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     margin-top: 16px;
 }
 
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount input[type="text"] {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-amount
+    input[type="text"] {
     border: none;
     border-left: 3px solid #b0bde0;
     background: transparent;
@@ -3782,8 +4042,18 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     pointer-events: none;
 }
 
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount input[type="text"]:hover,
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-amount input[type="text"]:focus {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-amount
+    input[type="text"]:hover,
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-amount
+    input[type="text"]:focus {
     border-top: none;
     border-right: none;
     border-bottom: none;
@@ -3793,7 +4063,11 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* ---- Bottom blue info bar ---- */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-plain-text-21046908741777441839426 {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-plain-text-21046908741777441839426 {
     background-color: #eef2ff;
     border: 1px solid #c7d2fe;
     border-radius: 10px;
@@ -3802,7 +4076,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     width: 100%;
 }
 
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-plain-text-21046908741777441839426 p {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-plain-text-21046908741777441839426
+    p {
     font-size: 0.9rem;
     color: #3730a3;
     font-weight: 500;
@@ -3811,7 +4090,12 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
 }
 
 /* ---- Copy button for Loan Application Number ---- */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .copy-btn {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number
+    .copy-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -3825,22 +4109,39 @@ main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .fi
     width: auto;
     height: auto;
     vertical-align: middle;
-    transition: color 0.15s ease, background 0.15s ease;
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
     flex-shrink: 0;
 }
 
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .copy-btn:hover {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number
+    .copy-btn:hover {
     background: #eef2ff;
     color: #3730a3;
 }
 
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .copy-btn.copied {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number
+    .copy-btn.copied {
     color: #16a34a;
     background: #f0fdf4;
 }
 
 /* Inline row: input value + copy button side by side — column 2, row 2 in the grid */
-main .form form fieldset.panel-wrapper[name="panel_17589940411777440376426"] .field-loan-application-number .number-input-row {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel_17589940411777440376426"]
+    .field-loan-application-number
+    .number-input-row {
     display: flex;
     align-items: center;
     gap: 0;
@@ -3866,20 +4167,33 @@ main .form form fieldset.panel-wrapper[name="panel1777437956773"] > legend {
     display: none;
 }
 
-main .form form fieldset.panel-wrapper[name="panel1777437956773"] > .field-wrapper {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel1777437956773"]
+    > .field-wrapper {
     grid-column: unset;
     margin: 0;
     padding: 0;
 }
 
 /* "Loan offer based on customer's declared income" — bold heading with party emoji */
-main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text1777438016234 {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel1777437956773"]
+    .field-plain-text1777438016234 {
     background: transparent;
     border: none;
     padding: 0 0 4px;
 }
 
-main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text1777438016234 p {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel1777437956773"]
+    .field-plain-text1777438016234
+    p {
     font-size: 1rem;
     font-weight: 700;
     color: #1a1a2e;
@@ -3890,14 +4204,23 @@ main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-t
     gap: 6px;
 }
 
-main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text1777438016234 p::before {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel1777437956773"]
+    .field-plain-text1777438016234
+    p::before {
     content: "🎉";
     font-style: normal;
     flex-shrink: 0;
 }
 
 /* "You can get a loan up to ₹15,00,000!" — light blue card with money bag icon */
-main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text-14231599091777438024640 {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel1777437956773"]
+    .field-plain-text-14231599091777438024640 {
     background-color: #e8f4fd;
     border: none;
     border-radius: 14px;
@@ -3907,7 +4230,11 @@ main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-t
     width: 100%;
 }
 
-main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text-14231599091777438024640::before {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel1777437956773"]
+    .field-plain-text-14231599091777438024640::before {
     content: "";
     position: absolute;
     left: 18px;
@@ -3920,7 +4247,12 @@ main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-t
     background-size: contain;
 }
 
-main .form form fieldset.panel-wrapper[name="panel1777437956773"] .field-plain-text-14231599091777438024640 p {
+main
+    .form
+    form
+    fieldset.panel-wrapper[name="panel1777437956773"]
+    .field-plain-text-14231599091777438024640
+    p {
     font-size: 1rem;
     font-weight: 700;
     color: #1a1a2e;
