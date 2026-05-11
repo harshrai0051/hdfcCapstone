@@ -723,9 +723,6 @@ async function generateOtp(e) {
     // Submit OTP button
     const submitBtn = document.getElementById('submit-1a393311e1');
 
-    // Reset attempts counter
-    attemptsLeft = 3;
-
     const res = await fetch(`${OTP_API_BASE}/api/generate-otp`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -741,7 +738,7 @@ async function generateOtp(e) {
         submitBtn.disabled = true;
       }
 
-      // Show initial attempts count
+      // Show current attempts count (do NOT reset — preserve across resends)
       if (attemptsField) {
         attemptsField.style.color = '#000';
         attemptsField.value = `Attempts Left: ${attemptsLeft}/3`;
