@@ -2343,8 +2343,8 @@ main .form form .field-otp-verification-panel {
     border: none;
     box-shadow: none;
     padding: 0;
-    row-gap: 12px;
-    column-gap: 16px;
+    row-gap: 8px;
+    column-gap: 0;
 }
 
 /* Heading */
@@ -2371,10 +2371,43 @@ main .form form .field-otp-instructions-richtext u {
     cursor: pointer;
 }
 
-/* OTP input wrapper (your password field) */
+/* ── OTP input row: password box + verify button side-by-side ── */
+
+/* Make the OTP password wrapper and verify button sit in the same flex row */
+main .form form .field-otp-verification-panel .field-password1777648986377,
+main .form form .field-otp-verification-panel .field-verify-otp-btn {
+    grid-column: unset !important;
+}
+
+main .form form .field-otp-verification-panel {
+    /* Use a nested sub-grid approach via display:contents trick isn't possible,
+       so we override via a flex wrapper on the two siblings */
+}
+
+/* Wrap the password + verify-button fields in an inline flex row */
 main .form form .field-password1777648986377 {
     position: relative;
-    margin: 4px 0;
+    margin: 4px 0 0;
+    /* grow to fill available space */
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Verify OTP button wrapper — shrink to content */
+main .form form .field-verify-otp-btn {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 1rem; /* aligns bottom with input bottom margin */
+}
+
+/* Override grid-column spans so both sit on the same row */
+main .form form .field-otp-verification-panel .field-password1777648986377 {
+    grid-column: span 9 !important;
+}
+
+main .form form .field-otp-verification-panel .field-verify-otp-btn {
+    grid-column: span 3 !important;
 }
 
 /* Hide label */
@@ -2382,14 +2415,14 @@ main .form form .field-password1777648986377 > label {
     display: none;
 }
 
-/* OTP input style */
+/* OTP input — single dashed-segment style matching screenshot */
 main .form form .field-password1777648986377 input {
-    height: 40px;
+    height: 44px;
     border-radius: 8px;
     border: 1px solid #d0d5dd;
-    font-size: 1.1rem;
-    letter-spacing: 1.8em;
-    text-indent: 0.9em;
+    font-size: 1.2rem;
+    letter-spacing: 1.6em;
+    text-indent: 0.7em;
     padding: 0 44px 0 0;
     width: 100%;
     color: #333;
@@ -2410,19 +2443,139 @@ main .form form .field-password1777648986377 input:focus {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    z-index: 2;
 }
 
-/* Resend timer */
-main .form form #textinput-447ef8b5b0 {
+/* Verify OTP button — outlined blue */
+main .form form .field-verify-otp-btn button {
+    background: transparent;
+    color: #4a62b6;
+    border: 1.5px solid #4a62b6;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+}
+
+main .form form .field-verify-otp-btn button:hover {
+    background: #4a62b6;
+    color: #fff;
+}
+
+/* ── OTP meta panel: timer | attempts | resend (3-col row) ── */
+
+/* The inner fieldset that wraps timer + attempts + resend */
+main .form form fieldset[name="otp_meta_panel"] {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    grid-column: span 12;
+}
+
+/* Override inner col-4 grid spans — use flex children instead */
+main .form form fieldset[name="otp_meta_panel"] > .field-wrapper {
+    grid-column: unset !important;
+    margin: 0;
+    padding: 0;
+}
+
+/* Timer field — left-aligned, auto width */
+main .form form fieldset[name="otp_meta_panel"] .field-text-input1777442313108 {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+main .form form fieldset[name="otp_meta_panel"] .field-text-input1777442313108 label {
+    font-size: 0.82rem;
+    color: #555;
+    font-weight: 400;
+    white-space: nowrap;
+    margin: 0;
+}
+
+main .form form fieldset[name="otp_meta_panel"] .field-text-input1777442313108 input {
+    border: none;
+    background: transparent;
     font-size: 0.82rem;
     font-weight: 700;
+    color: #333;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: 3em;
+    box-shadow: none;
+    pointer-events: none;
 }
 
-/* Attempts */
-main .form form #textinput-b825c7d30f {
+/* Attempts field — push to the right */
+main .form form fieldset[name="otp_meta_panel"] .field-text-input-16306142951777442376265 {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+main .form form fieldset[name="otp_meta_panel"] .field-text-input-16306142951777442376265 label {
+    display: none; /* label hidden; value shows "X/3 attempt(s) left" */
+}
+
+main .form form fieldset[name="otp_meta_panel"] .field-text-input-16306142951777442376265 input {
+    border: none;
+    background: transparent;
     font-size: 0.82rem;
-    text-align: right;
+    font-weight: 500;
     color: #888;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    width: auto;
+    min-width: 120px;
+    text-align: right;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+/* Resend OTP button — right-aligned link style (hidden by default via JS) */
+main .form form fieldset[name="otp_meta_panel"] .field-form-button1777442532723 {
+    flex: 0 0 auto;
+    margin-left: 16px;
+}
+
+main .form form #button-c578b87368 {
+    background: transparent;
+    border: none;
+    color: #4a62b6;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    text-align: right;
+    width: auto;
+    text-decoration: underline;
+}
+
+main .form form #button-c578b87368:hover {
+    color: #3730a3;
+}
+
+/* Resend timer & attempts — hide native label/input borders */
+main .form form #textinput-447ef8b5b0,
+main .form form #textinput-b825c7d30f {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    margin: 0 !important;
 }
 
 /* Submit button */
@@ -2438,28 +2591,16 @@ main .form form .field-submit-otp button {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 main .form form .field-submit-otp button::after {
     content: "›";
+    font-size: 1.2rem;
 }
 
 main .form form .field-submit-otp button:hover {
     background-color: rgb(165 180 252 / 50%);
-}
-main .form form #button-c578b87368 {
-    background: transparent;
-    border: none;
-    color: #4a62b6;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0;
-    text-align: right;
-}
-
-main .form form #button-c578b87368:hover {
-    text-decoration: underline;
 }
 
 /* ===== Personal Details Pre-Gender Panel ===== */
