@@ -2494,18 +2494,17 @@ main
     pointer-events: none;
 }
 
-/* Attempts field — full width, centered under OTP input */
+/* Attempts field — same row as timer, right-aligned */
 main
     .form
     form
     fieldset[name="otp_meta_panel"]
     .field-text-input-16306142951777442376265 {
-    flex: 0 0 100%;
-    width: 100%;
+    flex: 1 1 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-top: 6px;
+    justify-content: flex-end;
+    margin-top: 0;
 }
 
 main
@@ -2533,7 +2532,7 @@ main
     height: auto;
     width: auto;
     min-width: 0;
-    text-align: center;
+    text-align: right;
     box-shadow: none;
     pointer-events: none;
     white-space: nowrap;
