@@ -653,6 +653,7 @@ let attemptsLeft = 3;
 function startOtpTimer() {
   const timerInput = document.getElementById('textinput-447ef8b5b0');
   const resendBtn = document.getElementById('button-c578b87368');
+  const resendWrapper = resendBtn ? resendBtn.closest('.field-wrapper') : null;
 
   let timeLeft = 30;
 
@@ -660,8 +661,11 @@ function startOtpTimer() {
     clearInterval(otpTimerInterval);
   }
 
-  if (resendBtn) {
-    resendBtn.disabled = true;
+  // Hide Resend button while timer is running
+  if (resendWrapper) {
+    resendWrapper.style.display = 'none';
+  } else if (resendBtn) {
+    resendBtn.style.display = 'none';
   }
 
   if (timerInput) {
@@ -679,8 +683,11 @@ function startOtpTimer() {
       clearInterval(otpTimerInterval);
       otpTimerInterval = null;
 
-      if (resendBtn) {
-        resendBtn.disabled = false;
+      // Show Resend button when timer expires
+      if (resendWrapper) {
+        resendWrapper.style.display = '';
+      } else if (resendBtn) {
+        resendBtn.style.display = '';
       }
 
       if (timerInput) {
@@ -749,7 +756,7 @@ async function generateOtp(e) {
         otpInput.value = data.otp;
       }
 
-      // Start the 30-second resend timer
+      // Start the 30-second resend timer (hides Resend button during countdown)
       startOtpTimer();
     } else {
       console.error('Generate OTP failed:', data);
@@ -793,6 +800,8 @@ async function validateOtp(e) {
     const data = await res.json();
     console.log('Validate OTP response:', data);
 
+    const resendWrapper = resendBtn ? resendBtn.closest('.field-wrapper') : null;
+
     // ── SUCCESS ──────────────────────────────────────────────────────────────
     if (res.ok) {
       if (attemptsField) {
@@ -810,6 +819,13 @@ async function validateOtp(e) {
         timerInput.value = '';
       }
 
+      // Hide Resend button after successful verification
+      if (resendWrapper) {
+        resendWrapper.style.display = 'none';
+      } else if (resendBtn) {
+        resendBtn.style.display = 'none';
+      }
+
     // ── FAILURE ──────────────────────────────────────────────────────────────
     } else {
       attemptsLeft -= 1;
@@ -822,9 +838,11 @@ async function validateOtp(e) {
       }
 
       if (attemptsLeft > 0) {
-        // Allow retry: enable resend
-        if (resendBtn) {
-          resendBtn.disabled = false;
+        // Show Resend button on wrong OTP
+        if (resendWrapper) {
+          resendWrapper.style.display = '';
+        } else if (resendBtn) {
+          resendBtn.style.display = '';
         }
 
         if (attemptsField) {
@@ -832,14 +850,16 @@ async function validateOtp(e) {
           attemptsField.style.color = 'red';
         }
       } else {
-        // All attempts exhausted
+        // All attempts exhausted — keep Resend hidden
+        if (resendWrapper) {
+          resendWrapper.style.display = 'none';
+        } else if (resendBtn) {
+          resendBtn.style.display = 'none';
+        }
+
         if (attemptsField) {
           attemptsField.value = '❌ Too many failed attempts. Try again after 24 hours';
           attemptsField.style.color = 'red';
-        }
-
-        if (resendBtn) {
-          resendBtn.disabled = true;
         }
       }
 
@@ -867,6 +887,16 @@ function initOtpPanel() {
   if (!viewLoanBtn || !verifyOtpBtn) {
     setTimeout(initOtpPanel, 300);
     return;
+  }
+
+  // Hide Resend button on initial load
+  if (resendOtpBtn) {
+    const resendWrapper = resendOtpBtn.closest('.field-wrapper');
+    if (resendWrapper) {
+      resendWrapper.style.display = 'none';
+    } else {
+      resendOtpBtn.style.display = 'none';
+    }
   }
 
   // "View Loan Eligibility" triggers OTP generation
