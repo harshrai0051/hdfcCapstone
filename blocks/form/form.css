@@ -2501,7 +2501,7 @@ main
     fieldset[name="otp_meta_panel"]
     .field-text-input-16306142951777442376265 {
     flex: 1 1 auto;
-    display: flex;
+    display: inline;
     align-items: center;
     justify-content: flex-end;
     margin-top: 0;
