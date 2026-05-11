@@ -1405,6 +1405,7 @@ main .form form .pan-error {
     line-height: 1.4;
 }
 
+main .form form .field-wrapper.has-error input[type="text"],
 main .form form .field-wrapper.has-error input[type="email"] {
     border-color: var(--form-error-color) !important;
     box-shadow: 0 0 0 2px rgb(255 95 63 / 15%) !important;

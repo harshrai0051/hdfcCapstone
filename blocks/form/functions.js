@@ -980,6 +980,10 @@ function initPanValidation() {
       return;
     }
 
+    // Override browser's native email validation so our custom PAN regex runs
+    panInput.type = 'text';
+    panInput.removeAttribute('pattern');
+
     // Convert to uppercase as user types
     panInput.addEventListener('input', () => {
       const pos = panInput.selectionStart;
