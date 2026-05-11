@@ -2437,6 +2437,7 @@ main .form form .field-verify-otp-btn button:hover {
 main .form form fieldset[name="otp_meta_panel"] {
     display: flex !important;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     gap: 0;
     border: none;
@@ -2535,14 +2536,18 @@ main
     pointer-events: none;
 }
 
-/* Resend OTP button — right-aligned link style (hidden by default via JS) */
+/* Resend OTP button — new line, aligned under the timer (left side) */
 main
     .form
     form
     fieldset[name="otp_meta_panel"]
     .field-form-button1777442532723 {
-    flex: 0 0 auto;
-    margin-left: 16px;
+    flex: 0 0 100%;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 4px;
+    display: flex;
+    justify-content: flex-start;
 }
 
 main .form form #button-c578b87368 {
