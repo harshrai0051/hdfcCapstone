@@ -2444,7 +2444,7 @@ main .form form fieldset[name="otp_meta_panel"] {
     padding: 0;
     margin: 0;
     width: 100%;
-    grid-column: span 9;
+    grid-column: span 12;
 }
 
 /* Override inner col-4 grid spans — use flex children instead */
