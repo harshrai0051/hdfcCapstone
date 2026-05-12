@@ -686,6 +686,78 @@ function initConfirmButton() {
 
 initConfirmButton();
 
+// ─────────────────────────────────────────────────────────────────────────────
+// SALARY BANK AUTO-FILL
+// When a bank radio is selected, generate a random account number + IFSC and
+// pre-fill textinput-2dee9d4be0 (Salary Account Number) and
+// textinput-cbcb5be8d3 (IFSC).
+// ─────────────────────────────────────────────────────────────────────────────
+
+const SALARY_BANK_DATA = {
+  hdfc_bank:     { name: "HDFC Bank",       ifscPrefix: "HDFC0" },
+  icici_bank:    { name: "ICICI Bank",      ifscPrefix: "ICIC0" },
+  axis_bank:     { name: "Axis Bank",       ifscPrefix: "UTIB0" },
+  kotak:         { name: "Kotak",           ifscPrefix: "KKBK0" },
+  sbi:           { name: "SBI",             ifscPrefix: "SBIN0" },
+  bank_of_baroda:{ name: "Bank of Baroda",  ifscPrefix: "BARB0" },
+  idfc_first:    { name: "IDFC First",      ifscPrefix: "IDFB0" },
+};
+
+/**
+ * Generate N random digits as a string.
+ */
+function randDigits(n) {
+  return Array.from({ length: n }, () => Math.floor(Math.random() * 10)).join("");
+}
+
+/**
+ * Fill salary account number and IFSC based on the selected bank key.
+ */
+function fillSalaryBankDetails(bankKey) {
+  const data = SALARY_BANK_DATA[bankKey];
+  if (!data) return;
+
+  const acInput = document.getElementById("textinput-2dee9d4be0");
+  const ifscInput = document.getElementById("textinput-cbcb5be8d3");
+
+  if (acInput) {
+    acInput.value = randDigits(12);
+    acInput.dispatchEvent(new Event("input", { bubbles: true }));
+    acInput.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  if (ifscInput) {
+    ifscInput.value = data.ifscPrefix + randDigits(6);
+    ifscInput.dispatchEvent(new Event("input", { bubbles: true }));
+    ifscInput.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  // Trigger review mapping to keep the review panel in sync
+  setTimeout(mapFormFieldsToReview, 100);
+}
+
+/**
+ * Wire up salary_bank radio buttons to auto-fill account + IFSC.
+ * Polls until the radios are in the DOM.
+ */
+function initSalaryBankAutoFill() {
+  const radios = document.querySelectorAll('input[name="salary_bank"]');
+  if (!radios.length) {
+    setTimeout(initSalaryBankAutoFill, 300);
+    return;
+  }
+
+  radios.forEach((radio) => {
+    radio.addEventListener("change", () => {
+      if (radio.checked) fillSalaryBankDetails(radio.value);
+    });
+    // Auto-fill if a radio is already pre-checked
+    if (radio.checked) fillSalaryBankDetails(radio.value);
+  });
+}
+
+initSalaryBankAutoFill();
+
 /**
  * Remove placeholders from specific panel fields
  */
