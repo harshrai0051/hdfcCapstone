@@ -403,11 +403,13 @@ function mapFormFieldsToReview() {
 
   // ─── 3. Salary Account Details ──────────────────────────────────────────────
 
-  // Salary Account Number (textinput-2dee9d4be0, name="salary_account")
-  setValById("textinput-df7ef859ce", getValById("textinput-2dee9d4be0"));
+  // Salary Account Number — only overwrite review field if source has a value
+  const salaryAcVal = getValById("textinput-2dee9d4be0");
+  if (salaryAcVal) setValById("textinput-df7ef859ce", salaryAcVal);
 
-  // IFSC (textinput-cbcb5be8d3, name="ifsc")
-  setValById("textinput-f618a535ac", getValById("textinput-cbcb5be8d3"));
+  // IFSC — only overwrite review field if source has a value
+  const ifscVal = getValById("textinput-cbcb5be8d3");
+  if (ifscVal) setValById("textinput-f618a535ac", ifscVal);
 
   // Bank Name: salary_bank radio label; fallback to Other text input
   const salaryBankLabel = getRadioLabel("salary_bank");
@@ -712,7 +714,8 @@ function randDigits(n) {
 
 /**
  * Fill salary account number, IFSC and bank name based on the selected bank key.
- * Populates both the source fields and the review accordion fields directly.
+ * Writes directly to both source fields and the review accordion fields.
+ * Does NOT call mapFormFieldsToReview to avoid a race that would overwrite the values.
  */
 function fillSalaryBankDetails(bankKey) {
   const data = SALARY_BANK_DATA[bankKey];
@@ -724,30 +727,40 @@ function fillSalaryBankDetails(bankKey) {
   // ── Source fields (Income Verification panel) ─────────────────────────────
   const acInput = document.getElementById("textinput-2dee9d4be0");
   if (acInput) {
+    acInput.removeAttribute("readonly");
     acInput.value = generatedAc;
+    acInput.setAttribute("value", generatedAc);
     acInput.dispatchEvent(new Event("input", { bubbles: true }));
     acInput.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
   const ifscInput = document.getElementById("textinput-cbcb5be8d3");
   if (ifscInput) {
+    ifscInput.removeAttribute("readonly");
     ifscInput.value = generatedIfsc;
+    ifscInput.setAttribute("value", generatedIfsc);
     ifscInput.dispatchEvent(new Event("input", { bubbles: true }));
     ifscInput.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
-  // ── Review accordion fields (Salary Account Details panel) ────────────────
+  // ── Review accordion fields — write directly (bypass readonly via .value) ──
   const reviewAc = document.getElementById("textinput-df7ef859ce");
-  if (reviewAc) reviewAc.value = generatedAc;
+  if (reviewAc) {
+    reviewAc.value = generatedAc;
+    reviewAc.setAttribute("value", generatedAc);
+  }
 
   const reviewIfsc = document.getElementById("textinput-f618a535ac");
-  if (reviewIfsc) reviewIfsc.value = generatedIfsc;
+  if (reviewIfsc) {
+    reviewIfsc.value = generatedIfsc;
+    reviewIfsc.setAttribute("value", generatedIfsc);
+  }
 
   const reviewBank = document.getElementById("textinput-f33180d5e4");
-  if (reviewBank) reviewBank.value = data.name;
-
-  // Trigger review mapping to keep everything else in sync
-  setTimeout(mapFormFieldsToReview, 100);
+  if (reviewBank) {
+    reviewBank.value = data.name;
+    reviewBank.setAttribute("value", data.name);
+  }
 }
 
 /**
