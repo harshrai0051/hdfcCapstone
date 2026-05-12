@@ -1494,6 +1494,148 @@ function initDobValidation() {
 
 initDobValidation();
 
+// ─────────────────────────────────────────────────────────────────────────────
+// INCOME-BASED LOAN ELIGIBILITY
+// Watches the Monthly Net Income field and dynamically:
+//   1. Updates the "You can get a loan up to ₹X!" message
+//   2. Adjusts the loan amount slider max
+//   3. Recalculates EMI display
+// ─────────────────────────────────────────────────────────────────────────────
+
+const INCOME_LOAN_CONFIG = {
+  MIN_LOAN: 50000,
+  MAX_LOAN: 1500000,
+  STEP: 10000,
+  RATE_TIERS: [
+    { upTo: 200000,  rate: 14.50 },
+    { upTo: 400000,  rate: 13.50 },
+    { upTo: 600000,  rate: 12.75 },
+    { upTo: 900000,  rate: 12.00 },
+    { upTo: 1200000, rate: 11.25 },
+    { upTo: 1500000, rate: 10.97 },
+  ],
+  PROCESSING_FEE_RATE: 0.015,
+  GST_RATE: 0.18,
+};
+
+/**
+ * Calculate max eligible loan from monthly income.
+ * = income × 10, rounded to nearest ₹10K, capped ₹50K–₹15L.
+ */
+function calcMaxLoanFromIncome(monthlyIncome) {
+  const { MIN_LOAN, MAX_LOAN, STEP } = INCOME_LOAN_CONFIG;
+  const raw = Math.min(monthlyIncome * 10, MAX_LOAN);
+  const rounded = Math.round(raw / STEP) * STEP;
+  return Math.max(rounded, MIN_LOAN);
+}
+
+/**
+ * Pick interest rate tier based on loan amount.
+ */
+function getRateForLoanAmount(amount) {
+  const { RATE_TIERS } = INCOME_LOAN_CONFIG;
+  const tier = RATE_TIERS.find((t) => amount <= t.upTo);
+  return tier ? tier.rate : RATE_TIERS[RATE_TIERS.length - 1].rate;
+}
+
+/**
+ * Format a number as Indian currency string (e.g. ₹15,00,000).
+ */
+function formatIndianAmount(amount) {
+  return `₹${amount.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
+}
+
+/**
+ * Update the "You can get a loan up to ₹X!" message text.
+ */
+function updateLoanEligibilityMessage(maxLoan) {
+  const msgEl = document.getElementById('text-55a6c5a0e4');
+  if (!msgEl) return;
+  const p = msgEl.querySelector('p');
+  if (p) {
+    p.textContent = `You can get a loan up to ${formatIndianAmount(maxLoan)}!`;
+  }
+}
+
+/**
+ * Update the loan range slider max value and snap the current value if needed.
+ * Then fires an input event so EMI recalculates.
+ */
+function updateLoanSliderMax(maxLoan) {
+  const slider = document.getElementById('numberinput-573a41b8b9');
+  if (!slider) return;
+
+  slider.max = maxLoan;
+
+  // If current value exceeds new max, clamp it
+  if (Number(slider.value) > maxLoan) {
+    slider.value = maxLoan;
+  }
+
+  // Trigger input → EMI recalculates via initEMICalculator listener
+  slider.dispatchEvent(new Event('input', { bubbles: true }));
+  slider.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+/**
+ * Also update the rate of interest display when income changes loan amount.
+ */
+function updateRateDisplay(loanAmount) {
+  const rate = getRateForLoanAmount(loanAmount);
+  const roiDisplay = document.getElementById('textinput-705f91a759');
+  if (roiDisplay) {
+    roiDisplay.value = `${rate}%`;
+    roiDisplay.dispatchEvent(new Event('input', { bubbles: true }));
+    roiDisplay.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+}
+
+/**
+ * Core handler — runs whenever monthly income field changes.
+ */
+function onIncomeChange() {
+  const incomeEl = document.getElementById('numberinput-4f93a1127c');
+  if (!incomeEl) return;
+
+  const income = parseFloat(incomeEl.value) || 0;
+  const maxLoan = income > 0
+    ? calcMaxLoanFromIncome(income)
+    : INCOME_LOAN_CONFIG.MAX_LOAN;
+
+  updateLoanEligibilityMessage(maxLoan);
+  updateLoanSliderMax(maxLoan);
+
+  // Update rate display based on new current slider value
+  const slider = document.getElementById('numberinput-573a41b8b9');
+  if (slider) {
+    updateRateDisplay(Number(slider.value));
+  }
+}
+
+/**
+ * Poll until the income field is in the DOM, then attach listeners.
+ */
+function initIncomeLoanEligibility() {
+  const incomeEl = document.getElementById('numberinput-4f93a1127c');
+  if (!incomeEl) {
+    setTimeout(initIncomeLoanEligibility, 300);
+    return;
+  }
+
+  incomeEl.addEventListener('input', onIncomeChange);
+  incomeEl.addEventListener('change', onIncomeChange);
+
+  // Also watch loan slider changes to update rate display in real-time
+  const slider = document.getElementById('numberinput-573a41b8b9');
+  if (slider) {
+    slider.addEventListener('input', () => {
+      updateRateDisplay(Number(slider.value));
+    });
+  }
+}
+
+initIncomeLoanEligibility();
+
 /**
  * EXPORTS
  */
