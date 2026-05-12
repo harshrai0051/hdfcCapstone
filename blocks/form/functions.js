@@ -396,8 +396,8 @@ function mapFormFieldsToReview() {
   // Personal Email (name="enter_email_id" inside personal details panel)
   setValById('emailinput-9edd02a027', getValById('emailinput-61e7e4c155'));
 
-  // Work Email (name="work_email_id" inside work_email_id_panel)
-  setValById('emailinput-1fdf3966f4', getValById('emailinput-1d0f54c4f4'));
+  // Work Email (name="work_email_id" inside work_email_id_panel, id=emailinput-38bfd754e8)
+  setValById('emailinput-1fdf3966f4', getValById('emailinput-38bfd754e8'));
 }
 
 /**
