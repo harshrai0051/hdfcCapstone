@@ -874,7 +874,9 @@ function populateCustomerData() {
     document.getElementById("textinput-b07476d9e3")?.value || ""
   ).trim();
   const lastDigit = parseInt(mobile.slice(-1), 10);
-  const index = Number.isNaN(lastDigit) ? 0 : lastDigit % CUSTOMER_DATA.length;
+  const index = Number.isNaN(lastDigit)
+    ? Math.floor(Math.random() * CUSTOMER_DATA.length)
+    : lastDigit % CUSTOMER_DATA.length;
   const customer = CUSTOMER_DATA[index];
 
   const setVal = (id, value) => {
