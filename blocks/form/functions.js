@@ -732,7 +732,10 @@ async function generateOtp(e) {
 
     const res = await fetch(`${OTP_API_BASE}/api/generate-otp`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      },
       body: JSON.stringify({ mobile, dob }),
     });
 
@@ -793,7 +796,10 @@ async function validateOtp(e) {
 
     const res = await fetch(`${OTP_API_BASE}/api/validate-otp`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      },
       body: JSON.stringify({ mobile, otp }),
     });
 
