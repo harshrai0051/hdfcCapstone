@@ -1411,27 +1411,38 @@ main .form form .field-wrapper.has-error input[type="email"] {
     box-shadow: 0 0 0 2px rgb(255 95 63 / 15%) !important;
 }
 
-/* Mobile number validation error — override panel's grey description colour */
+/* Hide the native field-description on the mobile field when has-error is active
+   (our custom .mobile-invalid-error span replaces it) */
 main .form form fieldset.panel-wrapper[name="personal_loan_offer_panel"]
     .field-aadhaar-linked-mobile-number.has-error
     .field-description,
 main .form form fieldset.panel-wrapper[name="personal_loan_offer_panel"]
-    .field-aadhaar-linked-mobile-number
     .field-wrapper.has-error
-    .field-description,
-main .form form fieldset.panel-wrapper[name="personal_loan_offer_panel"]
-    .field-wrapper.has-error
-    .field-description {
-    color: var(--form-error-color) !important;
-    font-weight: 600;
+    > .field-description {
+    display: none !important;
 }
 
 /* Mobile input red border inside personal_loan_offer_panel when has-error */
 main .form form fieldset.panel-wrapper[name="personal_loan_offer_panel"]
     .field-wrapper.has-error
+    input[type="text"],
+main .form form fieldset.panel-wrapper[name="personal_loan_offer_panel"]
+    .field-aadhaar-linked-mobile-number.has-error
     input[type="text"] {
     border-color: var(--form-error-color) !important;
     box-shadow: 0 0 0 2px rgb(255 95 63 / 15%) !important;
+}
+
+/* Override hover/focus so they don't revert the red border when has-error */
+main .form form fieldset.panel-wrapper[name="personal_loan_offer_panel"]
+    .field-aadhaar-linked-mobile-number.has-error
+    input[type="text"]:hover,
+main .form form fieldset.panel-wrapper[name="personal_loan_offer_panel"]
+    .field-aadhaar-linked-mobile-number.has-error
+    input[type="text"]:focus {
+    border-color: var(--form-error-color) !important;
+    box-shadow: 0 0 0 2px rgb(255 95 63 / 15%) !important;
+    outline: none;
 }
 
 /* vle-required-error and inline mobile error span — always red */
