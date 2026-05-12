@@ -961,7 +961,7 @@ function setFieldError(wrapper, show) {
 function validateLoanOfferPanel(showErrors = false) {
   let allValid = true;
 
-  // 1. Mobile number
+  // 1. Mobile number — must be a valid 10-digit Indian number
   const mobileInput = document.getElementById('textinput-b07476d9e3');
   const mobileWrapper = mobileInput?.closest('.field-wrapper');
   const mobilePattern = /^[6-9]\d{9}$/;
@@ -969,11 +969,20 @@ function validateLoanOfferPanel(showErrors = false) {
   if (!mobileOk) allValid = false;
   if (showErrors) setFieldError(mobileWrapper, !mobileOk);
 
-  // 2. Date of birth
+  // 2. Date of birth — must be present, valid, not future, and age 21–60
   const dobInput = document.getElementById('datepicker-11fedea8ba');
   const dobWrapper = dobInput?.closest('.field-wrapper');
   const dobRaw = (dobInput?.getAttribute('edit-value') || dobInput?.value || '').trim();
-  const dobOk = dobRaw.length > 0 && !Number.isNaN(new Date(dobRaw).getTime());
+  let dobOk = false;
+  if (dobRaw.length > 0) {
+    const dobDate = new Date(dobRaw);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (!Number.isNaN(dobDate.getTime()) && dobDate < today) {
+      const age = getAge(dobRaw);
+      dobOk = age >= 21 && age <= 60;
+    }
+  }
   if (!dobOk) allValid = false;
   if (showErrors) setFieldError(dobWrapper, !dobOk);
 
@@ -1066,11 +1075,51 @@ function initLoanOfferPanelValidation() {
     if (activeWrapper) setFieldError(activeWrapper, false);
   });
 
+  // Real-time mobile number validation — apply/remove red border as user types
+  const mobileInput = document.getElementById('textinput-b07476d9e3');
+  if (mobileInput) {
+    const mobilePattern = /^[6-9]\d{9}$/;
+    const mobileWrap = mobileInput.closest('.field-wrapper');
+    mobileInput.addEventListener('input', () => {
+      const val = (mobileInput.value || '').trim();
+      // Only show red border if user has typed something but it's invalid
+      if (val.length > 0 && !mobilePattern.test(val)) {
+        mobileWrap?.classList.add('has-error');
+      } else {
+        mobileWrap?.classList.remove('has-error');
+        // Also clear the vle-required-error if present
+        mobileWrap?.querySelector('.vle-required-error')?.remove();
+      }
+      updateViewLoanBtnState();
+    });
+  }
+
   // Also watch DOB attribute mutations (datepicker sets edit-value via JS)
   const dobInput = document.getElementById('datepicker-11fedea8ba');
   if (dobInput) {
-    new MutationObserver(() => updateViewLoanBtnState())
-      .observe(dobInput, { attributes: true, attributeFilter: ['edit-value', 'value'] });
+    new MutationObserver(() => {
+      updateViewLoanBtnState();
+      // Keep DOB red border in sync with the age-range error that updateDobError manages
+      const dobWrap = dobInput.closest('.field-wrapper');
+      if (dobWrap) {
+        const dobRawVal = (dobInput.getAttribute('edit-value') || dobInput.value || '').trim();
+        if (dobRawVal.length > 0) {
+          const dobDate = new Date(dobRawVal);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          const valid = !Number.isNaN(dobDate.getTime())
+            && dobDate < today
+            && getAge(dobRawVal) >= 21
+            && getAge(dobRawVal) <= 60;
+          if (!valid) {
+            dobWrap.classList.add('has-error');
+          } else {
+            dobWrap.classList.remove('has-error');
+            dobWrap.querySelector('.vle-required-error')?.remove();
+          }
+        }
+      }
+    }).observe(dobInput, { attributes: true, attributeFilter: ['edit-value', 'value'] });
   }
 }
 
