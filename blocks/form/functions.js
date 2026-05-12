@@ -638,6 +638,70 @@ function removePanelPlaceholders() {
 removePanelPlaceholders();
 
 // ─────────────────────────────────────────────────────────────────────────────
+// CUSTOMER DATA — pre-populated mock profiles
+// ─────────────────────────────────────────────────────────────────────────────
+
+const CUSTOMER_DATA = [
+  {
+    fullName: 'Harsh Rai',
+    currentAddress: 'Mumbai, Maharashtra',
+    residenceType: 'Owned',
+  },
+  {
+    fullName: 'Priyanshu Raj',
+    currentAddress: 'Pune, Maharashtra',
+    residenceType: 'Rented',
+  },
+  {
+    fullName: 'Sarthak Khanna',
+    currentAddress: 'Delhi, India',
+    residenceType: 'Owned',
+  },
+  {
+    fullName: 'Sneha Reddy',
+    currentAddress: 'Hyderabad, Telangana',
+    residenceType: 'Rented',
+  },
+  {
+    fullName: 'Arjun Kapoor',
+    currentAddress: 'Bangalore, Karnataka',
+    residenceType: 'Owned',
+  },
+];
+
+/**
+ * Pick a customer from CUSTOMER_DATA based on the last digit of the mobile number,
+ * then populate:
+ *   - Full Name (As per Aadhaar)      → textinput-c800c88a3e
+ *   - Current Address                 → textinput-c0931aa145
+ *   - Address as per Aadhaar records  → textinput-8dcd88dcec
+ *   - Residence Type                  → textinput-d9fb9e62b3
+ */
+function populateCustomerData() {
+  const mobile = (document.getElementById('textinput-b07476d9e3')?.value || '').trim();
+  const lastDigit = parseInt(mobile.slice(-1), 10);
+  const index = Number.isNaN(lastDigit) ? 0 : lastDigit % CUSTOMER_DATA.length;
+  const customer = CUSTOMER_DATA[index];
+
+  const setVal = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.value = value;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  };
+
+  setVal('textinput-c800c88a3e', customer.fullName);       // Full Name (As per Aadhaar)
+  setVal('textinput-c0931aa145', customer.currentAddress); // Current Address (review field)
+  setVal('textinput-8dcd88dcec', customer.currentAddress); // Address as per Aadhaar records
+  setVal('textinput-d9fb9e62b3', customer.residenceType);  // Residence Type
+
+  // Re-run review mapping so the review accordion picks up the new address/residence
+  setTimeout(mapFormFieldsToReview, 150);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // OTP FUNCTIONALITY
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -834,6 +898,9 @@ async function validateOtp(e) {
       } else if (resendBtn) {
         resendBtn.style.display = 'none';
       }
+
+      // Populate customer data (name, address, residence type) based on mobile number
+      populateCustomerData();
 
     // ── FAILURE ──────────────────────────────────────────────────────────────
     } else {
