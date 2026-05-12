@@ -701,6 +701,23 @@ function populateCustomerData() {
   setTimeout(mapFormFieldsToReview, 150);
 }
 
+/**
+ * Wait for the Customer Details section to appear in the DOM, then
+ * pre-fill name / address / residence type from CUSTOMER_DATA.
+ * Uses the mobile number (if already entered) to pick the right profile;
+ * falls back to index 0 if the mobile field is still empty.
+ */
+function waitAndPopulateCustomerData() {
+  const fullNameField = document.getElementById('textinput-c800c88a3e');
+  if (fullNameField) {
+    populateCustomerData();
+  } else {
+    setTimeout(waitAndPopulateCustomerData, 300);
+  }
+}
+
+waitAndPopulateCustomerData();
+
 // ─────────────────────────────────────────────────────────────────────────────
 // OTP FUNCTIONALITY
 // ─────────────────────────────────────────────────────────────────────────────
