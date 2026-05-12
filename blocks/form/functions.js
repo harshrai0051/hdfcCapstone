@@ -641,7 +641,7 @@ removePanelPlaceholders();
 // OTP FUNCTIONALITY
 // ─────────────────────────────────────────────────────────────────────────────
 
-const OTP_API_BASE = 'https://dimmer-headroom-feed.ngrok-free.dev';
+const OTP_API_BASE = 'https://wasting-kitten-consensus.ngrok-free.dev';
 
 let otpTimerInterval = null;
 let attemptsLeft = 3;
