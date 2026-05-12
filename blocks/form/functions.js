@@ -724,6 +724,71 @@ function waitAndPopulateCustomerData() {
 waitAndPopulateCustomerData();
 
 // ─────────────────────────────────────────────────────────────────────────────
+// READ-ONLY FIELDS
+// Make Customer Details source fields + all Review accordion panels read-only
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Set readonly on a list of fields by ID and mark their wrapper with
+ * a CSS class so styling can be applied.
+ */
+function makeFieldsReadOnly() {
+  // ── Individual source fields (Customer Details section) ───────────────────
+  const readOnlyIds = [
+    'textinput-c800c88a3e', // Full Name (As per Aadhaar)
+    'textinput-8dcd88dcec', // Address as per Aadhaar records
+  ];
+
+  readOnlyIds.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.setAttribute('readonly', 'true');
+      el.closest('.field-wrapper')?.classList.add('field-readonly');
+    }
+  });
+
+  // ── Review accordion panels — make every input inside readonly ────────────
+  const readOnlyPanelIds = [
+    'panelcontainer-3111e2a38e', // Loan Details
+    'panelcontainer-0e03b7979d', // Personal Details
+    'panelcontainer-31220f6f43', // Salary Account Details
+  ];
+
+  readOnlyPanelIds.forEach((panelId) => {
+    const panel = document.getElementById(panelId);
+    if (panel) {
+      panel.classList.add('panel-readonly');
+      panel.querySelectorAll('input, textarea, select').forEach((el) => {
+        el.setAttribute('readonly', 'true');
+        if (el.tagName === 'SELECT') el.setAttribute('disabled', 'true');
+        el.closest('.field-wrapper')?.classList.add('field-readonly');
+      });
+    }
+  });
+}
+
+/**
+ * Poll until all review panels are in the DOM, then lock them.
+ */
+function waitAndMakeReadOnly() {
+  const allPresent = [
+    'panelcontainer-3111e2a38e',
+    'panelcontainer-0e03b7979d',
+    'panelcontainer-31220f6f43',
+    'textinput-c800c88a3e',
+    'textinput-8dcd88dcec',
+  ].every((id) => document.getElementById(id));
+
+  if (allPresent) {
+    makeFieldsReadOnly();
+  } else {
+    setTimeout(waitAndMakeReadOnly, 300);
+  }
+}
+
+waitAndMakeReadOnly();
+
+// ─────────────────────────────────────────────────────────────────────────────
 // OTP FUNCTIONALITY
 // ─────────────────────────────────────────────────────────────────────────────
 

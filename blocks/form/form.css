@@ -4391,3 +4391,42 @@ main .form form .field-form-button1778058860913 button:hover {
 /* ===== END Confirm / Proceed Button Styles ===== */
 
 /* ===== END Thank You Panel Styles ===== */
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   READ-ONLY FIELD STYLES
+   Applied to .field-readonly wrappers and .panel-readonly panels
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Individual read-only field wrappers */
+main .form form .field-readonly input[type="text"],
+main .form form .field-readonly input[type="email"],
+main .form form .field-readonly input[type="number"],
+main .form form .field-readonly textarea,
+main .form form .field-readonly select {
+    background-color: #f5f7fa !important;
+    color: #4a5568 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: none !important;
+}
+
+/* Entire review accordion panels read-only */
+main .form form .panel-readonly input[type="text"],
+main .form form .panel-readonly input[type="email"],
+main .form form .panel-readonly input[type="number"],
+main .form form .panel-readonly textarea,
+main .form form .panel-readonly select {
+    background-color: transparent !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Subtle visual cue on read-only wrappers (Customer Details source fields) */
+main .form form .field-readonly {
+    opacity: 0.85;
+}
+
+/* ===== END Read-Only Field Styles ===== */
