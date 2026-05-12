@@ -633,6 +633,56 @@ function initThankYouPanel() {
 
 initThankYouPanel();
 
+// ─────────────────────────────────────────────────────────────────────────────
+// CONFIRM BUTTON — Generate Loan Application Number
+// Clicking "Confirm" (button-5347d46ecb) generates a random 9-digit application
+// number and writes it into the Loan Application Number field (textinput-baf76d084a),
+// then makes that field read-only.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Generate a random 9-digit loan application number and populate the field.
+ * The field is locked read-only after the number is written.
+ */
+function generateLoanApplicationNumber() {
+  const appNoField = document.getElementById("textinput-baf76d084a");
+  if (!appNoField) return;
+
+  // Generate only once — skip if already populated
+  if (appNoField.dataset.appNoGenerated) return;
+  appNoField.dataset.appNoGenerated = "true";
+
+  const appNo = String(Math.floor(100000000 + Math.random() * 900000000));
+  appNoField.value = appNo;
+  appNoField.setAttribute("value", appNo);
+
+  // Make the field read-only
+  appNoField.setAttribute("readonly", "true");
+  appNoField.closest(".field-wrapper")?.classList.add("field-readonly");
+
+  // Notify the form framework of the change
+  appNoField.dispatchEvent(new Event("input", { bubbles: true }));
+  appNoField.dispatchEvent(new Event("change", { bubbles: true }));
+}
+
+/**
+ * Wire up the Confirm button to generate the loan application number.
+ * Polls until the button is in the DOM (AEM dynamic rendering).
+ */
+function initConfirmButton() {
+  const confirmBtn = document.getElementById("button-5347d46ecb");
+  if (!confirmBtn) {
+    setTimeout(initConfirmButton, 300);
+    return;
+  }
+
+  confirmBtn.addEventListener("click", () => {
+    generateLoanApplicationNumber();
+  });
+}
+
+initConfirmButton();
+
 /**
  * Remove placeholders from specific panel fields
  */
