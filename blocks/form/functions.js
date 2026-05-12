@@ -929,6 +929,154 @@ function initOtpPanel() {
 initOtpPanel();
 
 // ─────────────────────────────────────────────────────────────────────────────
+// VIEW LOAN ELIGIBILITY — PANEL VALIDATION
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Show or clear a "This is a required field" error message beneath a field wrapper.
+ */
+function setFieldError(wrapper, show) {
+  if (!wrapper) return;
+  let errEl = wrapper.querySelector('.vle-required-error');
+  if (show) {
+    if (!errEl) {
+      errEl = document.createElement('span');
+      errEl.className = 'vle-required-error';
+      errEl.style.cssText = 'color:red;font-size:0.78rem;display:block;margin-top:4px;';
+      errEl.textContent = 'This is a required field';
+      wrapper.appendChild(errEl);
+    }
+    wrapper.classList.add('has-error');
+  } else {
+    if (errEl) errEl.remove();
+    wrapper.classList.remove('has-error');
+  }
+}
+
+/**
+ * Validate all required fields on the Personal Loan Offer panel.
+ * Returns true if all are valid.
+ * When showErrors=true, renders inline error messages for empty fields.
+ */
+function validateLoanOfferPanel(showErrors = false) {
+  let allValid = true;
+
+  // 1. Mobile number
+  const mobileInput = document.getElementById('textinput-b07476d9e3');
+  const mobileWrapper = mobileInput?.closest('.field-wrapper');
+  const mobilePattern = /^[6-9]\d{9}$/;
+  const mobileOk = mobileInput && mobilePattern.test((mobileInput.value || '').trim());
+  if (!mobileOk) allValid = false;
+  if (showErrors) setFieldError(mobileWrapper, !mobileOk);
+
+  // 2. Date of birth
+  const dobInput = document.getElementById('datepicker-11fedea8ba');
+  const dobWrapper = dobInput?.closest('.field-wrapper');
+  const dobRaw = (dobInput?.getAttribute('edit-value') || dobInput?.value || '').trim();
+  const dobOk = dobRaw.length > 0 && !Number.isNaN(new Date(dobRaw).getTime());
+  if (!dobOk) allValid = false;
+  if (showErrors) setFieldError(dobWrapper, !dobOk);
+
+  // 3. Income source radio (must pick "Salaried")
+  const incomeChecked = document.querySelector('[name="income_source"]:checked');
+  const incomeWrapper = document.getElementById('radiobutton-e7c53285fe');
+  const incomeOk = incomeChecked !== null;
+  if (!incomeOk) allValid = false;
+  if (showErrors) setFieldError(incomeWrapper, !incomeOk);
+
+  // 4. Consent loan processing checkbox
+  const consentLoanCb = document.getElementById('checkbox-35dc144430');
+  const consentLoanWrapper = consentLoanCb?.closest('.field-wrapper');
+  const consentLoanOk = consentLoanCb?.checked === true;
+  if (!consentLoanOk) allValid = false;
+  if (showErrors) setFieldError(consentLoanWrapper, !consentLoanOk);
+
+  // 5. Consent marketing checkbox
+  const consentMktCb = document.getElementById('checkbox-169f3aa4ef');
+  const consentMktWrapper = consentMktCb?.closest('.field-wrapper');
+  const consentMktOk = consentMktCb?.checked === true;
+  if (!consentMktOk) allValid = false;
+  if (showErrors) setFieldError(consentMktWrapper, !consentMktOk);
+
+  return allValid;
+}
+
+/**
+ * Update the visual state of the "View Loan Eligibility" button
+ * based on whether all required fields are filled.
+ */
+function updateViewLoanBtnState() {
+  const btn = document.getElementById('submit-3b37973aeb');
+  if (!btn) return;
+
+  const valid = validateLoanOfferPanel(false);
+  if (valid) {
+    btn.disabled = false;
+    btn.style.opacity = '';
+    btn.style.cursor = '';
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+  }
+}
+
+/**
+ * Wire up the loan offer panel validation:
+ * - Disable button initially until all fields filled
+ * - Show per-field errors on click if validation fails
+ * - Re-evaluate state on every field change
+ */
+function initLoanOfferPanelValidation() {
+  const btn = document.getElementById('submit-3b37973aeb');
+  const panel = document.getElementById('panelcontainer-9f23d6d666');
+
+  if (!btn || !panel) {
+    setTimeout(initLoanOfferPanelValidation, 300);
+    return;
+  }
+
+  // Initial state — disable if fields are empty
+  updateViewLoanBtnState();
+
+  // Show errors and block submission when button is clicked with invalid fields
+  btn.addEventListener('click', (e) => {
+    if (!validateLoanOfferPanel(false)) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      validateLoanOfferPanel(true); // render error messages
+      return;
+    }
+    // Valid — clear any lingering error messages
+    panel.querySelectorAll('.vle-required-error').forEach((el) => el.remove());
+    panel.querySelectorAll('.has-error').forEach((el) => el.classList.remove('has-error'));
+  }, true); // capture phase so it runs before OTP handler
+
+  // Re-check state on every input/change inside the panel
+  panel.addEventListener('input', () => {
+    updateViewLoanBtnState();
+    // Clear error on the field being edited
+    const activeWrapper = document.activeElement?.closest?.('.field-wrapper');
+    if (activeWrapper) setFieldError(activeWrapper, false);
+  });
+
+  panel.addEventListener('change', () => {
+    updateViewLoanBtnState();
+    const activeWrapper = document.activeElement?.closest?.('.field-wrapper');
+    if (activeWrapper) setFieldError(activeWrapper, false);
+  });
+
+  // Also watch DOB attribute mutations (datepicker sets edit-value via JS)
+  const dobInput = document.getElementById('datepicker-11fedea8ba');
+  if (dobInput) {
+    new MutationObserver(() => updateViewLoanBtnState())
+      .observe(dobInput, { attributes: true, attributeFilter: ['edit-value', 'value'] });
+  }
+}
+
+initLoanOfferPanelValidation();
+
+// ─────────────────────────────────────────────────────────────────────────────
 // PAN VALIDATION
 // ─────────────────────────────────────────────────────────────────────────────
 
