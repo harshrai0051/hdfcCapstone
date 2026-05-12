@@ -342,8 +342,13 @@ function mapFormFieldsToReview() {
   // Current Address (from Aadhaar records)
   setValById('textinput-c0931aa145', getValById('textinput-8dcd88dcec'));
 
-  // Residence Type — human-readable label of selected radio
-  setValById('textinput-d9fb9e62b3', getRadioLabel('is_customer_aadhaar_address'));
+  // Residence Type — human-readable label of selected radio;
+  // if no radio is checked yet, keep the value already in the field
+  // (populated from CUSTOMER_DATA by populateCustomerData)
+  const residenceRadioLabel = getRadioLabel('is_customer_aadhaar_address');
+  if (residenceRadioLabel) {
+    setValById('textinput-d9fb9e62b3', residenceRadioLabel);
+  }
 
   // ─── 2. Loan Details ────────────────────────────────────────────────────────
 
