@@ -366,8 +366,8 @@ function mapFormFieldsToReview() {
   setValById('textinput-5932aacccc', getValById('textinput-705f91a759'));
 
   // Employer Name: prefer free-text "Other" input; fall back to dropdown label
-  const employerOther = getValById('textinput-cec5a6b8b7');
-  const employerDropdown = getSelectLabel('dropdown-5708e2571a');
+  const employerOther = getValById('textinput-5fd2ae7fc3');
+  const employerDropdown = getSelectLabel('dropdown-8e87f43526');
   const employerName = employerOther.trim()
     || (employerDropdown && employerDropdown !== 'Others' ? employerDropdown : '');
   setValById('textinput-dcfe7665b1', employerName);
