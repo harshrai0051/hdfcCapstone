@@ -1075,19 +1075,28 @@ function initLoanOfferPanelValidation() {
     if (activeWrapper) setFieldError(activeWrapper, false);
   });
 
-  // Real-time mobile number validation — apply/remove red border as user types
+  // Real-time mobile number validation — apply/remove red border and error text as user types
   const mobileInput = document.getElementById('textinput-b07476d9e3');
   if (mobileInput) {
     const mobilePattern = /^[6-9]\d{9}$/;
     const mobileWrap = mobileInput.closest('.field-wrapper');
     mobileInput.addEventListener('input', () => {
       const val = (mobileInput.value || '').trim();
-      // Only show red border if user has typed something but it's invalid
+      // Remove any existing mobile-specific error span first
+      mobileWrap?.querySelector('.mobile-invalid-error')?.remove();
+      // Only show red border + error if user has typed something but it's invalid
       if (val.length > 0 && !mobilePattern.test(val)) {
         mobileWrap?.classList.add('has-error');
+        // Add red error message if not already showing a vle-required-error
+        if (mobileWrap && !mobileWrap.querySelector('.vle-required-error')) {
+          const errSpan = document.createElement('span');
+          errSpan.className = 'mobile-invalid-error';
+          errSpan.textContent = 'Please enter a valid Indian mobile number';
+          mobileWrap.appendChild(errSpan);
+        }
       } else {
         mobileWrap?.classList.remove('has-error');
-        // Also clear the vle-required-error if present
+        // Clear both error types
         mobileWrap?.querySelector('.vle-required-error')?.remove();
       }
       updateViewLoanBtnState();
