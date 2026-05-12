@@ -353,11 +353,12 @@ function mapFormFieldsToReview() {
   // Current Address (from Aadhaar records)
   setValById("textinput-c0931aa145", getValById("textinput-8dcd88dcec"));
 
-  // Residence Type — human-readable label of selected radio;
-  // if no radio is checked yet, keep the value already in the field
-  // (populated from CUSTOMER_DATA by populateCustomerData)
+  // Residence Type — only use the radio label if it is one of the known
+  // valid values ("Owned" / "Rented"); otherwise keep whatever
+  // populateCustomerData() already wrote into the field.
   const residenceRadioLabel = getRadioLabel("is_customer_aadhaar_address");
-  if (residenceRadioLabel) {
+  const validResidenceTypes = ["Owned", "Rented"];
+  if (validResidenceTypes.includes(residenceRadioLabel)) {
     setValById("textinput-d9fb9e62b3", residenceRadioLabel);
   }
 
