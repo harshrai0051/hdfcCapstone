@@ -2445,7 +2445,7 @@ main .form form .field-password1777648986377 input:focus {
 #togglePassword {
     position: absolute;
     right: 10px;
-    top: 50%;
+    top: 36%;
     transform: translateY(-50%);
     cursor: pointer;
 }
