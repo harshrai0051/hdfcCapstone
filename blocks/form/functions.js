@@ -1558,19 +1558,63 @@ function updateLoanEligibilityMessage(maxLoan) {
 }
 
 /**
+ * Format a loan amount value into a short label (e.g. 50000 → "50K", 500000 → "5L").
+ */
+function formatScaleLabel(value) {
+  if (value >= 100000) {
+    const l = value / 100000;
+    return `${l % 1 === 0 ? l : l.toFixed(1)}L`;
+  }
+  return `${Math.round(value / 1000)}K`;
+}
+
+/**
+ * Rebuild the range-scale markers for the loan amount slider based on new max.
+ * Keeps 7 evenly-spaced markers from min to max.
+ */
+function rebuildLoanSliderScale(slider, minVal, maxVal) {
+  const scaleEl = slider.closest('.range-widget-wrapper')?.querySelector('.range-scale');
+  if (!scaleEl) return;
+
+  const MARKER_COUNT = 7;
+  const markers = scaleEl.querySelectorAll('.range-scale-marker');
+
+  // If markers don't exist yet, create them
+  if (markers.length === 0) {
+    for (let i = 0; i < MARKER_COUNT; i += 1) {
+      const span = document.createElement('span');
+      span.className = 'range-scale-marker';
+      scaleEl.appendChild(span);
+    }
+  }
+
+  const allMarkers = scaleEl.querySelectorAll('.range-scale-marker');
+  allMarkers.forEach((marker, i) => {
+    const pct = i / (MARKER_COUNT - 1);
+    const val = Math.round((minVal + pct * (maxVal - minVal)) / 10000) * 10000;
+    marker.textContent = formatScaleLabel(val);
+    marker.style.left = `${pct * 100}%`;
+  });
+}
+
+/**
  * Update the loan range slider max value and snap the current value if needed.
- * Then fires an input event so EMI recalculates.
+ * Also rebuilds the scale markers and fires an input event so EMI recalculates.
  */
 function updateLoanSliderMax(maxLoan) {
   const slider = document.getElementById('numberinput-573a41b8b9');
   if (!slider) return;
 
+  const minVal = Number(slider.min) || 50000;
   slider.max = maxLoan;
 
   // If current value exceeds new max, clamp it
   if (Number(slider.value) > maxLoan) {
     slider.value = maxLoan;
   }
+
+  // Rebuild scale markers to reflect new max
+  rebuildLoanSliderScale(slider, minVal, maxLoan);
 
   // Trigger input → EMI recalculates via initEMICalculator listener
   slider.dispatchEvent(new Event('input', { bubbles: true }));
