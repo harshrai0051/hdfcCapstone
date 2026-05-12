@@ -754,9 +754,12 @@ async function generateOtp(e) {
         attemptsField.value = `Attempts Left: ${attemptsLeft}/3`;
       }
 
-      // Auto-fill OTP for testing
+      // Auto-fill OTP and lock maxlength to generated OTP digit count
       if (otpInput && data.otp) {
-        otpInput.value = data.otp;
+        const otpStr = String(data.otp);
+        otpInput.maxLength = otpStr.length;
+        otpInput.setAttribute('maxlength', otpStr.length);
+        otpInput.value = otpStr;
       }
 
       // Start the 30-second resend timer (hides Resend button during countdown)
