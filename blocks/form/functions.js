@@ -178,10 +178,23 @@ function initEMICalculator() {
     const emi = calculateEMI(loan, RATE, months);
     const tax = Math.round((emi * TAX) / 100);
 
+    // Processing fee = 1.5% of loan, capped at ₹6,500
+    const processingFee = Math.min(Math.round(loan * 0.015), 6500);
+    // GST = 18% of processing fee
+    const gstOnFee = Math.round(processingFee * 0.18);
+    // Schedule of charges = processing fee + GST
+    const scheduleOfCharges = processingFee + gstOnFee;
+
     setFieldValue(loanDisplay, formatIndianCurrency(loan));
     setFieldValue(emiDisplay, formatIndianCurrency(emi));
     setFieldValue(roiDisplay, `${RATE}%`);
     setFieldValue(taxDisplay, formatIndianCurrency(tax));
+
+    // Schedule of Charges (processing fee + 18% GST)
+    const scheduleField = document.getElementById('textinput-9edede6d0e');
+    if (scheduleField) {
+      scheduleField.value = formatIndianCurrency(scheduleOfCharges);
+    }
   }
 
   // 🔥 REAL-TIME SYNC
@@ -377,8 +390,9 @@ function mapFormFieldsToReview() {
     || (employerDropdown && employerDropdown !== 'Others' ? employerDropdown : '');
   setValById('textinput-dcfe7665b1', employerName);
 
-  // Schedule of Charges — no source field; leave unchanged
-  // setValById('textinput-9edede6d0e', '');
+  // Schedule of Charges — computed as processing fee (1.5% of loan, cap ₹6,500) + 18% GST
+  // Already set by initEMICalculator; read it back here to keep review in sync
+  setValById('textinput-9edede6d0e', getValById('textinput-9edede6d0e'));
 
   // Type of Loan (dropdown label)
   setValById('textinput-355120dc42', getSelectLabel('dropdown-f187a59a23'));
