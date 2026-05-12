@@ -4388,6 +4388,30 @@ main .form form .field-form-button1778058860913 button:hover {
     background-color: #4a78c8;
 }
 
+/* ===== Back Button Styles ===== */
+
+main .form form .field-back-button button,
+main .form form #button-369805e5cf {
+    background-color: #5f8dda;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    min-width: 200px;
+    transition: background-color 0.2s ease;
+}
+
+main .form form .field-back-button button:hover,
+main .form form #button-369805e5cf:hover {
+    background-color: #4a78c8;
+}
+
+/* ===== END Back Button Styles ===== */
+
 /* ===== END Confirm / Proceed Button Styles ===== */
 
 /* ===== END Thank You Panel Styles ===== */
