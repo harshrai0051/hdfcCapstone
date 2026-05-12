@@ -711,28 +711,42 @@ function randDigits(n) {
 }
 
 /**
- * Fill salary account number and IFSC based on the selected bank key.
+ * Fill salary account number, IFSC and bank name based on the selected bank key.
+ * Populates both the source fields and the review accordion fields directly.
  */
 function fillSalaryBankDetails(bankKey) {
   const data = SALARY_BANK_DATA[bankKey];
   if (!data) return;
 
-  const acInput = document.getElementById("textinput-2dee9d4be0");
-  const ifscInput = document.getElementById("textinput-cbcb5be8d3");
+  const generatedAc = randDigits(12);
+  const generatedIfsc = data.ifscPrefix + randDigits(6);
 
+  // ── Source fields (Income Verification panel) ─────────────────────────────
+  const acInput = document.getElementById("textinput-2dee9d4be0");
   if (acInput) {
-    acInput.value = randDigits(12);
+    acInput.value = generatedAc;
     acInput.dispatchEvent(new Event("input", { bubbles: true }));
     acInput.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
+  const ifscInput = document.getElementById("textinput-cbcb5be8d3");
   if (ifscInput) {
-    ifscInput.value = data.ifscPrefix + randDigits(6);
+    ifscInput.value = generatedIfsc;
     ifscInput.dispatchEvent(new Event("input", { bubbles: true }));
     ifscInput.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
-  // Trigger review mapping to keep the review panel in sync
+  // ── Review accordion fields (Salary Account Details panel) ────────────────
+  const reviewAc = document.getElementById("textinput-df7ef859ce");
+  if (reviewAc) reviewAc.value = generatedAc;
+
+  const reviewIfsc = document.getElementById("textinput-f618a535ac");
+  if (reviewIfsc) reviewIfsc.value = generatedIfsc;
+
+  const reviewBank = document.getElementById("textinput-f33180d5e4");
+  if (reviewBank) reviewBank.value = data.name;
+
+  // Trigger review mapping to keep everything else in sync
   setTimeout(mapFormFieldsToReview, 100);
 }
 
