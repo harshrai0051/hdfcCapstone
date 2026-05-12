@@ -366,6 +366,9 @@ function mapFormFieldsToReview() {
   // Loan Amount (from EMI calculator display field)
   setValById("textinput-1f19cd4958", getValById("textinput-3f693161b5"));
 
+  // Loan Amount — also sync to Thank You panel loan amount field
+  setValById("textinput-cd9068e016", getValById("textinput-3f693161b5"));
+
   // EMI Amount (from EMI calculator display field)
   setValById("textinput-27f73095a4", getValById("textinput-b0f0fe33c2"));
 
