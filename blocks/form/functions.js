@@ -628,6 +628,8 @@ function initThankYouPanel() {
   function waitForThankYouPanel() {
     const panel = document.getElementById("panelcontainer-66df6ce6e9");
     if (panel) {
+      // Hide the Thank You panel by default — shown only on Confirm click
+      panel.style.display = "none";
       applyThankYouEnhancements();
     } else {
       setTimeout(waitForThankYouPanel, 300);
@@ -684,6 +686,12 @@ function initConfirmButton() {
 
   confirmBtn.addEventListener("click", () => {
     generateLoanApplicationNumber();
+
+    // Reveal the Thank You panel
+    const thankYouPanel = document.getElementById("panelcontainer-66df6ce6e9");
+    if (thankYouPanel) {
+      thankYouPanel.style.display = "";
+    }
   });
 }
 
