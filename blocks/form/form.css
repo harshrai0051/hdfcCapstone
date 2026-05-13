@@ -1035,7 +1035,7 @@ main .form form fieldset.panel-wrapper[name="personal_loan_offer_panel"] {
     border: none;
     padding: 28px 32px 32px;
     box-sizing: border-box;
-    display: flex !important;
+    /* display: flex !important; */
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0;
@@ -1049,7 +1049,7 @@ main
     form
     fieldset.panel-wrapper[name="personal_loan_offer_panel"]
     > legend {
-    display: block;
+    /* display: block; */
     font-size: 1.15rem;
     font-weight: 700;
     color: #1a1a1a;
