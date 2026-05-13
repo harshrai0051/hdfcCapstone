@@ -328,7 +328,8 @@ function mapFormFieldsToReview() {
   setValById("textinput-dcfe7665b1", employerName);
 
   setValById("textinput-9edede6d0e", getValById("textinput-9edede6d0e"));
-  setValById("textinput-355120dc42", getSelectLabel("dropdown-f187a59a23"));
+  const loanTypeLabel = getSelectLabel("dropdown-f187a59a23");
+  setValById("textinput-355120dc42", loanTypeLabel || "Fresh Loan");
 
   // ─── 3. Salary Account Details ──────────────────────────────────────────────
 
