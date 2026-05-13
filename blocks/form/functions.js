@@ -243,66 +243,20 @@ fixTenureSliderStep();
  *   Panel 4 – EMI Calculator Panel        (panelcontainer-3304e5a55d)
  *
  * Target: Review Details accordion (panelcontainer-6f0808bbe3)
- *
- * Source → Target ID mapping
- * ─────────────────────────────────────────────────────────────────────────────
- * PERSONAL DETAILS section
- *   first_name (textinput-77c9a87e6d)
- *   + middle_name (textinput-b14cc135a0)
- *   + last_name  (textinput-0f68496a69)          → full_name      (textinput-13f2313da5)
- *
- *   aadhaar_linked_mobile_number (textinput-b07476d9e3) → mobile_number (textinput-cf353230e9)
- *
- *   date_of_birth (datepicker-11fedea8ba)          → date_of_birth  (datepicker-a406454738)
- *
- *   enter_Pan_id1 (emailinput-f5348740aa)          → pan            (textinput-0372ede0ce)
- *
- *   address_as_per_aadhaar_records (textinput-8dcd88dcec) → current_address (textinput-c0931aa145)
- *
- *   is_customer_aadhaar_address radio label        → residence_type (textinput-d9fb9e62b3)
- *
- * LOAN DETAILS section
- *   EMI calc loan display (textinput-3f693161b5)   → loan_amount    (textinput-1f19cd4958)
- *   EMI calc EMI  display (textinput-b0f0fe33c2)   → emi_amount     (textinput-27f73095a4)
- *   tenure range  (numberinput-9a0e8002ff)          → tenure         (textinput-5bbeede9c1)
- *   taxes display (textinput-8adf25be5f)            → processing_fee (textinput-7a8f4288d0)
- *   ROI   display (textinput-705f91a759)            → rate_of_interest (textinput-5932aacccc)
- *   employer_company_name_other (textinput-cec5a6b8b7)
- *     / employer_company_name dropdown (dropdown-5708e2571a) → employer_name (textinput-dcfe7665b1)
- *   schedule_of_charges                             → (no source – left blank)
- *   loan_type dropdown (dropdown-f187a59a23)        → type_of_loan  (textinput-355120dc42)
- *
- * SALARY ACCOUNT DETAILS section
- *   salary_account (textinput-2dee9d4be0)           → salary_account_number (textinput-df7ef859ce)
- *   ifsc           (textinput-cbcb5be8d3)            → ifsc                  (textinput-f618a535ac)
- *   salary_bank radio label / salary_bank_other (textinput-77fb8d4235) → bank_name (textinput-f33180d5e4)
- *
- * VERIFY EMAIL ID section
- *   enter_email_id (emailinput-61e7e4c155)          → personal_email_id (emailinput-9edd02a027)
- *   work_email_id  (emailinput-1d0f54c4f4)          → work_email_id     (emailinput-1fdf3966f4)
  */
 function mapFormFieldsToReview() {
   // ─── Helpers ────────────────────────────────────────────────────────────────
 
-  /**
-   * Get value from a specific element by its unique id.
-   */
   const getValById = (id) => {
     const el = document.getElementById(id);
     return el ? el.value || "" : "";
   };
 
-  /**
-   * Set value on a specific element by its unique id.
-   */
   const setValById = (id, value) => {
     const el = document.getElementById(id);
     if (el) el.value = value;
   };
 
-  /**
-   * Return the visible label text for the checked radio in a named group.
-   */
   const getRadioLabel = (name) => {
     const checked = document.querySelector(`[name="${name}"]:checked`);
     if (!checked) return "";
@@ -310,9 +264,6 @@ function mapFormFieldsToReview() {
     return label ? label.textContent.trim() : checked.value;
   };
 
-  /**
-   * Return the display text of the currently selected <option> in a <select>.
-   */
   const getSelectLabel = (id) => {
     const el = document.getElementById(id);
     if (!el) return "";
@@ -322,7 +273,6 @@ function mapFormFieldsToReview() {
 
   // ─── 1. Personal Details ────────────────────────────────────────────────────
 
-  // Full Name: first + middle + last (PAN name panel)
   const firstName = getValById("textinput-77c9a87e6d");
   const middleName = getValById("textinput-b14cc135a0");
   const lastName = getValById("textinput-0f68496a69");
@@ -332,10 +282,8 @@ function mapFormFieldsToReview() {
     .trim();
   setValById("textinput-13f2313da5", fullName);
 
-  // Mobile Number (Aadhaar linked, Panel 1)
   setValById("textinput-cf353230e9", getValById("textinput-b07476d9e3"));
 
-  // Date of Birth — copy both display-value and edit-value attributes
   const dobSrc = document.getElementById("datepicker-11fedea8ba");
   const dobTarget = document.getElementById("datepicker-a406454738");
   if (dobSrc && dobTarget) {
@@ -347,15 +295,9 @@ function mapFormFieldsToReview() {
     dobTarget.setAttribute("edit-value", dobEdit);
   }
 
-  // PAN (stored as email-type input, name="enter_Pan_id1")
   setValById("textinput-0372ede0ce", getValById("emailinput-f5348740aa"));
-
-  // Current Address (from Aadhaar records)
   setValById("textinput-c0931aa145", getValById("textinput-8dcd88dcec"));
 
-  // Residence Type — only use the radio label if it is one of the known
-  // valid values ("Owned" / "Rented"); otherwise keep whatever
-  // populateCustomerData() already wrote into the field.
   const residenceRadioLabel = getRadioLabel("is_customer_aadhaar_address");
   const validResidenceTypes = ["Owned", "Rented"];
   if (validResidenceTypes.includes(residenceRadioLabel)) {
@@ -364,16 +306,10 @@ function mapFormFieldsToReview() {
 
   // ─── 2. Loan Details ────────────────────────────────────────────────────────
 
-  // Loan Amount (from EMI calculator display field)
   setValById("textinput-1f19cd4958", getValById("textinput-3f693161b5"));
-
-  // Loan Amount — also sync to Thank You panel loan amount field
   setValById("textinput-cd9068e016", getValById("textinput-3f693161b5"));
-
-  // EMI Amount (from EMI calculator display field)
   setValById("textinput-27f73095a4", getValById("textinput-b0f0fe33c2"));
 
-  // Tenure — format raw range value as "X months"
   const tenureRaw = getValById("numberinput-9a0e8002ff");
   const tenureNum = parseFloat(tenureRaw);
   const tenureLabel = !Number.isNaN(tenureNum)
@@ -381,13 +317,9 @@ function mapFormFieldsToReview() {
     : tenureRaw;
   setValById("textinput-5bbeede9c1", tenureLabel);
 
-  // Processing Fee (mapped from Taxes display field in EMI calculator)
   setValById("textinput-7a8f4288d0", getValById("textinput-8adf25be5f"));
-
-  // Rate of Interest
   setValById("textinput-5932aacccc", getValById("textinput-705f91a759"));
 
-  // Employer Name: prefer free-text "Other" input; fall back to dropdown label
   const employerOther = getValById("textinput-5fd2ae7fc3");
   const employerDropdown = getSelectLabel("dropdown-8e87f43526");
   const employerName =
@@ -395,72 +327,50 @@ function mapFormFieldsToReview() {
     (employerDropdown && employerDropdown !== "Others" ? employerDropdown : "");
   setValById("textinput-dcfe7665b1", employerName);
 
-  // Schedule of Charges — computed as processing fee (1.5% of loan, cap ₹6,500) + 18% GST
-  // Already set by initEMICalculator; read it back here to keep review in sync
   setValById("textinput-9edede6d0e", getValById("textinput-9edede6d0e"));
-
-  // Type of Loan (dropdown label)
   setValById("textinput-355120dc42", getSelectLabel("dropdown-f187a59a23"));
 
   // ─── 3. Salary Account Details ──────────────────────────────────────────────
 
-  // Salary Account Number — only overwrite review field if source has a value
   const salaryAcVal = getValById("textinput-2dee9d4be0");
   if (salaryAcVal) setValById("textinput-df7ef859ce", salaryAcVal);
 
-  // IFSC — only overwrite review field if source has a value
   const ifscVal = getValById("textinput-cbcb5be8d3");
   if (ifscVal) setValById("textinput-f618a535ac", ifscVal);
 
-  // Bank Name: salary_bank radio label; fallback to Other text input
   const salaryBankLabel = getRadioLabel("salary_bank");
   const salaryBankOther = getValById("textinput-77fb8d4235");
   setValById("textinput-f33180d5e4", salaryBankLabel || salaryBankOther);
 
   // ─── 4. Verify Email ID ─────────────────────────────────────────────────────
 
-  // Personal Email (name="enter_email_id" inside personal details panel)
   setValById("emailinput-9edd02a027", getValById("emailinput-61e7e4c155"));
-
-  // Work Email (name="work_email_id" inside work_email_id_panel, id=emailinput-38bfd754e8)
   setValById("emailinput-1fdf3966f4", getValById("emailinput-38bfd754e8"));
 }
 
 /**
  * Initialize form field mapping.
- * Attaches input/change listeners to all source fields so the review section
- * stays in sync as the user fills in the form.
  */
 function initFormFieldMapping() {
-  // ── Named-field listeners (by name attribute) ─────────────────────────────
   const namedFields = [
-    // Panel 1 – Personal Loan Offer
     "aadhaar_linked_mobile_number",
     "date_of_birth",
     "income_source",
-    // Panel 2 – Full Name
     "first_name",
     "middle_name",
     "last_name",
-    // Panel 2 – Personal Details
     "gender",
     "enter_Pan_id1",
     "enter_email_id",
-    // Panel 2 – Address Details
     "address_as_per_aadhaar_records",
     "is_customer_aadhaar_address",
-    // Panel 2 – Employer Details
     "employer_company_name",
     "employer_company_name_other",
     "industry_type",
-    // Panel 2 – Income Details
     "monthly_net_income_salary",
     "ongoing_emis_if_any",
-    // Panel 2 – Work Email
     "work_email_id",
-    // Panel 2 – Type of Loan
     "loan_type",
-    // Panel 3 – Salary Bank
     "salary_bank",
     "salary_bank_other",
     "salary_account",
@@ -479,14 +389,13 @@ function initFormFieldMapping() {
     });
   });
 
-  // ── ID-based listeners (EMI calculator display fields & range sliders) ─────
   const idFields = [
-    "numberinput-573a41b8b9", // Loan Amount range slider (EMI calc)
-    "numberinput-9a0e8002ff", // Tenure range slider (EMI calc)
-    "textinput-3f693161b5", // Loan Amount display (EMI calc)
-    "textinput-b0f0fe33c2", // EMI Amount display
-    "textinput-705f91a759", // Rate of Interest display
-    "textinput-8adf25be5f", // Taxes display
+    "numberinput-573a41b8b9",
+    "numberinput-9a0e8002ff",
+    "textinput-3f693161b5",
+    "textinput-b0f0fe33c2",
+    "textinput-705f91a759",
+    "textinput-8adf25be5f",
   ];
 
   idFields.forEach((id) => {
@@ -498,13 +407,11 @@ function initFormFieldMapping() {
     }
   });
 
-  // Run an initial mapping pass in case fields are pre-populated
   mapFormFieldsToReview();
 }
 
 /**
  * Wait for the Review Details accordion to be in the DOM, then start mapping.
- * Uses polling (safe for AEM dynamic form rendering).
  */
 function waitAndInitMapping() {
   const reviewAccordion = document.getElementById("panelcontainer-6f0808bbe3");
@@ -521,7 +428,6 @@ function waitAndInitMapping() {
  */
 function initPersonalDetailsPreGenderPanel() {
   function applyFixes() {
-    // 1. Rename "Pan Card" label to "PAN Number"
     const panLabel = document.querySelector(
       'label[for="emailinput-f5348740aa"].field-label',
     );
@@ -529,7 +435,6 @@ function initPersonalDetailsPreGenderPanel() {
       panLabel.textContent = "PAN Number";
     }
 
-    // 2. Radio-like behaviour for email-suggestion checkboxes
     const emailSuggestionsFieldset = document.querySelector(
       'fieldset[name="email_suggestions"]',
     );
@@ -543,7 +448,6 @@ function initPersonalDetailsPreGenderPanel() {
         if (clicked.type !== "checkbox" || clicked.name !== "email_suggestions")
           return;
 
-        // Uncheck every sibling checkbox except the one just clicked
         emailSuggestionsFieldset
           .querySelectorAll('input[type="checkbox"][name="email_suggestions"]')
           .forEach((cb) => {
@@ -555,7 +459,6 @@ function initPersonalDetailsPreGenderPanel() {
     }
   }
 
-  // Poll until the panel is in the DOM
   function waitForPanel() {
     const panel = document.querySelector(
       "fieldset.field-personal-details-pre-gender-panel",
@@ -580,7 +483,6 @@ function initThankYouPanel() {
     const panel = document.getElementById("panelcontainer-66df6ce6e9");
     if (!panel) return;
 
-    // Add copy button next to loan application number input
     const loanAppInput = document.getElementById("textinput-baf76d084a");
     if (
       loanAppInput &&
@@ -593,7 +495,6 @@ function initThankYouPanel() {
       copyBtn.innerHTML =
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
 
-      // Wrap input + copy button in a flex row so they appear inline
       const row = document.createElement("div");
       row.className = "number-input-row";
       loanAppInput.parentElement.insertBefore(row, loanAppInput);
@@ -610,7 +511,6 @@ function initThankYouPanel() {
               setTimeout(() => copyBtn.classList.remove("copied"), 1500);
             })
             .catch(() => {
-              // Fallback
               const ta = document.createElement("textarea");
               ta.value = value;
               document.body.appendChild(ta);
@@ -628,8 +528,6 @@ function initThankYouPanel() {
   function waitForThankYouPanel() {
     const panel = document.getElementById("panelcontainer-66df6ce6e9");
     if (panel) {
-      // Hide by default — shown only when Confirm button is clicked
-      panel.style.display = "none";
       applyThankYouEnhancements();
     } else {
       setTimeout(waitForThankYouPanel, 300);
@@ -643,20 +541,15 @@ initThankYouPanel();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIRM BUTTON — Generate Loan Application Number
-// Clicking "Confirm" (button-5347d46ecb) generates a random 9-digit application
-// number and writes it into the Loan Application Number field (textinput-baf76d084a),
-// then makes that field read-only.
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
  * Generate a random 9-digit loan application number and populate the field.
- * The field is locked read-only after the number is written.
  */
 function generateLoanApplicationNumber() {
   const appNoField = document.getElementById("textinput-baf76d084a");
   if (!appNoField) return;
 
-  // Generate only once — skip if already populated
   if (appNoField.dataset.appNoGenerated) return;
   appNoField.dataset.appNoGenerated = "true";
 
@@ -664,18 +557,15 @@ function generateLoanApplicationNumber() {
   appNoField.value = appNo;
   appNoField.setAttribute("value", appNo);
 
-  // Make the field read-only
   appNoField.setAttribute("readonly", "true");
   appNoField.closest(".field-wrapper")?.classList.add("field-readonly");
 
-  // Notify the form framework of the change
   appNoField.dispatchEvent(new Event("input", { bubbles: true }));
   appNoField.dispatchEvent(new Event("change", { bubbles: true }));
 }
 
 /**
  * Wire up the Confirm button to generate the loan application number.
- * Polls until the button is in the DOM (AEM dynamic rendering).
  */
 function initConfirmButton() {
   const confirmBtn = document.getElementById("button-5347d46ecb");
@@ -686,11 +576,6 @@ function initConfirmButton() {
 
   confirmBtn.addEventListener("click", () => {
     generateLoanApplicationNumber();
-    // Show the Thank You panel only after Confirm is clicked
-    const thankYouPanel = document.getElementById("panelcontainer-66df6ce6e9");
-    if (thankYouPanel) {
-      thankYouPanel.style.display = "";
-    }
   });
 }
 
@@ -698,9 +583,6 @@ initConfirmButton();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SALARY BANK AUTO-FILL
-// When a bank radio is selected, generate a random account number + IFSC and
-// pre-fill textinput-2dee9d4be0 (Salary Account Number) and
-// textinput-cbcb5be8d3 (IFSC).
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SALARY_BANK_DATA = {
@@ -713,18 +595,10 @@ const SALARY_BANK_DATA = {
   idfc_first:    { name: "IDFC First",      ifscPrefix: "IDFB0" },
 };
 
-/**
- * Generate N random digits as a string.
- */
 function randDigits(n) {
   return Array.from({ length: n }, () => Math.floor(Math.random() * 10)).join("");
 }
 
-/**
- * Fill salary account number, IFSC and bank name based on the selected bank key.
- * Writes directly to both source fields and the review accordion fields.
- * Does NOT call mapFormFieldsToReview to avoid a race that would overwrite the values.
- */
 function fillSalaryBankDetails(bankKey) {
   const data = SALARY_BANK_DATA[bankKey];
   if (!data) return;
@@ -732,7 +606,6 @@ function fillSalaryBankDetails(bankKey) {
   const generatedAc = randDigits(12);
   const generatedIfsc = data.ifscPrefix + randDigits(6);
 
-  // ── Source fields (Income Verification panel) ─────────────────────────────
   const acInput = document.getElementById("textinput-2dee9d4be0");
   if (acInput) {
     acInput.removeAttribute("readonly");
@@ -751,7 +624,6 @@ function fillSalaryBankDetails(bankKey) {
     ifscInput.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
-  // ── Review accordion fields — write directly (bypass readonly via .value) ──
   const reviewAc = document.getElementById("textinput-df7ef859ce");
   if (reviewAc) {
     reviewAc.value = generatedAc;
@@ -771,10 +643,6 @@ function fillSalaryBankDetails(bankKey) {
   }
 }
 
-/**
- * Wire up salary_bank radio buttons to auto-fill account + IFSC.
- * Polls until the radios are in the DOM.
- */
 function initSalaryBankAutoFill() {
   const radios = document.querySelectorAll('input[name="salary_bank"]');
   if (!radios.length) {
@@ -786,7 +654,6 @@ function initSalaryBankAutoFill() {
     radio.addEventListener("change", () => {
       if (radio.checked) fillSalaryBankDetails(radio.value);
     });
-    // Auto-fill if a radio is already pre-checked
     if (radio.checked) fillSalaryBankDetails(radio.value);
   });
 }
@@ -798,16 +665,16 @@ initSalaryBankAutoFill();
  */
 function removePanelPlaceholders() {
   const fieldIds = [
-    "textinput-5fd2ae7fc3", // Enter Employer/Company Name
-    "textinput-72cdaa5e64", // Industry Type
-    "numberinput-4f93a1127c", // Monthly Net Income (Salary)
-    "numberinput-fa64c35931", // Ongoing EMIs (If any)
-    "emailinput-38bfd754e8", // Work Email ID
+    "textinput-5fd2ae7fc3",
+    "textinput-72cdaa5e64",
+    "numberinput-4f93a1127c",
+    "numberinput-fa64c35931",
+    "emailinput-38bfd754e8",
   ];
 
   const dropdownIds = [
-    "dropdown-8e87f43526", // Employer/Company Name dropdown
-    "dropdown-d634820a49", // Select Loan Type dropdown
+    "dropdown-8e87f43526",
+    "dropdown-d634820a49",
   ];
 
   const allInputsFound = fieldIds.every((id) => document.getElementById(id));
@@ -816,13 +683,11 @@ function removePanelPlaceholders() {
   );
 
   if (allInputsFound && allDropdownsFound) {
-    // Remove placeholder attribute from text/number/email inputs
     fieldIds.forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.removeAttribute("placeholder");
     });
 
-    // Clear the text of the first disabled placeholder option so it shows blank
     dropdownIds.forEach((id) => {
       const select = document.getElementById(id);
       if (select) {
@@ -869,14 +734,6 @@ const CUSTOMER_DATA = [
   },
 ];
 
-/**
- * Pick a customer from CUSTOMER_DATA based on the last digit of the mobile number,
- * then populate:
- *   - Full Name (As per Aadhaar)      → textinput-c800c88a3e
- *   - Current Address                 → textinput-c0931aa145
- *   - Address as per Aadhaar records  → textinput-8dcd88dcec
- *   - Residence Type                  → textinput-d9fb9e62b3
- */
 function populateCustomerData() {
   const mobile = (
     document.getElementById("textinput-b07476d9e3")?.value || ""
@@ -896,21 +753,14 @@ function populateCustomerData() {
     }
   };
 
-  setVal("textinput-c800c88a3e", customer.fullName); // Full Name (As per Aadhaar)
-  setVal("textinput-c0931aa145", customer.currentAddress); // Current Address (review field)
-  setVal("textinput-8dcd88dcec", customer.currentAddress); // Address as per Aadhaar records
-  setVal("textinput-d9fb9e62b3", customer.residenceType); // Residence Type
+  setVal("textinput-c800c88a3e", customer.fullName);
+  setVal("textinput-c0931aa145", customer.currentAddress);
+  setVal("textinput-8dcd88dcec", customer.currentAddress);
+  setVal("textinput-d9fb9e62b3", customer.residenceType);
 
-  // Re-run review mapping so the review accordion picks up the new address/residence
   setTimeout(mapFormFieldsToReview, 150);
 }
 
-/**
- * Wait for the Customer Details section to appear in the DOM, then
- * pre-fill name / address / residence type from CUSTOMER_DATA.
- * Uses the mobile number (if already entered) to pick the right profile;
- * falls back to index 0 if the mobile field is still empty.
- */
 function waitAndPopulateCustomerData() {
   const fullNameField = document.getElementById("textinput-c800c88a3e");
   if (fullNameField) {
@@ -924,18 +774,12 @@ waitAndPopulateCustomerData();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // READ-ONLY FIELDS
-// Make Customer Details source fields + all Review accordion panels read-only
 // ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Set readonly on a list of fields by ID and mark their wrapper with
- * a CSS class so styling can be applied.
- */
 function makeFieldsReadOnly() {
-  // ── Individual source fields (Customer Details section) ───────────────────
   const readOnlyIds = [
-    "textinput-c800c88a3e", // Full Name (As per Aadhaar)
-    "textinput-8dcd88dcec", // Address as per Aadhaar records
+    "textinput-c800c88a3e",
+    "textinput-8dcd88dcec",
   ];
 
   readOnlyIds.forEach((id) => {
@@ -946,11 +790,10 @@ function makeFieldsReadOnly() {
     }
   });
 
-  // ── Review accordion panels — make every input inside readonly ────────────
   const readOnlyPanelIds = [
-    "panelcontainer-3111e2a38e", // Loan Details
-    "panelcontainer-0e03b7979d", // Personal Details
-    "panelcontainer-31220f6f43", // Salary Account Details
+    "panelcontainer-3111e2a38e",
+    "panelcontainer-0e03b7979d",
+    "panelcontainer-31220f6f43",
   ];
 
   readOnlyPanelIds.forEach((panelId) => {
@@ -966,9 +809,6 @@ function makeFieldsReadOnly() {
   });
 }
 
-/**
- * Poll until all review panels are in the DOM, then lock them.
- */
 function waitAndMakeReadOnly() {
   const allPresent = [
     "panelcontainer-3111e2a38e",
@@ -996,10 +836,6 @@ const OTP_API_BASE = "https://wasting-kitten-consensus.ngrok-free.dev";
 let otpTimerInterval = null;
 let attemptsLeft = 3;
 
-/**
- * Start OTP timer - counts down from 30 seconds.
- * Disables the Resend OTP button during the countdown.
- */
 function startOtpTimer() {
   const timerInput = document.getElementById("textinput-447ef8b5b0");
   const resendBtn = document.getElementById("button-c578b87368");
@@ -1011,7 +847,6 @@ function startOtpTimer() {
     clearInterval(otpTimerInterval);
   }
 
-  // Hide Resend button while timer is running
   if (resendWrapper) {
     resendWrapper.style.display = "none";
   } else if (resendBtn) {
@@ -1033,7 +868,6 @@ function startOtpTimer() {
       clearInterval(otpTimerInterval);
       otpTimerInterval = null;
 
-      // Show Resend button when timer expires
       if (resendWrapper) {
         resendWrapper.style.display = "";
       } else if (resendBtn) {
@@ -1047,9 +881,6 @@ function startOtpTimer() {
   }, 1000);
 }
 
-/**
- * Stop OTP timer.
- */
 function stopOtpTimer() {
   if (otpTimerInterval) {
     clearInterval(otpTimerInterval);
@@ -1057,27 +888,15 @@ function stopOtpTimer() {
   }
 }
 
-/**
- * Generate OTP — called when "View Loan Eligibility" button is clicked.
- */
 async function generateOtp(e) {
   if (e) e.preventDefault();
 
   try {
-    // Mobile number (Aadhaar linked mobile)
     const mobile = document.getElementById("textinput-b07476d9e3")?.value;
-
-    // Date of birth
     const dobEl = document.getElementById("datepicker-11fedea8ba");
     const dob = dobEl?.getAttribute("edit-value") || dobEl?.value;
-
-    // OTP input (password field)
     const otpInput = document.getElementById("textinput-8c697feb65");
-
-    // Attempts Left display
     const attemptsField = document.getElementById("textinput-b825c7d30f");
-
-    // Submit OTP button
     const submitBtn = document.getElementById("submit-1a393311e1");
 
     const res = await fetch(`${OTP_API_BASE}/api/generate-otp`, {
@@ -1093,18 +912,15 @@ async function generateOtp(e) {
     console.log("Generate OTP response:", data);
 
     if (res.ok) {
-      // Keep submit disabled until OTP is verified
       if (submitBtn) {
         submitBtn.disabled = true;
       }
 
-      // Show current attempts count (do NOT reset — preserve across resends)
       if (attemptsField) {
         attemptsField.style.color = "#000";
         attemptsField.value = `Attempts Left: ${attemptsLeft}/3`;
       }
 
-      // Auto-fill OTP and lock maxlength to generated OTP digit count
       if (otpInput && data.otp) {
         const otpStr = String(data.otp);
         otpInput.maxLength = otpStr.length;
@@ -1112,7 +928,6 @@ async function generateOtp(e) {
         otpInput.value = otpStr;
       }
 
-      // Start the 30-second resend timer (hides Resend button during countdown)
       startOtpTimer();
     } else {
       console.error("Generate OTP failed:", data);
@@ -1122,29 +937,15 @@ async function generateOtp(e) {
   }
 }
 
-/**
- * Validate OTP — called when "Verify OTP" button is clicked.
- */
 async function validateOtp(e) {
   if (e) e.preventDefault();
 
   try {
-    // Mobile number
     const mobile = document.getElementById("textinput-b07476d9e3")?.value;
-
-    // OTP entered by user (password field)
     const otp = document.getElementById("textinput-8c697feb65")?.value;
-
-    // Attempts Left display
     const attemptsField = document.getElementById("textinput-b825c7d30f");
-
-    // Submit OTP button
     const submitBtn = document.getElementById("submit-1a393311e1");
-
-    // Resend OTP button
     const resendBtn = document.getElementById("button-c578b87368");
-
-    // Timer input
     const timerInput = document.getElementById("textinput-447ef8b5b0");
 
     const res = await fetch(`${OTP_API_BASE}/api/validate-otp`, {
@@ -1163,7 +964,6 @@ async function validateOtp(e) {
       ? resendBtn.closest(".field-wrapper")
       : null;
 
-    // ── SUCCESS ──────────────────────────────────────────────────────────────
     if (res.ok) {
       if (attemptsField) {
         attemptsField.value = "✔ OTP Verified Successfully";
@@ -1180,17 +980,13 @@ async function validateOtp(e) {
         timerInput.value = "";
       }
 
-      // Hide Resend button after successful verification
       if (resendWrapper) {
         resendWrapper.style.display = "none";
       } else if (resendBtn) {
         resendBtn.style.display = "none";
       }
 
-      // Populate customer data (name, address, residence type) based on mobile number
       populateCustomerData();
-
-      // ── FAILURE ──────────────────────────────────────────────────────────────
     } else {
       attemptsLeft -= 1;
       if (attemptsLeft < 0) attemptsLeft = 0;
@@ -1202,7 +998,6 @@ async function validateOtp(e) {
       }
 
       if (attemptsLeft > 0) {
-        // Show Resend button on wrong OTP
         if (resendWrapper) {
           resendWrapper.style.display = "";
         } else if (resendBtn) {
@@ -1214,7 +1009,6 @@ async function validateOtp(e) {
           attemptsField.style.color = "red";
         }
       } else {
-        // All attempts exhausted — keep Resend hidden
         if (resendWrapper) {
           resendWrapper.style.display = "none";
         } else if (resendBtn) {
@@ -1241,9 +1035,6 @@ async function validateOtp(e) {
   }
 }
 
-/**
- * Wire up OTP buttons once the OTP panel is in the DOM.
- */
 function initOtpPanel() {
   const viewLoanBtn = document.getElementById("submit-3b37973aeb");
   const verifyOtpBtn = document.getElementById("button-71c0d88d0d");
@@ -1254,7 +1045,6 @@ function initOtpPanel() {
     return;
   }
 
-  // Hide Resend button on initial load
   if (resendOtpBtn) {
     const resendWrapper = resendOtpBtn.closest(".field-wrapper");
     if (resendWrapper) {
@@ -1264,17 +1054,14 @@ function initOtpPanel() {
     }
   }
 
-  // "View Loan Eligibility" triggers OTP generation
   viewLoanBtn.addEventListener("click", (e) => {
     generateOtp(e);
   });
 
-  // "Verify OTP" triggers OTP validation
   verifyOtpBtn.addEventListener("click", (e) => {
     validateOtp(e);
   });
 
-  // "Resend OTP" re-triggers OTP generation
   if (resendOtpBtn) {
     resendOtpBtn.addEventListener("click", (e) => {
       generateOtp(e);
@@ -1288,9 +1075,6 @@ initOtpPanel();
 // VIEW LOAN ELIGIBILITY — PANEL VALIDATION
 // ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Show or clear a "This is a required field" error message beneath a field wrapper.
- */
 function setFieldError(wrapper, show) {
   if (!wrapper) return;
   let errEl = wrapper.querySelector(".vle-required-error");
@@ -1310,15 +1094,9 @@ function setFieldError(wrapper, show) {
   }
 }
 
-/**
- * Validate all required fields on the Personal Loan Offer panel.
- * Returns true if all are valid.
- * When showErrors=true, renders inline error messages for empty fields.
- */
 function validateLoanOfferPanel(showErrors = false) {
   let allValid = true;
 
-  // 1. Mobile number — must be a valid 10-digit Indian number
   const mobileInput = document.getElementById("textinput-b07476d9e3");
   const mobileWrapper = mobileInput?.closest(".field-wrapper");
   const mobilePattern = /^[6-9]\d{9}$/;
@@ -1327,7 +1105,6 @@ function validateLoanOfferPanel(showErrors = false) {
   if (!mobileOk) allValid = false;
   if (showErrors) setFieldError(mobileWrapper, !mobileOk);
 
-  // 2. Date of birth — must be present, valid, not future, and age 21–60
   const dobInput = document.getElementById("datepicker-11fedea8ba");
   const dobWrapper = dobInput?.closest(".field-wrapper");
   const dobRaw = (
@@ -1348,7 +1125,6 @@ function validateLoanOfferPanel(showErrors = false) {
   if (!dobOk) allValid = false;
   if (showErrors) setFieldError(dobWrapper, !dobOk);
 
-  // 3. Income source radio (must pick "Salaried")
   const incomeChecked = document.querySelector(
     '[name="income_source"]:checked',
   );
@@ -1357,14 +1133,12 @@ function validateLoanOfferPanel(showErrors = false) {
   if (!incomeOk) allValid = false;
   if (showErrors) setFieldError(incomeWrapper, !incomeOk);
 
-  // 4. Consent loan processing checkbox
   const consentLoanCb = document.getElementById("checkbox-35dc144430");
   const consentLoanWrapper = consentLoanCb?.closest(".field-wrapper");
   const consentLoanOk = consentLoanCb?.checked === true;
   if (!consentLoanOk) allValid = false;
   if (showErrors) setFieldError(consentLoanWrapper, !consentLoanOk);
 
-  // 5. Consent marketing checkbox
   const consentMktCb = document.getElementById("checkbox-169f3aa4ef");
   const consentMktWrapper = consentMktCb?.closest(".field-wrapper");
   const consentMktOk = consentMktCb?.checked === true;
@@ -1374,10 +1148,6 @@ function validateLoanOfferPanel(showErrors = false) {
   return allValid;
 }
 
-/**
- * Update the visual state of the "View Loan Eligibility" button
- * based on whether all required fields are filled.
- */
 function updateViewLoanBtnState() {
   const btn = document.getElementById("submit-3b37973aeb");
   if (!btn) return;
@@ -1394,12 +1164,6 @@ function updateViewLoanBtnState() {
   }
 }
 
-/**
- * Wire up the loan offer panel validation:
- * - Disable button initially until all fields filled
- * - Show per-field errors on click if validation fails
- * - Re-evaluate state on every field change
- */
 function initLoanOfferPanelValidation() {
   const btn = document.getElementById("submit-3b37973aeb");
   const panel = document.getElementById("panelcontainer-9f23d6d666");
@@ -1409,20 +1173,17 @@ function initLoanOfferPanelValidation() {
     return;
   }
 
-  // Initial state — disable if fields are empty
   updateViewLoanBtnState();
 
-  // Show errors and block submission when button is clicked with invalid fields
   btn.addEventListener(
     "click",
     (e) => {
       if (!validateLoanOfferPanel(false)) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        validateLoanOfferPanel(true); // render error messages
+        validateLoanOfferPanel(true);
         return;
       }
-      // Valid — clear any lingering error messages
       panel
         .querySelectorAll(".vle-required-error")
         .forEach((el) => el.remove());
@@ -1431,12 +1192,10 @@ function initLoanOfferPanelValidation() {
         .forEach((el) => el.classList.remove("has-error"));
     },
     true,
-  ); // capture phase so it runs before OTP handler
+  );
 
-  // Re-check state on every input/change inside the panel
   panel.addEventListener("input", () => {
     updateViewLoanBtnState();
-    // Clear error on the field being edited
     const activeWrapper = document.activeElement?.closest?.(".field-wrapper");
     if (activeWrapper) setFieldError(activeWrapper, false);
   });
@@ -1447,19 +1206,15 @@ function initLoanOfferPanelValidation() {
     if (activeWrapper) setFieldError(activeWrapper, false);
   });
 
-  // Real-time mobile number validation — apply/remove red border and error text as user types
   const mobileInput = document.getElementById("textinput-b07476d9e3");
   if (mobileInput) {
     const mobilePattern = /^[6-9]\d{9}$/;
     const mobileWrap = mobileInput.closest(".field-wrapper");
     mobileInput.addEventListener("input", () => {
       const val = (mobileInput.value || "").trim();
-      // Remove any existing mobile-specific error span first
       mobileWrap?.querySelector(".mobile-invalid-error")?.remove();
-      // Only show red border + error if user has typed something but it's invalid
       if (val.length > 0 && !mobilePattern.test(val)) {
         mobileWrap?.classList.add("has-error");
-        // Add red error message if not already showing a vle-required-error
         if (mobileWrap && !mobileWrap.querySelector(".vle-required-error")) {
           const errSpan = document.createElement("span");
           errSpan.className = "mobile-invalid-error";
@@ -1468,19 +1223,16 @@ function initLoanOfferPanelValidation() {
         }
       } else {
         mobileWrap?.classList.remove("has-error");
-        // Clear both error types
         mobileWrap?.querySelector(".vle-required-error")?.remove();
       }
       updateViewLoanBtnState();
     });
   }
 
-  // Also watch DOB attribute mutations (datepicker sets edit-value via JS)
   const dobInput = document.getElementById("datepicker-11fedea8ba");
   if (dobInput) {
     new MutationObserver(() => {
       updateViewLoanBtnState();
-      // Keep DOB red border in sync with the age-range error that updateDobError manages
       const dobWrap = dobInput.closest(".field-wrapper");
       if (dobWrap) {
         const dobRawVal = (
@@ -1518,15 +1270,11 @@ initLoanOfferPanelValidation();
 // PAN VALIDATION
 // ─────────────────────────────────────────────────────────────────────────────
 
-// PAN: 3 alpha + 'P' (4th) + 1 alpha + 4 digits + 1 alpha, total 10 chars
 const PAN_REGEX = /^[A-Z]{3}P[A-Z][0-9]{4}[A-Z]$/;
 
-/**
- * Validate a PAN string. Returns null if valid, or an error message string.
- */
 function validatePan(raw) {
   const v = (raw || "").trim().toUpperCase();
-  if (v.length === 0) return null; // empty — no error while user hasn't typed yet
+  if (v.length === 0) return null;
   if (v.length !== 10) return "PAN must be exactly 10 characters.";
   if (PAN_REGEX.test(v)) return null;
   if (!/^[A-Z]{5}/.test(v))
@@ -1537,9 +1285,6 @@ function validatePan(raw) {
   return "PAN could not be verified. Please enter a valid PAN.";
 }
 
-/**
- * Show/clear the PAN error message below the PAN field.
- */
 function updatePanError() {
   const panInput = document.getElementById("emailinput-f5348740aa");
   if (!panInput) return;
@@ -1566,9 +1311,6 @@ function updatePanError() {
   }
 }
 
-/**
- * Attach PAN validation listeners to the PAN input field.
- */
 function initPanValidation() {
   function attachPanListeners() {
     const panInput = document.getElementById("emailinput-f5348740aa");
@@ -1577,11 +1319,9 @@ function initPanValidation() {
       return;
     }
 
-    // Override browser's native email validation so our custom PAN regex runs
     panInput.type = "text";
     panInput.removeAttribute("pattern");
 
-    // Convert to uppercase as user types
     panInput.addEventListener("input", () => {
       const pos = panInput.selectionStart;
       panInput.value = panInput.value.toUpperCase();
@@ -1602,9 +1342,6 @@ initPanValidation();
 // DOB VALIDATION
 // ─────────────────────────────────────────────────────────────────────────────
 
-/**
- * Calculate age in years from a date string (YYYY-MM-DD or similar).
- */
 function getAge(dobRaw) {
   const dob = new Date(dobRaw);
   const today = new Date();
@@ -1616,9 +1353,6 @@ function getAge(dobRaw) {
   return age;
 }
 
-/**
- * Check whether all required fields on the Personal Loan Offer panel are valid.
- */
 function isValid() {
   const form = document.querySelector("form");
   if (!form) return false;
@@ -1652,9 +1386,6 @@ function isValid() {
   return phoneOk && dobOk && checkboxesOk;
 }
 
-/**
- * Show/clear the age-range error message below the DOB field.
- */
 function updateDobError() {
   const form = document.querySelector("form");
   if (!form) return;
@@ -1697,9 +1428,6 @@ function updateDobError() {
   }
 }
 
-/**
- * Attach DOB validation listeners to the date-of-birth field.
- */
 function initDobValidation() {
   function attachListeners() {
     const dobInput = document.getElementById("datepicker-11fedea8ba");
@@ -1708,15 +1436,12 @@ function initDobValidation() {
       return;
     }
 
-    // Run on every change/input event
     ["change", "input", "blur"].forEach((evt) => {
       dobInput.addEventListener(evt, () => {
-        // Short delay allows the datepicker to write edit-value before we read it
         setTimeout(updateDobError, 50);
       });
     });
 
-    // Also watch for attribute mutations (datepicker writes edit-value via JS)
     const observer = new MutationObserver(() => {
       setTimeout(updateDobError, 50);
     });
@@ -1733,10 +1458,6 @@ initDobValidation();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // INCOME-BASED LOAN ELIGIBILITY
-// Watches the Monthly Net Income field and dynamically:
-//   1. Updates the "You can get a loan up to ₹X!" message
-//   2. Adjusts the loan amount slider max
-//   3. Recalculates EMI display
 // ─────────────────────────────────────────────────────────────────────────────
 
 const INCOME_LOAN_CONFIG = {
@@ -1755,10 +1476,6 @@ const INCOME_LOAN_CONFIG = {
   GST_RATE: 0.18,
 };
 
-/**
- * Calculate max eligible loan from monthly income.
- * = income × 10, rounded to nearest ₹10K, capped ₹50K–₹15L.
- */
 function calcMaxLoanFromIncome(monthlyIncome) {
   const { MIN_LOAN, MAX_LOAN, STEP } = INCOME_LOAN_CONFIG;
   const raw = Math.min(monthlyIncome * 10, MAX_LOAN);
@@ -1766,25 +1483,16 @@ function calcMaxLoanFromIncome(monthlyIncome) {
   return Math.max(rounded, MIN_LOAN);
 }
 
-/**
- * Pick interest rate tier based on loan amount.
- */
 function getRateForLoanAmount(amount) {
   const { RATE_TIERS } = INCOME_LOAN_CONFIG;
   const tier = RATE_TIERS.find((t) => amount <= t.upTo);
   return tier ? tier.rate : RATE_TIERS[RATE_TIERS.length - 1].rate;
 }
 
-/**
- * Format a number as Indian currency string (e.g. ₹15,00,000).
- */
 function formatIndianAmount(amount) {
   return `₹${amount.toLocaleString("en-IN", { maximumFractionDigits: 0 })}`;
 }
 
-/**
- * Update the "You can get a loan up to ₹X!" message text.
- */
 function updateLoanEligibilityMessage(maxLoan) {
   const msgEl = document.getElementById("text-55a6c5a0e4");
   if (!msgEl) return;
@@ -1794,9 +1502,6 @@ function updateLoanEligibilityMessage(maxLoan) {
   }
 }
 
-/**
- * Format a loan amount value into a short label (e.g. 50000 → "50K", 500000 → "5L").
- */
 function formatScaleLabel(value) {
   if (value >= 100000) {
     const l = value / 100000;
@@ -1805,10 +1510,6 @@ function formatScaleLabel(value) {
   return `${Math.round(value / 1000)}K`;
 }
 
-/**
- * Rebuild the range-scale markers for the loan amount slider based on new max.
- * Keeps 7 evenly-spaced markers from min to max.
- */
 function rebuildLoanSliderScale(slider, minVal, maxVal) {
   const scaleEl = slider
     .closest(".range-widget-wrapper")
@@ -1818,7 +1519,6 @@ function rebuildLoanSliderScale(slider, minVal, maxVal) {
   const MARKER_COUNT = 7;
   const markers = scaleEl.querySelectorAll(".range-scale-marker");
 
-  // If markers don't exist yet, create them
   if (markers.length === 0) {
     for (let i = 0; i < MARKER_COUNT; i += 1) {
       const span = document.createElement("span");
@@ -1836,10 +1536,6 @@ function rebuildLoanSliderScale(slider, minVal, maxVal) {
   });
 }
 
-/**
- * Update the loan range slider max value and snap the current value if needed.
- * Also rebuilds the scale markers and fires an input event so EMI recalculates.
- */
 function updateLoanSliderMax(maxLoan) {
   const slider = document.getElementById("numberinput-573a41b8b9");
   if (!slider) return;
@@ -1847,22 +1543,16 @@ function updateLoanSliderMax(maxLoan) {
   const minVal = Number(slider.min) || 50000;
   slider.max = maxLoan;
 
-  // If current value exceeds new max, clamp it
   if (Number(slider.value) > maxLoan) {
     slider.value = maxLoan;
   }
 
-  // Rebuild scale markers to reflect new max
   rebuildLoanSliderScale(slider, minVal, maxLoan);
 
-  // Trigger input → EMI recalculates via initEMICalculator listener
   slider.dispatchEvent(new Event("input", { bubbles: true }));
   slider.dispatchEvent(new Event("change", { bubbles: true }));
 }
 
-/**
- * Also update the rate of interest display when income changes loan amount.
- */
 function updateRateDisplay(loanAmount) {
   const rate = getRateForLoanAmount(loanAmount);
   const roiDisplay = document.getElementById("textinput-705f91a759");
@@ -1873,9 +1563,6 @@ function updateRateDisplay(loanAmount) {
   }
 }
 
-/**
- * Core handler — runs whenever monthly income field changes.
- */
 function onIncomeChange() {
   const incomeEl = document.getElementById("numberinput-4f93a1127c");
   if (!incomeEl) return;
@@ -1887,16 +1574,12 @@ function onIncomeChange() {
   updateLoanEligibilityMessage(maxLoan);
   updateLoanSliderMax(maxLoan);
 
-  // Update rate display based on new current slider value
   const slider = document.getElementById("numberinput-573a41b8b9");
   if (slider) {
     updateRateDisplay(Number(slider.value));
   }
 }
 
-/**
- * Poll until the income field is in the DOM, then attach listeners.
- */
 function initIncomeLoanEligibility() {
   const incomeEl = document.getElementById("numberinput-4f93a1127c");
   if (!incomeEl) {
@@ -1907,7 +1590,6 @@ function initIncomeLoanEligibility() {
   incomeEl.addEventListener("input", onIncomeChange);
   incomeEl.addEventListener("change", onIncomeChange);
 
-  // Also watch loan slider changes to update rate display in real-time
   const slider = document.getElementById("numberinput-573a41b8b9");
   if (slider) {
     slider.addEventListener("input", () => {
