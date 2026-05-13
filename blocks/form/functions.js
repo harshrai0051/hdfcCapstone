@@ -755,6 +755,7 @@ function populateCustomerData() {
   };
 
   setVal("textinput-c800c88a3e", customer.fullName);
+  setVal("textinput-aa7b358109", customer.fullName);
   setVal("textinput-c0931aa145", customer.currentAddress);
   setVal("textinput-8dcd88dcec", customer.currentAddress);
   setVal("textinput-d9fb9e62b3", customer.residenceType);
